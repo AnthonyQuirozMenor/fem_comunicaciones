@@ -232,7 +232,7 @@ body {
 .timeline-line {
     position: absolute;
     left: 40px;
-    right: 40px;
+    right: 0;
     top: 50px;
     height: 6px;
     background: linear-gradient(to right, var(--accent-indigo), var(--accent-fuchsia));
@@ -352,8 +352,6 @@ body {
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     padding-bottom: 15px;
     margin-bottom: 20px;
-    cursor: pointer;
-    user-select: none;
 }
 
 .card-date {
@@ -371,31 +369,6 @@ body {
     font-size: 20px;
     font-weight: 700;
     color: white;
-}
-
-/* Toggle icon for collapsing/expanding */
-.card-toggle-icon {
-    font-size: 18px;
-    color: var(--text-secondary);
-    transition: var(--transition-smooth);
-}
-
-.card-header:hover .card-toggle-icon {
-    color: var(--accent-fuchsia);
-}
-
-.timeline-card.collapsed .card-toggle-icon {
-    transform: rotate(-90deg);
-}
-
-/* Collapsed state for activities */
-.timeline-card.collapsed .activities-grid {
-    display: none;
-}
-
-.timeline-card.collapsed .card-header {
-    margin-bottom: 0;
-    padding-bottom: 10px;
 }
 
 /* Delete Saturday Button */
@@ -465,29 +438,27 @@ body {
     white-space: nowrap;
 }
 
-/* Title input - integrates cleanly */
-.activity-title-input {
+/* Title display */
+.activity-title {
     background: transparent;
-    border: none;
-    border-bottom: 1px solid transparent;
     color: white;
     font-size: 16px;
     font-weight: 600;
     width: 100%;
     padding: 2px 0;
-    outline: none;
-    transition: var(--transition-smooth);
 }
 
-.activity-title-input:hover {
-    border-bottom-color: rgba(255, 255, 255, 0.1);
+/* Description display */
+.activity-description {
+    background: transparent;
+    color: var(--text-primary);
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
 }
 
-.activity-title-input:focus {
-    border-bottom-color: var(--accent-fuchsia);
-}
-
-/* Description textarea */
+/* Description textarea (legacy - no longer used) */
 .activity-desc-container {
     position: relative;
     width: 100%;
@@ -518,7 +489,7 @@ body {
 }
 
 /* ==========================================
-   PHOTO UPLOADER SLOTS (MAX 3)
+   PHOTO DISPLAY (READ-ONLY)
    ========================================= */
 
 .activity-photos-container {
@@ -531,13 +502,11 @@ body {
     font-size: 12px;
     color: var(--text-secondary);
     font-weight: 500;
-    display: flex;
-    justify-content: space-between;
 }
 
 .photo-slots-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
     gap: 12px;
 }
 
@@ -550,56 +519,6 @@ body {
     background: var(--input-bg);
     transition: var(--transition-smooth);
     cursor: pointer;
-}
-
-/* Empty upload state */
-.photo-slot-empty {
-    border: 2px dashed rgba(255, 255, 255, 0.12);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    color: var(--text-secondary);
-}
-
-.photo-slot-empty i {
-    font-size: 16px;
-    transition: var(--transition-smooth);
-}
-
-.photo-slot-empty span {
-    font-size: 10px;
-    font-weight: 500;
-}
-
-.photo-slot-empty:hover {
-    border-color: var(--accent-fuchsia);
-    color: var(--text-primary);
-    background: rgba(255, 255, 255, 0.05);
-}
-
-.photo-slot-empty:hover i {
-    transform: scale(1.1);
-    color: var(--accent-fuchsia);
-}
-
-/* Uploading/Loading state */
-.photo-slot-loading {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    color: var(--accent-fuchsia);
-}
-
-.photo-slot-loading i {
-    font-size: 18px;
-}
-
-.photo-slot-loading span {
-    font-size: 9px;
 }
 
 /* Filled photo state */
@@ -657,20 +576,6 @@ body {
 .btn-photo-view:hover {
     background: #4f46e5;
     transform: scale(1.1);
-}
-
-.btn-photo-delete {
-    background: #ef4444;
-}
-
-.btn-photo-delete:hover {
-    background: #dc2626;
-    transform: scale(1.1);
-}
-
-/* Hidden file input */
-.hidden-file-input {
-    display: none;
 }
 
 /* ==========================================

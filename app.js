@@ -208,12 +208,11 @@ function renderTimeline() {
             
             <!-- Tarjeta Principal del Sábado -->
             <div class="timeline-card" data-sat-id="${saturday.id}">
-                <div class="card-header" onclick="toggleActivities('${saturday.id}')">
+                <div class="card-header">
                     <div class="card-date">
                         <i class="fa-solid fa-calendar-day"></i>
                         <h2>${saturday.formattedDate}</h2>
                     </div>
-                    <i class="fa-solid fa-chevron-down card-toggle-icon"></i>
                 </div>
                 
                 <!-- Cuadrícula de 4 Actividades -->
@@ -234,58 +233,38 @@ function renderTimeline() {
 function renderActivity(activity, saturdayId, actIndex) {
     const photosHtml = [];
     
-    // Renderizar exactamente 3 ranuras para fotos
-    for (let slotIdx = 0; slotIdx < 3; slotIdx++) {
-        const photoPath = activity.photos[slotIdx];
-        
-        if (photoPath) {
-            // Ranura con foto cargada
-            photosHtml.push(`
-                <div class="photo-slot photo-slot-filled" data-slot="${slotIdx}">
-                    <img src="${photoPath}" alt="Imagen ${slotIdx + 1}">
-                    <div class="photo-overlay">
-                        <button class="btn-photo-action btn-photo-view" onclick="openLightbox('${activity.id}', ${slotIdx})" title="Ampliar imagen">
-                            <i class="fa-solid fa-expand"></i>
-                        </button>
-                        <button class="btn-photo-action btn-photo-delete" onclick="deletePhoto('${saturdayId}', '${activity.id}', ${slotIdx})" title="Eliminar imagen">
-                            <i class="fa-solid fa-trash-can"></i>
-                        </button>
+    // Renderizar solo las fotos existentes
+    if (activity.photos && activity.photos.length > 0) {
+        activity.photos.forEach((photoPath, slotIdx) => {
+            if (photoPath) {
+                photosHtml.push(`
+                    <div class="photo-slot photo-slot-filled" data-slot="${slotIdx}">
+                        <img src="${photoPath}" alt="Imagen ${slotIdx + 1}">
+                        <div class="photo-overlay">
+                            <button class="btn-photo-action btn-photo-view" onclick="openLightbox('${activity.id}', ${slotIdx})" title="Ampliar imagen">
+                                <i class="fa-solid fa-expand"></i>
+                            </button>
+                        </div>
                     </div>
-                </div>
-            `);
-        } else {
-            // Ranura vacía (lista para subir)
-            photosHtml.push(`
-                <div class="photo-slot photo-slot-empty" data-slot="${slotIdx}" onclick="triggerPhotoUpload('${saturdayId}', '${activity.id}', ${slotIdx})">
-                    <i class="fa-solid fa-circle-plus"></i>
-                    <span>+ Imagen</span>
-                </div>
-            `);
-        }
+                `);
+            }
+        });
     }
     
     return `
         <div class="activity-card" data-act-id="${activity.id}">
             <div class="activity-header">
                 <span class="activity-badge">Actividad ${actIndex + 1}</span>
-                <input type="text" class="activity-title-input" 
-                    value="${escapeHtml(activity.name)}" 
-                    data-sat-id="${saturdayId}" 
-                    data-act-id="${activity.id}" 
-                    placeholder="Título de la actividad...">
+                <h3 class="activity-title">${escapeHtml(activity.name)}</h3>
             </div>
             
             <div class="activity-desc-container">
-                <textarea class="activity-desc-textarea" 
-                    data-sat-id="${saturdayId}" 
-                    data-act-id="${activity.id}" 
-                    placeholder="Escriba aquí los detalles o descripción de esta actividad...">${escapeHtml(activity.description)}</textarea>
+                <p class="activity-description">${escapeHtml(activity.description)}</p>
             </div>
             
             <div class="activity-photos-container">
                 <div class="photos-label">
-                    <span>Fotos del registro (Máx 3)</span>
-                    <span>${activity.photos.length}/3</span>
+                    <span>Fotos del registro</span>
                 </div>
                 <div class="photo-slots-grid">
                     ${photosHtml.join('')}
@@ -297,31 +276,7 @@ function renderActivity(activity, saturdayId, actIndex) {
 
 // Vincular los eventos onChange a los campos de texto
 function bindCardInputs() {
-    // Escuchar títulos
-    const titleInputs = document.querySelectorAll('.activity-title-input');
-    titleInputs.forEach(input => {
-        input.addEventListener('input', (e) => {
-            const satId = e.target.getAttribute('data-sat-id');
-            const actId = e.target.getAttribute('data-act-id');
-            const newName = e.target.value;
-            
-            updateActivityProperty(satId, actId, 'name', newName);
-            triggerAutosave();
-        });
-    });
-    
-    // Escuchar descripciones
-    const descTextareas = document.querySelectorAll('.activity-desc-textarea');
-    descTextareas.forEach(textarea => {
-        textarea.addEventListener('input', (e) => {
-            const satId = e.target.getAttribute('data-sat-id');
-            const actId = e.target.getAttribute('data-act-id');
-            const newDesc = e.target.value;
-            
-            updateActivityProperty(satId, actId, 'description', newDesc);
-            triggerAutosave();
-        });
-    });
+    // No hay más inputs para vincular - modo solo lectura
 }
 
 // Actualiza una propiedad del JSON local
@@ -333,17 +288,6 @@ function updateActivityProperty(satId, actId, property, value) {
     if (!activity) return;
     
     activity[property] = value;
-}
-
-// ==========================================
-// CONTROL DE COLAPSO/EXPANSIÓN DE ACTIVIDADES
-// ==========================================
-
-function toggleActivities(satId) {
-    const card = document.querySelector(`.timeline-card[data-sat-id="${satId}"]`);
-    if (!card) return;
-    
-    card.classList.toggle('collapsed');
 }
 
 // ==========================================
@@ -396,103 +340,6 @@ function deleteSaturday(satId) {
         saveTimelineData();
         renderTimeline();
         showToast('Sábado eliminado correctamente.', 'success');
-    }
-}
-
-// ==========================================
-// SUBIDA Y ELIMINACIÓN DE FOTOS
-// ==========================================
-
-// Iniciar proceso de subida simulando clic en un input oculto
-function triggerPhotoUpload(satId, actId, slotIndex) {
-    const fileInput = document.createElement('input');
-    fileInput.type = 'file';
-    fileInput.accept = 'image/*';
-    fileInput.className = 'hidden-file-input';
-    
-    fileInput.addEventListener('change', async (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
-        
-        // Mostrar animación de cargando en la ranura
-        setPhotoSlotLoading(actId, slotIndex, true);
-        
-        try {
-            const formData = new FormData();
-            formData.append('image', file);
-            
-            const response = await fetch('/api/upload', {
-                method: 'POST',
-                headers: {
-                    'X-File-Name': file.name
-                },
-                body: file // Envío del archivo binario puro
-            });
-            
-            if (!response.ok) throw new Error('Error al subir el archivo');
-            
-            const result = await response.json();
-            
-            if (result.status === 'success' && result.filePath) {
-                // Guardar ruta de la foto en la actividad correspondiente
-                const saturday = timelineData.find(s => s.id === satId);
-                const activity = saturday.activities.find(a => a.id === actId);
-                
-                // Asegurar que la imagen se coloque en la ranura correcta
-                activity.photos[slotIndex] = result.filePath;
-                
-                await saveTimelineData();
-                renderTimeline();
-                showToast('Foto cargada exitosamente.', 'success');
-            } else {
-                throw new Error('Respuesta inválida del servidor');
-            }
-        } catch (error) {
-            console.error(error);
-            showToast('No se pudo subir la foto. Intente de nuevo.', 'error');
-            setPhotoSlotLoading(actId, slotIndex, false);
-        }
-    });
-    
-    fileInput.click();
-}
-
-// Cambiar la visualización del slot a "Cargando..."
-function setPhotoSlotLoading(actId, slotIndex, isLoading) {
-    const activityCard = document.querySelector(`[data-act-id="${actId}"]`);
-    if (!activityCard) return;
-    
-    const slot = activityCard.querySelectorAll('.photo-slot')[slotIndex];
-    if (!slot) return;
-    
-    if (isLoading) {
-        slot.className = 'photo-slot photo-slot-loading';
-        slot.innerHTML = `
-            <i class="fa-solid fa-spinner fa-spin"></i>
-            <span>Subiendo...</span>
-        `;
-        slot.onclick = null; // Desactivar clics
-    } else {
-        slot.className = 'photo-slot photo-slot-empty';
-        slot.innerHTML = `
-            <i class="fa-solid fa-circle-plus"></i>
-            <span>+ Imagen</span>
-        `;
-    }
-}
-
-// Eliminar una foto de una actividad
-function deletePhoto(satId, actId, slotIndex) {
-    if (confirm('¿Está seguro de eliminar esta imagen?')) {
-        const saturday = timelineData.find(s => s.id === satId);
-        const activity = saturday.activities.find(a => a.id === actId);
-        
-        // Quitar la foto de la ranura (dejar el espacio como undefined/vaciado)
-        activity.photos.splice(slotIndex, 1);
-        
-        saveTimelineData();
-        renderTimeline();
-        showToast('Foto eliminada.', 'success');
     }
 }
 
