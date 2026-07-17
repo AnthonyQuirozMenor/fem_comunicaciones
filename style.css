@@ -232,7 +232,7 @@ body {
 .timeline-line {
     position: absolute;
     left: 40px;
-    right: 0;
+    right: 40px;
     top: 50px;
     height: 6px;
     background: linear-gradient(to right, var(--accent-indigo), var(--accent-fuchsia));

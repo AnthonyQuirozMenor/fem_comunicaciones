@@ -5,15 +5,12 @@
 
 // Estado de la aplicación
 let timelineData = [];
-let autosaveTimeout = null;
 let currentLightboxIndex = 0;
 let currentLightboxPhotos = [];
 
 // Elementos del DOM
 const timelineItemsContainer = document.getElementById('timelineItems');
-const addSaturdayBtn = document.getElementById('addSaturdayBtn');
 const searchInput = document.getElementById('searchInput');
-const saveStatusBadge = document.getElementById('saveStatus');
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightboxImg');
 const lightboxCaption = document.getElementById('lightboxCaption');
@@ -30,11 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Registrar eventos globales
 function setupEventListeners() {
-    // Botón Agregar Sábado (si existe)
-    if (addSaturdayBtn) {
-        addSaturdayBtn.addEventListener('click', addSaturday);
-    }
-    
     // Campo de búsqueda
     searchInput.addEventListener('input', filterTimeline);
     
@@ -117,22 +109,20 @@ function createNewSaturdayObject(dateString) {
         date: dateString,
         formattedDate: formatted,
         activities: [
-            { id: 'act_1_' + Date.now(), name: 'Actividad 1', description: '', photos: [] },
-            { id: 'act_2_' + Date.now(), name: 'Actividad 2', description: '', photos: [] },
-            { id: 'act_3_' + Date.now(), name: 'Actividad 3', description: '', photos: [] },
-            { id: 'act_4_' + Date.now(), name: 'Actividad 4', description: '', photos: [] }
+            { id: 'act_1_' + Date.now(), name: 'Actividad 1', description: 'hola', photos: [] },
+            { id: 'act_2_' + Date.now(), name: 'Actividad 2', description: 'hola', photos: [] },
+            { id: 'act_3_' + Date.now(), name: 'Actividad 3', description: 'hola', photos: [] },
+            { id: 'act_4_' + Date.now(), name: 'Actividad 4', description: 'hola', photos: [] }
         ]
     };
 }
 
 // ==========================================
-// LÓGICA DE PERSISTENCIA (AUTOSAVE)
+// LÓGICA DE PERSISTENCIA
 // ==========================================
 
 // Guardar datos al servidor
 async function saveTimelineData(silent = false) {
-    if (!silent) setSaveStatus('saving');
-    
     try {
         const response = await fetch('/api/data', {
             method: 'POST',
@@ -141,40 +131,9 @@ async function saveTimelineData(silent = false) {
         });
         
         if (!response.ok) throw new Error('No se pudo guardar la información');
-        
-        if (!silent) setSaveStatus('saved');
     } catch (error) {
         console.error(error);
-        if (!silent) setSaveStatus('error');
-        showToast('No se pudieron guardar los cambios en el servidor.', 'error');
-    }
-}
-
-// Disparar autoguardado con retardo para evitar sobrecargar al escribir
-function triggerAutosave() {
-    setSaveStatus('saving');
-    if (autosaveTimeout) clearTimeout(autosaveTimeout);
-    
-    autosaveTimeout = setTimeout(() => {
-        saveTimelineData();
-    }, 800); // 800ms después de que el usuario deja de escribir
-}
-
-// Actualizar indicador visual de guardado
-function setSaveStatus(status) {
-    saveStatusBadge.className = 'save-status ' + status;
-    const icon = saveStatusBadge.querySelector('i');
-    const text = saveStatusBadge.querySelector('span');
-    
-    if (status === 'saved') {
-        icon.className = 'fa-solid fa-cloud-arrow-up';
-        text.innerText = 'Cambios guardados';
-    } else if (status === 'saving') {
-        icon.className = 'fa-solid fa-circle-notch';
-        text.innerText = 'Guardando...';
-    } else if (status === 'error') {
-        icon.className = 'fa-solid fa-triangle-exclamation';
-        text.innerText = 'Error al guardar';
+        if (!silent) showToast('No se pudieron guardar los cambios en el servidor.', 'error');
     }
 }
 
@@ -225,8 +184,6 @@ function renderTimeline() {
         timelineItemsContainer.appendChild(cardWrapper);
     });
     
-    // Asociar inputs y descripciones dinámicamente tras renderizar
-    bindCardInputs();
 }
 
 // Renderiza una sola actividad
@@ -254,7 +211,7 @@ function renderActivity(activity, saturdayId, actIndex) {
     return `
         <div class="activity-card" data-act-id="${activity.id}">
             <div class="activity-header">
-                <span class="activity-badge">Actividad ${actIndex + 1}</span>
+                <span class="activity-badge">Actividad 1</span>
                 <h3 class="activity-title">${escapeHtml(activity.name)}</h3>
             </div>
             
@@ -272,75 +229,6 @@ function renderActivity(activity, saturdayId, actIndex) {
             </div>
         </div>
     `;
-}
-
-// Vincular los eventos onChange a los campos de texto
-function bindCardInputs() {
-    // No hay más inputs para vincular - modo solo lectura
-}
-
-// Actualiza una propiedad del JSON local
-function updateActivityProperty(satId, actId, property, value) {
-    const saturday = timelineData.find(s => s.id === satId);
-    if (!saturday) return;
-    
-    const activity = saturday.activities.find(a => a.id === actId);
-    if (!activity) return;
-    
-    activity[property] = value;
-}
-
-// ==========================================
-// CONTROL DE SÁBADOS (AÑADIR / ELIMINAR)
-// ==========================================
-
-// Añadir un nuevo sábado
-function addSaturday() {
-    let newDate = '2026-08-15'; // Fecha inicial si no hay elementos
-    
-    if (timelineData.length > 0) {
-        // Encontrar la fecha más reciente y sumarle 7 días
-        const sortedSaturdays = [...timelineData].sort((a, b) => new Date(a.date) - new Date(b.date));
-        const lastSaturday = sortedSaturdays[sortedSaturdays.length - 1];
-        newDate = calculateNextSaturdayDate(lastSaturday.date);
-    }
-    
-    const newSaturday = createNewSaturdayObject(newDate);
-    timelineData.push(newSaturday);
-    
-    // Volver a ordenar por fecha para mantener el timeline coherente
-    timelineData.sort((a, b) => new Date(a.date) - new Date(b.date));
-    
-    saveTimelineData();
-    renderTimeline();
-    
-    // Hacer scroll suave hacia el nuevo elemento
-    setTimeout(() => {
-        const element = document.querySelector(`[data-id="${newSaturday.id}"]`);
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            // Efecto flash de luz sutil
-            element.querySelector('.timeline-card').style.boxShadow = '0 0 40px rgba(217, 70, 239, 0.4)';
-            setTimeout(() => {
-                element.querySelector('.timeline-card').style.boxShadow = '';
-            }, 1000);
-        }
-    }, 100);
-    
-    showToast(`Se agregó el sábado ${formatSpanishDate(newDate)}`);
-}
-
-// Eliminar un sábado
-function deleteSaturday(satId) {
-    const saturday = timelineData.find(s => s.id === satId);
-    if (!saturday) return;
-    
-    if (confirm(`¿Está seguro de eliminar el Sábado ${saturday.formattedDate} y todas sus actividades? Esta acción no se puede deshacer.`)) {
-        timelineData = timelineData.filter(s => s.id !== satId);
-        saveTimelineData();
-        renderTimeline();
-        showToast('Sábado eliminado correctamente.', 'success');
-    }
 }
 
 // ==========================================
