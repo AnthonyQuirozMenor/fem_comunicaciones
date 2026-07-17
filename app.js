@@ -30,8 +30,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Registrar eventos globales
 function setupEventListeners() {
-    // Botón Agregar Sábado
-    addSaturdayBtn.addEventListener('click', addSaturday);
+    // Botón Agregar Sábado (si existe)
+    if (addSaturdayBtn) {
+        addSaturdayBtn.addEventListener('click', addSaturday);
+    }
     
     // Campo de búsqueda
     searchInput.addEventListener('input', filterTimeline);
@@ -53,6 +55,17 @@ function setupEventListeners() {
         if (e.key === 'ArrowLeft') prevLightboxImage();
         if (e.key === 'ArrowRight') nextLightboxImage();
     });
+
+    // Traducción de scroll de rueda vertical a horizontal
+    const container = document.querySelector('.timeline-container');
+    if (container) {
+        container.addEventListener('wheel', (e) => {
+            if (e.deltaY !== 0) {
+                container.scrollLeft += e.deltaY * 1.2;
+                e.preventDefault();
+            }
+        });
+    }
 }
 
 // ==========================================
@@ -84,13 +97,13 @@ async function loadTimelineData() {
     }
 }
 
-// Genera los primeros sábados por defecto empezando del 15 de agosto de 2026
+// Genera los 16 sábados fijos desde el 15 de agosto de 2026 hasta el 28 de noviembre de 2026
 function generateInitialSaturdays() {
     timelineData = [];
     let currentDate = '2026-08-15'; // Sábado 15 de agosto
     
-    // Generar 4 sábados iniciales
-    for (let i = 0; i < 4; i++) {
+    // Generar exactamente 16 sábados
+    for (let i = 0; i < 16; i++) {
         timelineData.push(createNewSaturdayObject(currentDate));
         currentDate = calculateNextSaturdayDate(currentDate);
     }
@@ -190,7 +203,7 @@ function renderTimeline() {
         
         // Generar HTML de la tarjeta
         cardWrapper.innerHTML = `
-            <!-- Nodo en la línea vertical -->
+            <!-- Nodo en la línea horizontal -->
             <div class="timeline-node"></div>
             
             <!-- Tarjeta Principal del Sábado -->
@@ -200,10 +213,6 @@ function renderTimeline() {
                         <i class="fa-solid fa-calendar-day"></i>
                         <h2>${saturday.formattedDate}</h2>
                     </div>
-                    <button class="btn-delete-saturday" onclick="deleteSaturday('${saturday.id}')" title="Eliminar este sábado">
-                        <i class="fa-solid fa-trash-can"></i>
-                        <span>Eliminar</span>
-                    </button>
                 </div>
                 
                 <!-- Cuadrícula de 4 Actividades -->
