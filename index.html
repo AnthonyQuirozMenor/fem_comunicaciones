@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Línea de Tiempo - FEM COMUNICACIONES</title>
+    
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS Styling -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Ambient background glows -->
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    <div class="bg-glow bg-glow-3"></div>
+
+    <header class="app-header">
+        <div class="header-container">
+            <div class="brand">
+                <div class="brand-logo">
+                    <i class="fa-solid fa-timeline"></i>
+                </div>
+                <div class="brand-info">
+                    <h1>FEM COMUNICACIONES</h1>
+                    <p class="subtitle">Línea de Tiempo de Actividades</p>
+                </div>
+            </div>
+            
+            <div class="header-controls">
+                <!-- Search bar -->
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="searchInput" placeholder="Buscar actividad o fecha...">
+                </div>
+                
+                <!-- Autosave Badge -->
+                <div id="saveStatus" class="save-status saved">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    <span>Cambios guardados</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="app-main">
+        <div class="timeline-container">
+            <!-- Central timeline path line -->
+            <div class="timeline-line"></div>
+            
+            <!-- Dynamic Saturdays will render here -->
+            <div id="timelineItems" class="timeline-items">
+                <!-- Loading State placeholder -->
+                <div class="loading-state">
+                    <i class="fa-solid fa-circle-notch fa-spin"></i>
+                    <p>Cargando línea de tiempo...</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Add Saturday Button Container -->
+        <div class="actions-container">
+            <button id="addSaturdayBtn" class="btn btn-primary">
+                <i class="fa-solid fa-plus-circle"></i>
+                <span>Agregar Sábado</span>
+            </button>
+        </div>
+    </main>
+
+    <!-- Image Lightbox Modal -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <button class="lightbox-prev" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+        <div class="lightbox-content-container">
+            <img id="lightboxImg" src="" alt="Vista ampliada">
+            <p id="lightboxCaption" class="lightbox-caption"></p>
+        </div>
+        <button class="lightbox-next" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+
+    <!-- Toast Notification for Alerts -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Frontend JS Application Logic -->
+    <script src="app.js"></script>
+</body>
+</html>

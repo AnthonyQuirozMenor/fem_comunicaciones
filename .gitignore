@@ -1,0 +1,12 @@
+# Ignorar archivos locales generados por la aplicación
+data.json
+fotos/*
+!fotos/.gitkeep
+
+# Archivos del sistema y editores
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
