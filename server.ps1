@@ -60,6 +60,11 @@ while ($listener.IsListening) {
         $response.Headers.Add("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
         $response.Headers.Add("Access-Control-Allow-Headers", "Content-Type, X-File-Name")
         
+        # Headers para evitar caché del navegador
+        $response.Headers.Add("Cache-Control", "no-cache, no-store, must-revalidate")
+        $response.Headers.Add("Pragma", "no-cache")
+        $response.Headers.Add("Expires", "0")
+        
         if ($request.HttpMethod -eq "OPTIONS") {
             $response.StatusCode = 200
             $response.OutputStream.Close()
