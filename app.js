@@ -207,12 +207,13 @@ function renderTimeline() {
             <div class="timeline-node"></div>
             
             <!-- Tarjeta Principal del Sábado -->
-            <div class="timeline-card">
-                <div class="card-header">
+            <div class="timeline-card" data-sat-id="${saturday.id}">
+                <div class="card-header" onclick="toggleActivities('${saturday.id}')">
                     <div class="card-date">
                         <i class="fa-solid fa-calendar-day"></i>
                         <h2>${saturday.formattedDate}</h2>
                     </div>
+                    <i class="fa-solid fa-chevron-down card-toggle-icon"></i>
                 </div>
                 
                 <!-- Cuadrícula de 4 Actividades -->
@@ -332,6 +333,17 @@ function updateActivityProperty(satId, actId, property, value) {
     if (!activity) return;
     
     activity[property] = value;
+}
+
+// ==========================================
+// CONTROL DE COLAPSO/EXPANSIÓN DE ACTIVIDADES
+// ==========================================
+
+function toggleActivities(satId) {
+    const card = document.querySelector(`.timeline-card[data-sat-id="${satId}"]`);
+    if (!card) return;
+    
+    card.classList.toggle('collapsed');
 }
 
 // ==========================================
