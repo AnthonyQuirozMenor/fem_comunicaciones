@@ -1,0 +1,178 @@
+[
+  {
+    "id": "sat_1",
+    "date": "2026-08-15",
+    "formattedDate": "Sábado, 15 de agosto de 2026",
+    "activities": [
+      { "id": "sat_1_act_1", "name": "Planificación y Bienvenida", "description": "Sesión inaugural para definir metas y objetivos del periodo. Coordinación inicial con todo el equipo de FEM COMUNICACIONES.", "photos": [] },
+      { "id": "sat_1_act_2", "name": "Distribución de Roles", "description": "Asignación de comités de trabajo y definición de tareas semanales para la línea de acción.", "photos": [] },
+      { "id": "sat_1_act_3", "name": "Taller de Integración", "description": "Dinámicas grupales de comunicación asertiva y desarrollo de confianza organizativa.", "photos": [] },
+      { "id": "sat_1_act_4", "name": "Retroalimentación y Cierre", "description": "Espacio de reflexión final sobre el inicio de las actividades y recopilación de sugerencias.", "photos": [] }
+    ]
+  },
+  {
+    "id": "sat_2",
+    "date": "2026-08-22",
+    "formattedDate": "Sábado, 22 de agosto de 2026",
+    "activities": [
+      { "id": "sat_2_act_1", "name": "Revisión de Avances", "description": "Presentación de los primeros entregables de cada equipo y análisis de puntos críticos.", "photos": [] },
+      { "id": "sat_2_act_2", "name": "Taller de Oratoria", "description": "Capacitación práctica en expresión verbal y corporal para la vocería del proyecto.", "photos": [] },
+      { "id": "sat_2_act_3", "name": "Diseño de Estrategias", "description": "Lluvia de ideas y estructuración de la campaña de comunicación digital para el mes.", "photos": [] },
+      { "id": "sat_2_act_4", "name": "Evaluación de Sesión", "description": "Análisis rápido de aprendizajes y compromisos asumidos para la siguiente semana.", "photos": [] }
+    ]
+  },
+  {
+    "id": "sat_3",
+    "date": "2026-08-29",
+    "formattedDate": "Sábado, 29 de agosto de 2026",
+    "activities": [
+      { "id": "sat_3_act_1", "name": "Análisis de Métricas", "description": "Revisión del alcance de las publicaciones digitales y discusión de mejoras de impacto.", "photos": [] },
+      { "id": "sat_3_act_2", "name": "Taller de Redacción Creativa", "description": "Prácticas de copywriting y storytelling aplicadas a contenidos comunitarios.", "photos": [] },
+      { "id": "sat_3_act_3", "name": "Reunión de Enlace", "description": "Coordinación con aliados estratégicos para actividades conjuntas del siguiente mes.", "photos": [] },
+      { "id": "sat_3_act_4", "name": "Cierre Mensual", "description": "Resumen de logros de agosto y ajuste del plan operativo para septiembre.", "photos": [] }
+    ]
+  },
+  {
+    "id": "sat_4",
+    "date": "2026-09-05",
+    "formattedDate": "Sábado, 5 de septiembre de 2026",
+    "activities": [
+      { "id": "sat_4_act_1", "name": "Alineamiento Mensual", "description": "Lanzamiento de las prioridades operativas de septiembre y asignación de presupuesto.", "photos": [] },
+      { "id": "sat_4_act_2", "name": "Taller de Producción Audiovisual", "description": "Fundamentos de grabación de video y encuadre utilizando dispositivos móviles.", "photos": [] },
+      { "id": "sat_4_act_3", "name": "Edición Práctica", "description": "Laboratorio interactivo de corte y montaje de videos cortos para redes sociales.", "photos": [] },
+      { "id": "sat_4_act_4", "name": "Puntos de Control", "description": "Aprobación de guiones y calendarización de las producciones en marcha.", "photos": [] }
+    ]
+  },
+  {
+    "id": "sat_5",
+    "date": "2026-09-12",
+    "formattedDate": "Sábado, 12 de septiembre de 2026",
+    "activities": [
+      { "id": "sat_5_act_1", "name": "Revisión Audiovisual", "description": "Visualización y feedback grupal del primer lote de contenidos en video creados.", "photos": [] },
+      { "id": "sat_5_act_2", "name": "Manejo de Vocerías", "description": "Simulación de entrevistas periodísticas y fortalecimiento de mensajes clave.", "photos": [] },
+      { "id": "sat_5_act_3", "name": "Campañas de Campo", "description": "Organización del plan de visitas de campo para registro fotográfico presencial.", "photos": [] },
+      { "id": "sat_5_act_4", "name": "Monitoreo Operativo", "description": "Compromisos para el desarrollo logístico de las salidas programadas.", "photos": [] }
+    ]
+  },
+  {
+    "id": "sat_6",
+    "date": "2026-09-19",
+    "formattedDate": "Sábado, 19 de septiembre de 2026",
+    "activities": [
+      { "id": "sat_6_act_1", "name": "Lanzamiento de Campaña", "description": "Puesta en marcha de la campaña comunitaria en canales de comunicación local.", "photos": [] },
+      { "id": "sat_6_act_2", "name": "Taller de Relaciones Públicas", "description": "Cómo redactar notas de prensa institucionales y contactar a medios locales.", "photos": [] },
+      { "id": "sat_6_act_3", "name": "Mapeo de Actores", "description": "Identificación de líderes comunitarios clave para el escalamiento del proyecto.", "photos": [] },
+      { "id": "sat_6_act_4", "name": "Reporte Semanal", "description": "Documentación de impresiones recibidas de los primeros impactos públicos.", "photos": [] }
+    ]
+  },
+  {
+    "id": "sat_7",
+    "date": "2026-09-26",
+    "formattedDate": "Sábado, 26 de septiembre de 2026",
+    "activities": [
+      { "id": "sat_7_act_1", "name": "Evaluación Intermedia", "description": "Medición cualitativa y cuantitativa de las metas alcanzadas a mitad de camino.", "photos": [] },
+      { "id": "sat_7_act_2", "name": "Mesa de Co-Creación", "description": "Taller participativo con miembros de la comunidad para ajustar mensajes del proyecto.", "photos": [] },
+      { "id": "sat_7_act_3", "name": "Ajuste de Estrategia", "description": "Redefinición de dinámicas de comunicación basadas en la mesa de co-creación.", "photos": [] },
+      { "id": "sat_7_act_4", "name": "Plan de Octubre", "description": "Planificación y asignación de temas para el siguiente bloque de sábados.", "photos": [] }
+    ]
+  },
+  {
+    "id": "sat_8",
+    "date": "2026-10-03",
+    "formattedDate": "Sábado, 3 de octubre de 2026",
+    "activities": [
+      { "id": "sat_8_act_1", "name": "Introducción a Diseño Gráfico", "description": "Conceptos de jerarquía visual, uso del color y tipografía para marcas sociales.", "photos": [] },
+      { "id": "sat_8_act_2", "name": "Taller de Herramientas Digitales", "description": "Creación guiada de plantillas visuales reutilizables para contenido digital.", "photos": [] },
+      { "id": "sat_8_act_3", "name": "Sesión Fotográfica Práctica", "description": "Consejos para capturar retratos e historias humanas con buena iluminación.", "photos": [] },
+      { "id": "sat_8_act_4", "name": "Galería Grupal", "description": "Presentación y corrección constructiva de los diseños y fotos creados en el día.", "photos": [] }
+    ]
+  },
+  {
+    "id": "sat_9",
+    "date": "2026-10-10",
+    "formattedDate": "Sábado, 10 de octubre de 2026",
+    "activities": [
+      { "id": "sat_9_act_1", "name": "Estrategias de Pauta", "description": "Introducción básica al funcionamiento y configuración de anuncios comunitarios.", "photos": [] },
+      { "id": "sat_9_act_2", "name": "Taller de Periodismo Ciudadano", "description": "Principios éticos de verificación de datos y entrevistas de opinión.", "photos": [] },
+      { "id": "sat_9_act_3", "name": "Redacción Práctica", "description": "Elaboración en vivo de una mini-crónica sobre un personaje destacado de la zona.", "photos": [] },
+      { "id": "sat_9_act_4", "name": "Revisión de Textos", "description": "Edición y preparación de las crónicas para su publicación final.", "photos": [] }
+    ]
+  },
+  {
+    "id": "sat_10",
+    "date": "2026-10-17",
+    "formattedDate": "Sábado, 17 de octubre de 2026",
+    "activities": [
+      { "id": "sat_10_act_1", "name": "Producción de Podcasts", "description": "Configuración de audio, micrófonos e iniciación en guionaje radiofónico.", "photos": [] },
+      { "id": "sat_10_act_2", "name": "Grabación en Cabina", "description": "Prácticas reales de locución de spots y narración en entornos controlados.", "photos": [] },
+      { "id": "sat_10_act_3", "name": "Edición de Audio", "description": "Fundamentos para limpiar ruido y agregar efectos y música de fondo.", "photos": [] },
+      { "id": "sat_10_act_4", "name": "Escucha y Feedback", "description": "Audición colectiva de los primeros spots de audio y propuesta de ajustes.", "photos": [] }
+    ]
+  },
+  {
+    "id": "sat_11",
+    "date": "2026-10-24",
+    "formattedDate": "Sábado, 24 de octubre de 2026",
+    "activities": [
+      { "id": "sat_11_act_1", "name": "Distribución Transmedia", "description": "Estrategia para conectar el podcast, las crónicas y los videos en una sola narrativa.", "photos": [] },
+      { "id": "sat_11_act_2", "name": "Taller de Gestión de Crisis", "description": "Cómo responder ante comentarios negativos y manejar la reputación de la organización.", "photos": [] },
+      { "id": "sat_11_act_3", "name": "Planificación Comunitaria", "description": "Desarrollo del evento presencial de rendición de cuentas para noviembre.", "photos": [] },
+      { "id": "sat_11_act_4", "name": "Cierre de Actividades", "description": "Tareas delegadas para el equipamiento logístico y difusión del foro.", "photos": [] }
+    ]
+  },
+  {
+    "id": "sat_12",
+    "date": "2026-10-31",
+    "formattedDate": "Sábado, 31 de octubre de 2026",
+    "activities": [
+      { "id": "sat_12_act_1", "name": "Consolidación de Contenidos", "description": "Integración del material final que se presentará en la exposición fotográfica.", "photos": [] },
+      { "id": "sat_12_act_2", "name": "Taller de Logística y Protocolo", "description": "Definición del cronograma detallado del evento presencial y vocerías oficiales.", "photos": [] },
+      { "id": "sat_12_act_3", "name": "Ensayo de Presentaciones", "description": "Práctica de los discursos y ponencias de los líderes del proyecto.", "photos": [] },
+      { "id": "sat_12_act_4", "name": "Balance Mensual", "description": "Evaluación del cumplimiento del plan de octubre y metas del tramo final.", "photos": [] }
+    ]
+  },
+  {
+    "id": "sat_13",
+    "date": "2026-11-07",
+    "formattedDate": "Sábado, 7 de noviembre de 2026",
+    "activities": [
+      { "id": "sat_13_act_1", "name": "Convocatoria y Prensa", "description": "Envío masivo de invitaciones a autoridades y gestión de entrevistas de prensa.", "photos": [] },
+      { "id": "sat_13_act_2", "name": "Revisión de Material Gráfico", "description": "Inspección final de los folletos, banners y materiales que se imprimirán.", "photos": [] },
+      { "id": "sat_13_act_3", "name": "Ensayo General Voces", "description": "Segundo ensayo con cronometraje estricto de las ponencias e intervenciones.", "photos": [] },
+      { "id": "sat_13_act_4", "name": "Logística de Sitio", "description": "Coordinación final de sonido, iluminación y disposición física en la locación.", "photos": [] }
+    ]
+  },
+  {
+    "id": "sat_14",
+    "date": "2026-11-14",
+    "formattedDate": "Sábado, 14 de noviembre de 2026",
+    "activities": [
+      { "id": "sat_14_act_1", "name": "Foro FEM COMUNICACIONES", "description": "Ejecución presencial del foro comunitario y exposición de trabajos logrados.", "photos": [] },
+      { "id": "sat_14_act_2", "name": "Registro de Testimonios", "description": "Grabación de opiniones e impactos de los participantes al cierre del evento.", "photos": [] },
+      { "id": "sat_14_act_3", "name": "Desmontaje Logístico", "description": "Orden, inventario y devolución de los materiales del local del evento.", "photos": [] },
+      { "id": "sat_14_act_4", "name": "Celebración de Hitos", "description": "Breve compartir grupal para felicitar el esfuerzo de todos los comités.", "photos": [] }
+    ]
+  },
+  {
+    "id": "sat_15",
+    "date": "2026-11-21",
+    "formattedDate": "Sábado, 21 de noviembre de 2026",
+    "activities": [
+      { "id": "sat_15_act_1", "name": "Evaluación Post-Foro", "description": "Reunión de análisis de la asistencia, repercusión en medios y lecciones aprendidas.", "photos": [] },
+      { "id": "sat_15_act_2", "name": "Redacción de Informe Final", "description": "Estructuración del reporte ejecutivo con datos cuantitativos de impacto social.", "photos": [] },
+      { "id": "sat_15_act_3", "name": "Compilación del Video Memoria", "description": "Edición grupal del videoclip que recopila los mejores momentos del foro.", "photos": [] },
+      { "id": "sat_15_act_4", "name": "Entrega de Borradores", "description": "Revisión conjunta y validación de las cifras presentadas en el borrador.", "photos": [] }
+    ]
+  },
+  {
+    "id": "sat_16",
+    "date": "2026-11-28",
+    "formattedDate": "Sábado, 28 de noviembre de 2026",
+    "activities": [
+      { "id": "sat_16_act_1", "name": "Presentación de Memoria", "description": "Exposición formal del informe final y entrega del video memoria a todo el equipo.", "photos": [] },
+      { "id": "sat_16_act_2", "name": "Entrega de Reconocimientos", "description": "Ceremonia interna de agradecimiento y entrega de diplomas de participación.", "photos": [] },
+      { "id": "sat_16_act_3", "name": "Taller de Proyección Futura", "description": "Discusión sobre la sostenibilidad del proyecto y metas para los próximos periodos.", "photos": [] },
+      { "id": "sat_16_act_4", "name": "Clausura y Brindis", "description": "Palabras de agradecimiento finales de la dirección y brindis de despedida de la temporada.", "photos": [] }
+    ]
+  }
+]

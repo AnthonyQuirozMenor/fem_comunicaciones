@@ -3,7 +3,9 @@
 $OutputEncoding = [System.Text.Encoding]::UTF8
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 
-$workspace = "c:\Users\The-b\Downloads\Linea de tiempo"
+Add-Type -AssemblyName System.Web -ErrorAction SilentlyContinue
+
+$workspace = if ($PSScriptRoot) { $PSScriptRoot } else { "c:\Users\The-b\Downloads\Linea de tiempo" }
 $fotosDir = Join-Path $workspace "fotos"
 
 # Crear carpeta de fotos si no existe
@@ -78,7 +80,6 @@ while ($listener.IsListening) {
                 if (Test-Path $dataPath) {
                     $bytes = [System.IO.File]::ReadAllBytes($dataPath)
                 } else {
-                    # Devolver datos por defecto vacíos
                     $bytes = [System.Text.Encoding]::UTF8.GetBytes("[]")
                 }
                 $response.ContentType = "application/json; charset=utf-8"
@@ -94,12 +95,10 @@ while ($listener.IsListening) {
                 $localPath = Join-Path $workspace "index.html"
             } elseif ($url.StartsWith("/fotos/")) {
                 $filename = $url.Substring(7)
-                # Decodificar el nombre del archivo para soportar espacios/caracteres URL
-                $filename = [System.Web.HttpUtility]::UrlDecode($filename)
+                $filename = [System.Uri]::UnescapeDataString($filename)
                 $localPath = Join-Path $fotosDir $filename
             } else {
-                # Decodificar URL
-                $decodedUrl = [System.Web.HttpUtility]::UrlDecode($url.TrimStart('/'))
+                $decodedUrl = [System.Uri]::UnescapeDataString($url.TrimStart('/'))
                 $localPath = Join-Path $workspace $decodedUrl
             }
             
@@ -133,23 +132,19 @@ while ($listener.IsListening) {
                 
             # Endpoint para subir imágenes
             } elseif ($url -eq "/api/upload") {
-                # Obtener el nombre original desde los headers
                 $rawFilename = $request.Headers["X-File-Name"]
                 if ([string]::IsNullOrEmpty($rawFilename)) {
                     $rawFilename = "imagen.png"
                 }
                 
-                # Limpiar el nombre de archivo (remover caracteres extraños y ruta)
                 $originalName = [System.IO.Path]::GetFileName($rawFilename)
                 $originalName = $originalName -replace '[^a-zA-Z0-9_\-\.]', '_'
                 
-                # Generar un nombre único para evitar sobreescritura
                 $uniquePrefix = [Guid]::NewGuid().ToString().Substring(0, 8)
                 $finalFilename = $uniquePrefix + "_" + $originalName
                 
                 $savePath = Join-Path $fotosDir $finalFilename
                 
-                # Guardar el stream binario al archivo
                 $inputStream = $request.InputStream
                 $fileStream = [System.IO.File]::Create($savePath)
                 $inputStream.CopyTo($fileStream)
@@ -157,12 +152,10 @@ while ($listener.IsListening) {
                 
                 Write-Host "Archivo guardado en: $savePath" -ForegroundColor Green
                 
-                # Devolver el path relativo para el frontend
                 $response.StatusCode = 200
                 $response.ContentType = "application/json; charset=utf-8"
                 
-                # Codificar el nombre final de la URL para que sea seguro
-                $encodedFilename = [System.Web.HttpUtility]::UrlPathEncode($finalFilename)
+                $encodedFilename = [System.Uri]::EscapeDataString($finalFilename)
                 $jsonResponse = '{"status":"success", "filePath": "/fotos/' + $encodedFilename + '"}'
                 $bytes = [System.Text.Encoding]::UTF8.GetBytes($jsonResponse)
                 $response.OutputStream.Write($bytes, 0, $bytes.Length)

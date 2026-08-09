@@ -1,6 +1,6 @@
 /**
  * APLICACIÓN DE LÍNEA DE TIEMPO - FEM COMUNICACIONES
- * Lógica del Cliente (Vanilla JavaScript)
+ * Lógica del Cliente (Solo Lectura)
  */
 
 // Estado de la aplicación
@@ -52,7 +52,8 @@ function setupEventListeners() {
     const container = document.querySelector('.timeline-container');
     if (container) {
         container.addEventListener('wheel', (e) => {
-            if (e.deltaY !== 0) {
+            // Solo aplicar scroll horizontal si el contenedor puede hacer scroll horizontal (vista escritorio)
+            if (window.innerWidth > 768 && e.deltaY !== 0) {
                 container.scrollLeft += e.deltaY * 1.2;
                 e.preventDefault();
             }
@@ -61,7 +62,7 @@ function setupEventListeners() {
 }
 
 // ==========================================
-// CARGA Y GENERACIÓN DE DATOS
+// CARGA DE DATOS (SOLO LECTURA)
 // ==========================================
 
 // Cargar datos desde el servidor
@@ -75,65 +76,37 @@ async function loadTimelineData() {
         if (data && data.length > 0) {
             timelineData = data;
         } else {
-            // Generar estado inicial por defecto si el archivo está vacío
+            // Generar datos locales en memoria como respaldo (sin persistencia en servidor)
             generateInitialSaturdays();
-            await saveTimelineData(true); // Guardar inmediatamente silencioso
         }
         
         renderTimeline();
     } catch (error) {
         console.error(error);
-        showToast('Error al cargar la línea de tiempo. Cargando datos locales sin conexión.', 'error');
+        showToast('Error al cargar datos. Mostrando plantilla de respaldo.', 'error');
         generateInitialSaturdays();
         renderTimeline();
     }
 }
 
-// Genera los 16 sábados fijos desde el 15 de agosto de 2026 hasta el 28 de noviembre de 2026
+// Genera los 16 sábados fijos desde el 15 de agosto de 2026 como respaldo
 function generateInitialSaturdays() {
     timelineData = [];
     let currentDate = '2026-08-15'; // Sábado 15 de agosto
     
-    // Generar exactamente 16 sábados
     for (let i = 0; i < 16; i++) {
-        timelineData.push(createNewSaturdayObject(currentDate));
-        currentDate = calculateNextSaturdayDate(currentDate);
-    }
-}
-
-// Crea la estructura de datos básica de un Sábado con 4 actividades
-function createNewSaturdayObject(dateString) {
-    const formatted = formatSpanishDate(dateString);
-    return {
-        id: 'sat_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
-        date: dateString,
-        formattedDate: formatted,
-        activities: [
-            { id: 'act_1_' + Date.now(), name: 'Actividad 1', description: 'hola', photos: [] },
-            { id: 'act_2_' + Date.now(), name: 'Actividad 2', description: 'hola', photos: [] },
-            { id: 'act_3_' + Date.now(), name: 'Actividad 3', description: 'hola', photos: [] },
-            { id: 'act_4_' + Date.now(), name: 'Actividad 4', description: 'hola', photos: [] }
-        ]
-    };
-}
-
-// ==========================================
-// LÓGICA DE PERSISTENCIA
-// ==========================================
-
-// Guardar datos al servidor
-async function saveTimelineData(silent = false) {
-    try {
-        const response = await fetch('/api/data', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(timelineData)
+        timelineData.push({
+            id: 'sat_' + (i + 1),
+            date: currentDate,
+            formattedDate: formatSpanishDate(currentDate),
+            activities: [
+                { id: `sat_${i+1}_act_1`, name: 'Planificación y Bienvenida', description: 'Reunión inicial de coordinación.', photos: [] },
+                { id: `sat_${i+1}_act_2`, name: 'Talleres Prácticos', description: 'Desarrollo de las dinámicas planificadas.', photos: [] },
+                { id: `sat_${i+1}_act_3`, name: 'Revisión y Enlaces', description: 'Control de avances y acuerdos del día.', photos: [] },
+                { id: `sat_${i+1}_act_4`, name: 'Evaluación y Cierre', description: 'Retroalimentación grupal de la jornada.', photos: [] }
+            ]
         });
-        
-        if (!response.ok) throw new Error('No se pudo guardar la información');
-    } catch (error) {
-        console.error(error);
-        if (!silent) showToast('No se pudieron guardar los cambios en el servidor.', 'error');
+        currentDate = calculateNextSaturdayDate(currentDate);
     }
 }
 
@@ -142,13 +115,14 @@ async function saveTimelineData(silent = false) {
 // ==========================================
 
 function renderTimeline() {
-    timelineItemsContainer.innerHTML = '';
+    // Limpiar contenedor e insertar la línea base del recorrido
+    timelineItemsContainer.innerHTML = '<div class="timeline-line"></div>';
     
     if (timelineData.length === 0) {
         timelineItemsContainer.innerHTML = `
             <div class="loading-state">
                 <i class="fa-solid fa-calendar-xmark"></i>
-                <p>No hay sábados registrados en la línea de tiempo.</p>
+                <p>No hay actividades registradas en la línea de tiempo.</p>
             </div>
         `;
         return;
@@ -162,7 +136,7 @@ function renderTimeline() {
         
         // Generar HTML de la tarjeta
         cardWrapper.innerHTML = `
-            <!-- Nodo en la línea horizontal -->
+            <!-- Nodo en la línea horizontal/vertical -->
             <div class="timeline-node"></div>
             
             <!-- Tarjeta Principal del Sábado -->
@@ -170,7 +144,7 @@ function renderTimeline() {
                 <div class="card-header">
                     <div class="card-date">
                         <i class="fa-solid fa-calendar-day"></i>
-                        <h2>${saturday.formattedDate}</h2>
+                        <h2>${saturday.formattedDate || formatSpanishDate(saturday.date)}</h2>
                     </div>
                 </div>
                 
@@ -183,14 +157,13 @@ function renderTimeline() {
         
         timelineItemsContainer.appendChild(cardWrapper);
     });
-    
 }
 
 // Renderiza una sola actividad
 function renderActivity(activity, saturdayId, actIndex) {
     const photosHtml = [];
     
-    // Renderizar solo las fotos existentes
+    // Renderizar las fotos existentes (subidas manualmente en la carpeta /fotos/)
     if (activity.photos && activity.photos.length > 0) {
         activity.photos.forEach((photoPath, slotIdx) => {
             if (photoPath) {
@@ -208,10 +181,17 @@ function renderActivity(activity, saturdayId, actIndex) {
         });
     }
     
+    // Si no hay fotos registradas, mostramos espacios vacíos elegantes con bordes discontinuos
+    while (photosHtml.length < 3) {
+        photosHtml.push(`
+            <div class="photo-slot photo-slot-empty" title="Sin foto cargada"></div>
+        `);
+    }
+    
     return `
         <div class="activity-card" data-act-id="${activity.id}">
             <div class="activity-header">
-                <span class="activity-badge">Actividad 1</span>
+                <span class="activity-badge">Actividad ${actIndex + 1}</span>
                 <h3 class="activity-title">${escapeHtml(activity.name)}</h3>
             </div>
             
@@ -221,7 +201,7 @@ function renderActivity(activity, saturdayId, actIndex) {
             
             <div class="activity-photos-container">
                 <div class="photos-label">
-                    <span>Fotos del registro</span>
+                    <span>Registro Fotográfico</span>
                 </div>
                 <div class="photo-slots-grid">
                     ${photosHtml.join('')}
@@ -236,7 +216,6 @@ function renderActivity(activity, saturdayId, actIndex) {
 // ==========================================
 
 function openLightbox(actId, slotIndex) {
-    // Buscar la actividad para extraer sus fotos
     let activity = null;
     for (let s of timelineData) {
         activity = s.activities.find(a => a.id === actId);
@@ -245,8 +224,7 @@ function openLightbox(actId, slotIndex) {
     
     if (!activity || !activity.photos || activity.photos.length === 0) return;
     
-    // Guardar las fotos actuales de la actividad y la posición inicial
-    currentLightboxPhotos = activity.photos.filter(p => p !== null && p !== undefined);
+    currentLightboxPhotos = activity.photos.filter(p => p !== null && p !== undefined && p !== '');
     const selectedPhotoPath = activity.photos[slotIndex];
     currentLightboxIndex = currentLightboxPhotos.indexOf(selectedPhotoPath);
     
@@ -255,10 +233,9 @@ function openLightbox(actId, slotIndex) {
     updateLightboxContent(activity.name);
     
     lightbox.style.display = 'flex';
-    // Forzar reflow para animación
-    lightbox.offsetWidth;
+    lightbox.offsetWidth; // Reflow
     lightbox.classList.add('active');
-    document.body.style.overflow = 'hidden'; // Detener scroll de fondo
+    document.body.style.overflow = 'hidden';
 }
 
 function updateLightboxContent(activityName) {
@@ -268,7 +245,6 @@ function updateLightboxContent(activityName) {
     lightboxImg.src = photoPath;
     lightboxCaption.innerText = `${activityName} - Foto ${currentLightboxIndex + 1} de ${currentLightboxPhotos.length}`;
     
-    // Ocultar botones de navegación si solo hay una imagen
     if (currentLightboxPhotos.length <= 1) {
         lightboxPrev.style.display = 'none';
         lightboxNext.style.display = 'none';
@@ -283,7 +259,7 @@ function closeLightbox() {
     setTimeout(() => {
         lightbox.style.display = 'none';
         lightboxImg.src = '';
-        document.body.style.overflow = ''; // Restaurar scroll
+        document.body.style.overflow = '';
     }, 300);
 }
 
@@ -296,7 +272,6 @@ function prevLightboxImage(e) {
         currentLightboxIndex = currentLightboxPhotos.length - 1;
     }
     
-    // Obtener el nombre de la actividad basándonos en la foto actual
     const activityName = getActivityNameByPhoto(currentLightboxPhotos[currentLightboxIndex]);
     updateLightboxContent(activityName);
 }
@@ -314,11 +289,10 @@ function nextLightboxImage(e) {
     updateLightboxContent(activityName);
 }
 
-// Helper para encontrar el título de la actividad por la ruta de la foto
 function getActivityNameByPhoto(photoPath) {
     for (let s of timelineData) {
         for (let a of s.activities) {
-            if (a.photos.includes(photoPath)) {
+            if (a.photos && a.photos.includes(photoPath)) {
                 return a.name;
             }
         }
@@ -333,16 +307,14 @@ function getActivityNameByPhoto(photoPath) {
 function filterTimeline() {
     const query = searchInput.value.toLowerCase().trim();
     const cardWrappers = document.querySelectorAll('.timeline-card-wrapper');
+    let visibleCount = 0;
     
     cardWrappers.forEach(wrapper => {
         const satId = wrapper.getAttribute('data-id');
         const saturday = timelineData.find(s => s.id === satId);
         if (!saturday) return;
         
-        // Coincidencia con fecha
         const dateMatch = saturday.formattedDate.toLowerCase().includes(query) || saturday.date.includes(query);
-        
-        // Coincidencia con actividades
         const activitiesMatch = saturday.activities.some(act => {
             const nameMatch = act.name.toLowerCase().includes(query);
             const descMatch = act.description.toLowerCase().includes(query);
@@ -351,16 +323,16 @@ function filterTimeline() {
         
         if (dateMatch || activitiesMatch) {
             wrapper.style.display = 'block';
+            visibleCount++;
             
-            // Si la búsqueda es específica de alguna actividad, podemos resaltar las tarjetas internas
             const activityCards = wrapper.querySelectorAll('.activity-card');
             activityCards.forEach(card => {
                 const actId = card.getAttribute('data-act-id');
                 const act = saturday.activities.find(a => a.id === actId);
                 
                 if (query !== '' && (act.name.toLowerCase().includes(query) || act.description.toLowerCase().includes(query))) {
-                    card.style.borderColor = 'var(--accent-indigo)';
-                    card.style.boxShadow = '0 0 15px rgba(99, 102, 241, 0.2)';
+                    card.style.borderColor = 'var(--accent-pink)';
+                    card.style.boxShadow = '0 0 15px rgba(246, 82, 160, 0.25)';
                 } else {
                     card.style.borderColor = '';
                     card.style.boxShadow = '';
@@ -371,14 +343,33 @@ function filterTimeline() {
         }
     });
     
-    // Ocultar o mostrar la línea vertical central según si hay resultados visibles
-    const visibleCards = document.querySelectorAll('.timeline-card-wrapper[style="display: block;"], .timeline-card-wrapper:not([style])');
     const timelineLine = document.querySelector('.timeline-line');
-    
-    if (visibleCards.length === 0) {
-        timelineLine.style.display = 'none';
-    } else {
-        timelineLine.style.display = 'block';
+    if (timelineLine) {
+        if (visibleCount === 0) {
+            timelineLine.style.display = 'none';
+        } else {
+            timelineLine.style.display = 'block';
+            
+            // Si hay filtros activos, ajustar la línea horizontal
+            if (query !== '' && window.innerWidth > 768) {
+                // Encontrar el primer y último elemento visible para ajustar los extremos de la línea
+                const visibleElements = Array.from(cardWrappers).filter(el => el.style.display !== 'none');
+                if (visibleElements.length > 0) {
+                    const firstEl = visibleElements[0];
+                    const lastEl = visibleElements[visibleElements.length - 1];
+                    
+                    const leftOffset = firstEl.offsetLeft + 190;
+                    const rightOffset = timelineItemsContainer.offsetWidth - (lastEl.offsetLeft + 190);
+                    
+                    timelineLine.style.left = `${leftOffset}px`;
+                    timelineLine.style.right = `${rightOffset}px`;
+                }
+            } else {
+                // Restaurar valores por defecto
+                timelineLine.style.left = '';
+                timelineLine.style.right = '';
+            }
+        }
     }
 }
 
@@ -386,11 +377,8 @@ function filterTimeline() {
 // UTILIDADES COMPLEMENTARIAS
 // ==========================================
 
-// Formatear fecha YYYY-MM-DD en texto largo en español
 function formatSpanishDate(dateString) {
-    // Añadimos hora local (T12:00:00) para evitar desfase por huso horario en UTC
     const date = new Date(dateString + 'T12:00:00');
-    
     const options = { 
         weekday: 'long', 
         day: 'numeric', 
@@ -399,17 +387,11 @@ function formatSpanishDate(dateString) {
     };
     
     let formatted = date.toLocaleDateString('es-ES', options);
-    
-    // Capitalizar primera letra del día y del mes
     formatted = formatted.replace(/^\w/, c => c.toUpperCase());
-    
-    // Reemplazar después de comas (por ejemplo: "Sábado, 15 de agosto...")
     formatted = formatted.replace(/,\s\w/, c => c.toUpperCase());
-    
     return formatted;
 }
 
-// Calcular el siguiente sábado sumando 7 días
 function calculateNextSaturdayDate(lastDateString) {
     const date = new Date(lastDateString + 'T12:00:00');
     const nextDate = new Date(date.getTime() + 7 * 24 * 60 * 60 * 1000);
@@ -421,8 +403,8 @@ function calculateNextSaturdayDate(lastDateString) {
     return `${yyyy}-${mm}-${dd}`;
 }
 
-// Mostrar alertas tipo Toast en la esquina inferior derecha
 function showToast(message, type = 'success') {
+    if (!toastElement) return;
     toastElement.innerText = message;
     toastElement.className = `toast show ${type}`;
     
@@ -431,7 +413,6 @@ function showToast(message, type = 'success') {
     }, 3000);
 }
 
-// Escapar caracteres HTML peligrosos
 function escapeHtml(text) {
     if (!text) return '';
     return text
