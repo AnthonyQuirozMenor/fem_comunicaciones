@@ -26,23 +26,30 @@
     <div class="bg-glow bg-glow-2"></div>
     <div class="bg-glow bg-glow-3"></div>
 
-    <!-- Minimal HUD Badge / Brand & Search Floating Controls -->
-    <div class="hud-container">
-        <div class="hud-brand">
-            <div class="hud-logo">
-                <i class="fa-solid fa-timeline"></i>
-            </div>
-            <div class="hud-title">
-                <h1>FEM COMUNICACIONES</h1>
-                <p>Línea de Tiempo de Actividades</p>
-            </div>
+    <!-- Floating Search Box (Top-Right Corner) -->
+    <div class="hud-search-fixed">
+        <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="searchInput" placeholder="Buscar actividad o fecha...">
         </div>
-        
-        <div class="hud-search">
-            <div class="search-box">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" id="searchInput" placeholder="Buscar actividad o fecha...">
-            </div>
+    </div>
+
+    <!-- Brand Pill Badge (Bottom-Left Corner) -->
+    <div class="brand-pill-badge">
+        <div class="brand-pill-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F652A0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <line x1="6" y1="12" x2="6" y2="7"></line>
+                <circle cx="6" cy="5" r="2" fill="#F652A0"></circle>
+                <line x1="18" y1="12" x2="18" y2="7"></line>
+                <circle cx="18" cy="5" r="2" fill="#F652A0"></circle>
+                <line x1="12" y1="12" x2="12" y2="17"></line>
+                <circle cx="12" cy="19" r="2" fill="#F652A0"></circle>
+            </svg>
+        </div>
+        <div class="brand-pill-info">
+            <h2>FEM COMUNICACIONES</h2>
+            <p>Linea de Tiempo de Actividades</p>
         </div>
     </div>
 
@@ -51,7 +58,7 @@
             <!-- Central timeline path line -->
             <div class="timeline-line"></div>
             
-            <!-- Dynamic Saturdays will render here (alternating above and below central line) -->
+            <!-- Dynamic Saturdays will render here -->
             <div id="timelineItems" class="timeline-items">
                 <!-- Loading State placeholder -->
                 <div class="loading-state">
