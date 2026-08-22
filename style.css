@@ -1,10 +1,10 @@
 /* ==========================================
    DESIGN SYSTEM - FEM COMUNICACIONES
-   Color Palette: #F652A0 & Space Black (#030206)
+   Color Palette: #F652A0 & Deep Cosmic Black (#020205)
    ========================================== */
 
 :root {
-    --bg-color: #030206;
+    --bg-color: #020205;
     --text-primary: #ffffff;
     --text-secondary: #a3a3c2;
     
@@ -15,12 +15,12 @@
     --accent-purple: #7b2cbf;
     
     /* Glassmorphism background matching cosmic nebula theme */
-    --glass-bg: rgba(12, 10, 20, 0.75);
+    --glass-bg: rgba(10, 8, 18, 0.78);
     --glass-border: rgba(246, 82, 160, 0.22);
     --glass-border-hover: rgba(246, 82, 160, 0.6);
     
-    --card-bg-inner: rgba(20, 16, 32, 0.6);
-    --input-bg: rgba(18, 14, 28, 0.85);
+    --card-bg-inner: rgba(18, 14, 30, 0.65);
+    --input-bg: rgba(16, 12, 25, 0.88);
     
     --transition-smooth: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -57,13 +57,13 @@ html, body {
 /* Ambient Background Glows */
 .bg-glow {
     position: fixed;
-    width: 600px;
-    height: 600px;
+    width: 650px;
+    height: 650px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(246, 82, 160, 0.08) 0%, rgba(0, 0, 0, 0) 70%);
+    background: radial-gradient(circle, rgba(246, 82, 160, 0.09) 0%, rgba(0, 0, 0, 0) 70%);
     pointer-events: none;
     z-index: -1;
-    filter: blur(90px);
+    filter: blur(95px);
 }
 
 .bg-glow-1 {
@@ -82,9 +82,9 @@ html, body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 900px;
-    height: 900px;
-    background: radial-gradient(circle, rgba(123, 44, 191, 0.08) 0%, rgba(0, 0, 0, 0) 75%);
+    width: 950px;
+    height: 950px;
+    background: radial-gradient(circle, rgba(123, 44, 191, 0.09) 0%, rgba(0, 0, 0, 0) 75%);
 }
 
 @keyframes floatGlow {
@@ -98,7 +98,7 @@ html, body {
     height: 6px;
 }
 ::-webkit-scrollbar-track {
-    background: rgba(10, 8, 16, 0.5);
+    background: rgba(8, 6, 14, 0.5);
     border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb {
@@ -133,13 +133,13 @@ html, body {
     display: flex;
     align-items: center;
     gap: 14px;
-    background: rgba(12, 9, 20, 0.7);
+    background: rgba(10, 8, 18, 0.75);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid var(--glass-border);
     padding: 10px 20px;
     border-radius: 30px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
 }
 
 .hud-logo {
@@ -184,7 +184,7 @@ html, body {
     padding: 8px 16px 8px 38px;
     width: 260px;
     transition: var(--transition-smooth);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
 }
 
 .search-box i {
@@ -237,12 +237,10 @@ html, body {
     align-items: center;
 }
 
-/* Central horizontal glowing line */
+/* Central horizontal glowing line (stretching precisely to last node) */
 .timeline-line {
     position: absolute;
     top: 50%;
-    left: 100px;
-    right: 100px;
     height: 5px;
     background: linear-gradient(90deg, #F652A0 0%, #ff75c3 50%, #F652A0 100%);
     transform: translateY(-50%);
@@ -250,19 +248,21 @@ html, body {
     z-index: 5;
     box-shadow: 0 0 15px rgba(246, 82, 160, 0.9), 0 0 30px rgba(246, 82, 160, 0.5);
     pointer-events: none;
+    transition: width 0.3s ease, left 0.3s ease;
 }
 
+/* Dynamic arrow head at the end of the line */
 .timeline-line::after {
     content: '';
     position: absolute;
-    right: -20px;
+    right: -16px;
     top: 50%;
     transform: translateY(-50%);
     width: 0;
     height: 0;
     border-top: 8px solid transparent;
     border-bottom: 8px solid transparent;
-    border-left: 20px solid var(--accent-pink);
+    border-left: 18px solid var(--accent-pink);
     filter: drop-shadow(0 0 10px var(--accent-pink));
 }
 
@@ -313,7 +313,7 @@ html, body {
     transform: translate(-50%, -50%);
     width: 22px;
     height: 22px;
-    background-color: #030206;
+    background-color: #020205;
     border: 4px solid var(--accent-pink);
     border-radius: 50%;
     z-index: 15;
@@ -338,9 +338,7 @@ html, body {
     box-shadow: 0 0 8px rgba(246, 82, 160, 0.6);
 }
 
-/* ------------------------------------------
-   POSICIONAMIENTO ARRIBA DE LA LÍNEA (CARD-ABOVE)
-   ------------------------------------------ */
+/* POSICIONAMIENTO ARRIBA DE LA LÍNEA (CARD-ABOVE) */
 .timeline-card-wrapper.card-above {
     justify-content: flex-start;
     padding-top: calc(50vh - 410px);
@@ -356,9 +354,7 @@ html, body {
     transform: translateY(-8px);
 }
 
-/* ------------------------------------------
-   POSICIONAMIENTO ABAJO DE LA LÍNEA (CARD-BELOW)
-   ------------------------------------------ */
+/* POSICIONAMIENTO ABAJO DE LA LÍNEA (CARD-BELOW) */
 .timeline-card-wrapper.card-below {
     justify-content: flex-end;
     padding-bottom: calc(50vh - 410px);
@@ -388,7 +384,7 @@ html, body {
     width: 100%;
     max-height: 370px;
     overflow-y: auto;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
     transition: var(--transition-smooth);
     position: relative;
     z-index: 10;
@@ -412,7 +408,7 @@ html, body {
 
 .timeline-card:hover {
     border-color: var(--glass-border-hover);
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.8), 0 0 25px rgba(246, 82, 160, 0.2);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.9), 0 0 25px rgba(246, 82, 160, 0.25);
 }
 
 /* Card Header */
@@ -585,7 +581,7 @@ html, body {
     z-index: 200;
     left: 0; top: 0;
     width: 100vw; height: 100vh;
-    background-color: rgba(3, 2, 6, 0.96);
+    background-color: rgba(2, 2, 5, 0.96);
     backdrop-filter: blur(25px);
     -webkit-backdrop-filter: blur(25px);
     align-items: center;
@@ -671,7 +667,7 @@ html, body {
 .toast {
     position: fixed;
     bottom: 30px; right: 30px;
-    background: rgba(12, 10, 20, 0.95);
+    background: rgba(10, 8, 18, 0.95);
     backdrop-filter: blur(10px);
     border: 1px solid var(--glass-border);
     padding: 12px 20px;
@@ -710,9 +706,9 @@ html, body {
     }
     
     .timeline-line {
-        left: 30px; right: auto;
+        left: 30px !important; right: auto !important;
         top: 120px; bottom: 40px;
-        width: 4px; height: auto;
+        width: 4px !important; height: auto;
         transform: none;
     }
     

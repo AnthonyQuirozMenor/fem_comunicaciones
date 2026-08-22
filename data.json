@@ -152,27 +152,5 @@
       { "id": "sat_14_act_3", "name": "Compilación del Video Memoria", "description": "Edición grupal del videoclip que recopila los mejores momentos del foro.", "photos": [] },
       { "id": "sat_14_act_4", "name": "Entrega de Borradores", "description": "Revisión conjunta y validación de las cifras presentadas en el borrador.", "photos": [] }
     ]
-  },
-  {
-    "id": "sat_15",
-    "date": "2026-11-28",
-    "formattedDate": "Sábado, 28 de noviembre de 2026",
-    "activities": [
-      { "id": "sat_15_act_1", "name": "Presentación de Memoria", "description": "Exposición formal del informe final y entrega del video memoria a todo el equipo.", "photos": [] },
-      { "id": "sat_15_act_2", "name": "Entrega de Reconocimientos", "description": "Ceremonia interna de agradecimiento y entrega de diplomas de participación.", "photos": [] },
-      { "id": "sat_15_act_3", "name": "Taller de Proyección Futura", "description": "Discusión sobre la sostenibilidad del proyecto y metas para los próximos periodos.", "photos": [] },
-      { "id": "sat_15_act_4", "name": "Clausura y Brindis", "description": "Palabras de agradecimiento finales de la dirección y brindis de despedida de la temporada.", "photos": [] }
-    ]
-  },
-  {
-    "id": "sat_16",
-    "date": "2026-12-05",
-    "formattedDate": "Sábado, 5 de diciembre de 2026",
-    "activities": [
-      { "id": "sat_16_act_1", "name": "Plan de Seguimiento", "description": "Planificación del esquema de monitoreo continuo para el próximo ciclo.", "photos": [] },
-      { "id": "sat_16_act_2", "name": "Evaluación Anual", "description": "Balance de logros y análisis del impacto de las comunicaciones integradas.", "photos": [] },
-      { "id": "sat_16_act_3", "name": "Taller de Planificación 2027", "description": "Definición de líneas de acción y proyección de proyectos para el nuevo año.", "photos": [] },
-      { "id": "sat_16_act_4", "name": "Cierre de Año", "description": "Encuentro de confraternidad y despedida oficial de las actividades 2026.", "photos": [] }
-    ]
   }
 ]

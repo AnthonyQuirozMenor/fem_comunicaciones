@@ -1,6 +1,6 @@
 /**
  * APLICACIÓN DE LÍNEA DE TIEMPO - FEM COMUNICACIONES
- * Versión Universo 3D (Lógica de Cliente)
+ * Versión Universo 3D Espacial (Lógica de Cliente)
  */
 
 // Estado de la aplicación
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ==========================================
-// FONDO 3D INTERACTIVO DEL UNIVERSO (THREE.JS)
+// FONDO 3D INTERACTIVO CON MILES DE ESTRELLAS (THREE.JS)
 // ==========================================
 
 function init3DUniverse() {
@@ -35,15 +35,15 @@ function init3DUniverse() {
     if (!canvas || typeof THREE === 'undefined') return;
 
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 3000);
+    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 3500);
     camera.position.z = 1000;
 
     const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-    // Generar textura brillante suave en código canvas
-    function createParticleTexture() {
+    // Textura de punto estelar brillante
+    function createStarTexture() {
         const pCanvas = document.createElement('canvas');
         pCanvas.width = 32;
         pCanvas.height = 32;
@@ -51,81 +51,126 @@ function init3DUniverse() {
         
         const gradient = ctx.createRadialGradient(16, 16, 0, 16, 16, 16);
         gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
-        gradient.addColorStop(0.3, 'rgba(246, 82, 160, 0.8)');
-        gradient.addColorStop(0.7, 'rgba(123, 44, 191, 0.3)');
+        gradient.addColorStop(0.25, 'rgba(246, 82, 160, 0.9)');
+        gradient.addColorStop(0.65, 'rgba(123, 44, 191, 0.4)');
         gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
         
         ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, 32, 32);
         
-        const texture = new THREE.CanvasTexture(pCanvas);
-        return texture;
+        return new THREE.CanvasTexture(pCanvas);
     }
 
-    // Geometría de 2,500 estrellas en espacio 3D
-    const starCount = 2500;
-    const geometry = new THREE.BufferGeometry();
-    const positions = new Float32Array(starCount * 3);
-    const colors = new Float32Array(starCount * 3);
-    const sizes = new Float32Array(starCount);
+    const starTexture = createStarTexture();
 
-    const palette = [
-        new THREE.Color('#F652A0'), // Hot Pink FEM
-        new THREE.Color('#ffffff'), // Blanco Estelar
-        new THREE.Color('#7b2cbf'), // Violeta Cósmico
-        new THREE.Color('#ff75c3'), // Rosa Neón
-        new THREE.Color('#3a0ca3')  // Azul Profundo
+    // ------------------------------------------
+    // CAPA 1: Polvo estelar de fondo (6,000 estrellas pequeñas)
+    // ------------------------------------------
+    const bgStarCount = 6000;
+    const bgGeometry = new THREE.BufferGeometry();
+    const bgPositions = new Float32Array(bgStarCount * 3);
+    const bgColors = new Float32Array(bgStarCount * 3);
+
+    const bgPalette = [
+        new THREE.Color('#ffffff'),
+        new THREE.Color('#e2e8f0'),
+        new THREE.Color('#f472b6'),
+        new THREE.Color('#c084fc')
     ];
 
-    for (let i = 0; i < starCount; i++) {
-        positions[i * 3] = (Math.random() - 0.5) * 2400;
-        positions[i * 3 + 1] = (Math.random() - 0.5) * 2400;
-        positions[i * 3 + 2] = (Math.random() - 0.5) * 2400;
+    for (let i = 0; i < bgStarCount; i++) {
+        bgPositions[i * 3] = (Math.random() - 0.5) * 3200;
+        bgPositions[i * 3 + 1] = (Math.random() - 0.5) * 3200;
+        bgPositions[i * 3 + 2] = (Math.random() - 0.5) * 3200;
 
-        const color = palette[Math.floor(Math.random() * palette.length)];
-        colors[i * 3] = color.r;
-        colors[i * 3 + 1] = color.g;
-        colors[i * 3 + 2] = color.b;
-
-        sizes[i] = Math.random() * 12 + 4;
+        const color = bgPalette[Math.floor(Math.random() * bgPalette.length)];
+        bgColors[i * 3] = color.r;
+        bgColors[i * 3 + 1] = color.g;
+        bgColors[i * 3 + 2] = color.b;
     }
 
-    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-    geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+    bgGeometry.setAttribute('position', new THREE.BufferAttribute(bgPositions, 3));
+    bgGeometry.setAttribute('color', new THREE.BufferAttribute(bgColors, 3));
 
-    const material = new THREE.PointsMaterial({
+    const bgMaterial = new THREE.PointsMaterial({
+        size: 3,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.8,
+        depthWrite: false
+    });
+
+    const bgStarField = new THREE.Points(bgGeometry, bgMaterial);
+    scene.add(bgStarField);
+
+    // ------------------------------------------
+    // CAPA 2: Estrellas brillantes y destellos (2,000 estrellas)
+    // ------------------------------------------
+    const fgStarCount = 2000;
+    const fgGeometry = new THREE.BufferGeometry();
+    const fgPositions = new Float32Array(fgStarCount * 3);
+    const fgColors = new Float32Array(fgStarCount * 3);
+    const fgSizes = new Float32Array(fgStarCount);
+
+    const fgPalette = [
+        new THREE.Color('#F652A0'), // Hot Pink FEM
+        new THREE.Color('#ffffff'), // Blanco brillante
+        new THREE.Color('#7b2cbf'), // Violeta profundo
+        new THREE.Color('#00f5d4'), // Cyan cósmico
+        new THREE.Color('#ff75c3')  // Rosa neón
+    ];
+
+    for (let i = 0; i < fgStarCount; i++) {
+        fgPositions[i * 3] = (Math.random() - 0.5) * 2800;
+        fgPositions[i * 3 + 1] = (Math.random() - 0.5) * 2800;
+        fgPositions[i * 3 + 2] = (Math.random() - 0.5) * 2800;
+
+        const color = fgPalette[Math.floor(Math.random() * fgPalette.length)];
+        fgColors[i * 3] = color.r;
+        fgColors[i * 3 + 1] = color.g;
+        fgColors[i * 3 + 2] = color.b;
+
+        fgSizes[i] = Math.random() * 10 + 4;
+    }
+
+    fgGeometry.setAttribute('position', new THREE.BufferAttribute(fgPositions, 3));
+    fgGeometry.setAttribute('color', new THREE.BufferAttribute(fgColors, 3));
+
+    const fgMaterial = new THREE.PointsMaterial({
         size: 8,
         vertexColors: true,
-        map: createParticleTexture(),
+        map: starTexture,
         transparent: true,
         blending: THREE.AdditiveBlending,
         depthWrite: false
     });
 
-    const starField = new THREE.Points(geometry, material);
-    scene.add(starField);
+    const fgStarField = new THREE.Points(fgGeometry, fgMaterial);
+    scene.add(fgStarField);
 
-    // Movimiento del ratón para efecto de paralaje 3D
+    // Movimiento con el ratón
     let mouseX = 0;
     let mouseY = 0;
     let targetX = 0;
     let targetY = 0;
 
     window.addEventListener('mousemove', (e) => {
-        mouseX = (e.clientX - window.innerWidth / 2) * 0.3;
-        mouseY = (e.clientY - window.innerHeight / 2) * 0.3;
+        mouseX = (e.clientX - window.innerWidth / 2) * 0.4;
+        mouseY = (e.clientY - window.innerHeight / 2) * 0.4;
     });
 
-    // Bucle de animación 3D
+    // Bucle de animación del universo
     function animate() {
         requestAnimationFrame(animate);
 
-        starField.rotation.y += 0.0006;
-        starField.rotation.x += 0.0003;
+        bgStarField.rotation.y += 0.0003;
+        bgStarField.rotation.x += 0.00015;
 
-        targetX += (mouseX - targetX) * 0.05;
-        targetY += (mouseY - targetY) * 0.05;
+        fgStarField.rotation.y += 0.0007;
+        fgStarField.rotation.x += 0.00035;
+
+        targetX += (mouseX - targetX) * 0.04;
+        targetY += (mouseY - targetY) * 0.04;
 
         camera.position.x = targetX;
         camera.position.y = -targetY;
@@ -136,7 +181,6 @@ function init3DUniverse() {
 
     animate();
 
-    // Redimensionamiento responsive
     window.addEventListener('resize', () => {
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
@@ -167,7 +211,7 @@ function setupEventListeners() {
         if (e.key === 'ArrowRight') nextLightboxImage();
     });
 
-    // Scroll de rueda de ratón horizontal en escritorio
+    // Scroll de rueda de ratón horizontal
     const container = document.querySelector('.timeline-container');
     if (container) {
         container.addEventListener('wheel', (e) => {
@@ -177,6 +221,8 @@ function setupEventListeners() {
             }
         });
     }
+
+    window.addEventListener('resize', updateTimelineLine);
 }
 
 // ==========================================
@@ -205,12 +251,12 @@ async function loadTimelineData() {
     }
 }
 
-// Genera sábados de respaldo iniciando el SÁBADO 22 DE AGOSTO DE 2026
+// Genera los 14 sábados desde el 22 DE AGOSTO hasta el 21 DE NOVIEMBRE DE 2026
 function generateInitialSaturdays() {
     timelineData = [];
-    let currentDate = '2026-08-22'; // Sábado 22 de agosto de 2026
+    let currentDate = '2026-08-22';
     
-    for (let i = 0; i < 16; i++) {
+    for (let i = 0; i < 14; i++) {
         timelineData.push({
             id: 'sat_' + (i + 1),
             date: currentDate,
@@ -227,7 +273,7 @@ function generateInitialSaturdays() {
 }
 
 // ==========================================
-// RENDERIZADO CON TARJETAS INTERCALADAS (ARRIBA Y ABAJO)
+// RENDERIZADO Y CÁLCULO EXACTO DE LA LÍNEA DE TIEMPO
 // ==========================================
 
 function renderTimeline() {
@@ -253,13 +299,9 @@ function renderTimeline() {
         cardWrapper.setAttribute('data-id', saturday.id);
         
         cardWrapper.innerHTML = `
-            <!-- Conector Vertical -->
             <div class="timeline-connector"></div>
-            
-            <!-- Nodo Central en la Línea Guía -->
             <div class="timeline-node"></div>
             
-            <!-- Tarjeta del Sábado -->
             <div class="timeline-card" data-sat-id="${saturday.id}">
                 <div class="card-header">
                     <div class="card-date">
@@ -276,6 +318,33 @@ function renderTimeline() {
         
         timelineItemsContainer.appendChild(cardWrapper);
     });
+
+    // Calcular la línea central para que termine exactamente en el nodo del 21 de noviembre
+    setTimeout(updateTimelineLine, 50);
+}
+
+// Ajusta la línea horizontal para que inicie en el primer nodo (22-Ago) y termine en el último (21-Nov)
+function updateTimelineLine() {
+    const line = document.querySelector('.timeline-line');
+    const wrappers = document.querySelectorAll('.timeline-card-wrapper');
+    if (!line || wrappers.length === 0) return;
+    
+    if (window.innerWidth <= 768) {
+        line.style.left = '';
+        line.style.width = '';
+        line.style.right = '';
+        return;
+    }
+    
+    const firstWrapper = wrappers[0];
+    const lastWrapper = wrappers[wrappers.length - 1];
+    
+    const firstNodeX = firstWrapper.offsetLeft + (firstWrapper.offsetWidth / 2);
+    const lastNodeX = lastWrapper.offsetLeft + (lastWrapper.offsetWidth / 2);
+    
+    line.style.left = `${firstNodeX}px`;
+    line.style.width = `${lastNodeX - firstNodeX}px`;
+    line.style.right = 'auto';
 }
 
 function renderActivity(activity, saturdayId, actIndex) {
@@ -456,6 +525,8 @@ function filterTimeline() {
             wrapper.style.display = 'none';
         }
     });
+
+    setTimeout(updateTimelineLine, 50);
 }
 
 // ==========================================
