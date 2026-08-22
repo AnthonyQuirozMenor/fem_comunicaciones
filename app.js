@@ -1,6 +1,6 @@
 /**
  * APLICACIÓN DE LÍNEA DE TIEMPO - FEM COMUNICACIONES
- * Lógica del Cliente (Solo Lectura)
+ * Versión Universo 3D (Lógica de Cliente)
  */
 
 // Estado de la aplicación
@@ -21,40 +21,158 @@ const toastElement = document.getElementById('toast');
 
 // Inicializar la aplicación al cargar el documento
 document.addEventListener('DOMContentLoaded', () => {
+    init3DUniverse();
     loadTimelineData();
     setupEventListeners();
 });
 
+// ==========================================
+// FONDO 3D INTERACTIVO DEL UNIVERSO (THREE.JS)
+// ==========================================
+
+function init3DUniverse() {
+    const canvas = document.getElementById('universeCanvas');
+    if (!canvas || typeof THREE === 'undefined') return;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 3000);
+    camera.position.z = 1000;
+
+    const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    // Generar textura brillante suave en código canvas
+    function createParticleTexture() {
+        const pCanvas = document.createElement('canvas');
+        pCanvas.width = 32;
+        pCanvas.height = 32;
+        const ctx = pCanvas.getContext('2d');
+        
+        const gradient = ctx.createRadialGradient(16, 16, 0, 16, 16, 16);
+        gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
+        gradient.addColorStop(0.3, 'rgba(246, 82, 160, 0.8)');
+        gradient.addColorStop(0.7, 'rgba(123, 44, 191, 0.3)');
+        gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+        
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, 32, 32);
+        
+        const texture = new THREE.CanvasTexture(pCanvas);
+        return texture;
+    }
+
+    // Geometría de 2,500 estrellas en espacio 3D
+    const starCount = 2500;
+    const geometry = new THREE.BufferGeometry();
+    const positions = new Float32Array(starCount * 3);
+    const colors = new Float32Array(starCount * 3);
+    const sizes = new Float32Array(starCount);
+
+    const palette = [
+        new THREE.Color('#F652A0'), // Hot Pink FEM
+        new THREE.Color('#ffffff'), // Blanco Estelar
+        new THREE.Color('#7b2cbf'), // Violeta Cósmico
+        new THREE.Color('#ff75c3'), // Rosa Neón
+        new THREE.Color('#3a0ca3')  // Azul Profundo
+    ];
+
+    for (let i = 0; i < starCount; i++) {
+        positions[i * 3] = (Math.random() - 0.5) * 2400;
+        positions[i * 3 + 1] = (Math.random() - 0.5) * 2400;
+        positions[i * 3 + 2] = (Math.random() - 0.5) * 2400;
+
+        const color = palette[Math.floor(Math.random() * palette.length)];
+        colors[i * 3] = color.r;
+        colors[i * 3 + 1] = color.g;
+        colors[i * 3 + 2] = color.b;
+
+        sizes[i] = Math.random() * 12 + 4;
+    }
+
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+    geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+
+    const material = new THREE.PointsMaterial({
+        size: 8,
+        vertexColors: true,
+        map: createParticleTexture(),
+        transparent: true,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+    });
+
+    const starField = new THREE.Points(geometry, material);
+    scene.add(starField);
+
+    // Movimiento del ratón para efecto de paralaje 3D
+    let mouseX = 0;
+    let mouseY = 0;
+    let targetX = 0;
+    let targetY = 0;
+
+    window.addEventListener('mousemove', (e) => {
+        mouseX = (e.clientX - window.innerWidth / 2) * 0.3;
+        mouseY = (e.clientY - window.innerHeight / 2) * 0.3;
+    });
+
+    // Bucle de animación 3D
+    function animate() {
+        requestAnimationFrame(animate);
+
+        starField.rotation.y += 0.0006;
+        starField.rotation.x += 0.0003;
+
+        targetX += (mouseX - targetX) * 0.05;
+        targetY += (mouseY - targetY) * 0.05;
+
+        camera.position.x = targetX;
+        camera.position.y = -targetY;
+        camera.lookAt(scene.position);
+
+        renderer.render(scene, camera);
+    }
+
+    animate();
+
+    // Redimensionamiento responsive
+    window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+}
+
 // Registrar eventos globales
 function setupEventListeners() {
-    // Campo de búsqueda
-    searchInput.addEventListener('input', filterTimeline);
+    if (searchInput) {
+        searchInput.addEventListener('input', filterTimeline);
+    }
     
-    // Cerrar Lightbox
-    lightboxClose.addEventListener('click', closeLightbox);
-    lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) closeLightbox();
-    });
+    if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+    if (lightbox) {
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+    }
     
-    // Navegación en Lightbox
-    lightboxPrev.addEventListener('click', prevLightboxImage);
-    lightboxNext.addEventListener('click', nextLightboxImage);
+    if (lightboxPrev) lightboxPrev.addEventListener('click', prevLightboxImage);
+    if (lightboxNext) lightboxNext.addEventListener('click', nextLightboxImage);
     
-    // Atajos de teclado para Lightbox
     document.addEventListener('keydown', (e) => {
-        if (!lightbox.classList.contains('active')) return;
+        if (!lightbox || !lightbox.classList.contains('active')) return;
         if (e.key === 'Escape') closeLightbox();
         if (e.key === 'ArrowLeft') prevLightboxImage();
         if (e.key === 'ArrowRight') nextLightboxImage();
     });
 
-    // Traducción de scroll de rueda vertical a horizontal
+    // Scroll de rueda de ratón horizontal en escritorio
     const container = document.querySelector('.timeline-container');
     if (container) {
         container.addEventListener('wheel', (e) => {
-            // Solo aplicar scroll horizontal si el contenedor puede hacer scroll horizontal (vista escritorio)
             if (window.innerWidth > 768 && e.deltaY !== 0) {
-                container.scrollLeft += e.deltaY * 1.2;
+                container.scrollLeft += e.deltaY * 1.5;
                 e.preventDefault();
             }
         });
@@ -62,10 +180,9 @@ function setupEventListeners() {
 }
 
 // ==========================================
-// CARGA DE DATOS (SOLO LECTURA)
+// CARGA DE DATOS DE LA LÍNEA DE TIEMPO
 // ==========================================
 
-// Cargar datos desde el servidor
 async function loadTimelineData() {
     try {
         const response = await fetch('/api/data');
@@ -76,23 +193,22 @@ async function loadTimelineData() {
         if (data && data.length > 0) {
             timelineData = data;
         } else {
-            // Generar datos locales en memoria como respaldo (sin persistencia en servidor)
             generateInitialSaturdays();
         }
         
         renderTimeline();
     } catch (error) {
         console.error(error);
-        showToast('Error al cargar datos. Mostrando plantilla de respaldo.', 'error');
+        showToast('Cargando plantilla estelar de respaldo.', 'error');
         generateInitialSaturdays();
         renderTimeline();
     }
 }
 
-// Genera los 16 sábados fijos desde el 15 de agosto de 2026 como respaldo
+// Genera sábados de respaldo iniciando el SÁBADO 22 DE AGOSTO DE 2026
 function generateInitialSaturdays() {
     timelineData = [];
-    let currentDate = '2026-08-15'; // Sábado 15 de agosto
+    let currentDate = '2026-08-22'; // Sábado 22 de agosto de 2026
     
     for (let i = 0; i < 16; i++) {
         timelineData.push({
@@ -100,9 +216,9 @@ function generateInitialSaturdays() {
             date: currentDate,
             formattedDate: formatSpanishDate(currentDate),
             activities: [
-                { id: `sat_${i+1}_act_1`, name: 'Planificación y Bienvenida', description: 'Reunión inicial de coordinación.', photos: [] },
+                { id: `sat_${i+1}_act_1`, name: 'Revisión y Planificación', description: 'Reunión inicial de coordinación.', photos: [] },
                 { id: `sat_${i+1}_act_2`, name: 'Talleres Prácticos', description: 'Desarrollo de las dinámicas planificadas.', photos: [] },
-                { id: `sat_${i+1}_act_3`, name: 'Revisión y Enlaces', description: 'Control de avances y acuerdos del día.', photos: [] },
+                { id: `sat_${i+1}_act_3`, name: 'Control de Enlaces', description: 'Control de avances y acuerdos del día.', photos: [] },
                 { id: `sat_${i+1}_act_4`, name: 'Evaluación y Cierre', description: 'Retroalimentación grupal de la jornada.', photos: [] }
             ]
         });
@@ -111,12 +227,11 @@ function generateInitialSaturdays() {
 }
 
 // ==========================================
-// RENDERIZADO DE LA LÍNEA DE TIEMPO
+// RENDERIZADO CON TARJETAS INTERCALADAS (ARRIBA Y ABAJO)
 // ==========================================
 
 function renderTimeline() {
-    // Limpiar contenedor e insertar la línea base del recorrido
-    timelineItemsContainer.innerHTML = '<div class="timeline-line"></div>';
+    timelineItemsContainer.innerHTML = '';
     
     if (timelineData.length === 0) {
         timelineItemsContainer.innerHTML = `
@@ -130,16 +245,21 @@ function renderTimeline() {
     
     timelineData.forEach((saturday, satIndex) => {
         const cardWrapper = document.createElement('div');
-        cardWrapper.className = 'timeline-card-wrapper';
+        
+        // Alternación de posición: Pares Arriba (card-above), Impares Abajo (card-below)
+        const isAbove = (satIndex % 2 === 0);
+        cardWrapper.className = `timeline-card-wrapper ${isAbove ? 'card-above' : 'card-below'}`;
         cardWrapper.setAttribute('data-date', saturday.date);
         cardWrapper.setAttribute('data-id', saturday.id);
         
-        // Generar HTML de la tarjeta
         cardWrapper.innerHTML = `
-            <!-- Nodo en la línea horizontal/vertical -->
+            <!-- Conector Vertical -->
+            <div class="timeline-connector"></div>
+            
+            <!-- Nodo Central en la Línea Guía -->
             <div class="timeline-node"></div>
             
-            <!-- Tarjeta Principal del Sábado -->
+            <!-- Tarjeta del Sábado -->
             <div class="timeline-card" data-sat-id="${saturday.id}">
                 <div class="card-header">
                     <div class="card-date">
@@ -148,7 +268,6 @@ function renderTimeline() {
                     </div>
                 </div>
                 
-                <!-- Cuadrícula de 4 Actividades -->
                 <div class="activities-grid">
                     ${saturday.activities.map((activity, actIndex) => renderActivity(activity, saturday.id, actIndex)).join('')}
                 </div>
@@ -159,11 +278,9 @@ function renderTimeline() {
     });
 }
 
-// Renderiza una sola actividad
 function renderActivity(activity, saturdayId, actIndex) {
     const photosHtml = [];
     
-    // Renderizar las fotos existentes (subidas manualmente en la carpeta /fotos/)
     if (activity.photos && activity.photos.length > 0) {
         activity.photos.forEach((photoPath, slotIdx) => {
             if (photoPath) {
@@ -181,7 +298,6 @@ function renderActivity(activity, saturdayId, actIndex) {
         });
     }
     
-    // Si no hay fotos registradas, mostramos espacios vacíos elegantes con bordes discontinuos
     while (photosHtml.length < 3) {
         photosHtml.push(`
             <div class="photo-slot photo-slot-empty" title="Sin foto cargada"></div>
@@ -233,7 +349,7 @@ function openLightbox(actId, slotIndex) {
     updateLightboxContent(activity.name);
     
     lightbox.style.display = 'flex';
-    lightbox.offsetWidth; // Reflow
+    lightbox.offsetWidth;
     lightbox.classList.add('active');
     document.body.style.overflow = 'hidden';
 }
@@ -301,13 +417,12 @@ function getActivityNameByPhoto(photoPath) {
 }
 
 // ==========================================
-// FILTRO DE BÚSQUEDA
+// BÚSQUEDA Y FILTRADO
 // ==========================================
 
 function filterTimeline() {
     const query = searchInput.value.toLowerCase().trim();
     const cardWrappers = document.querySelectorAll('.timeline-card-wrapper');
-    let visibleCount = 0;
     
     cardWrappers.forEach(wrapper => {
         const satId = wrapper.getAttribute('data-id');
@@ -322,8 +437,7 @@ function filterTimeline() {
         });
         
         if (dateMatch || activitiesMatch) {
-            wrapper.style.display = 'block';
-            visibleCount++;
+            wrapper.style.display = 'flex';
             
             const activityCards = wrapper.querySelectorAll('.activity-card');
             activityCards.forEach(card => {
@@ -332,7 +446,7 @@ function filterTimeline() {
                 
                 if (query !== '' && (act.name.toLowerCase().includes(query) || act.description.toLowerCase().includes(query))) {
                     card.style.borderColor = 'var(--accent-pink)';
-                    card.style.boxShadow = '0 0 15px rgba(246, 82, 160, 0.25)';
+                    card.style.boxShadow = '0 0 15px rgba(246, 82, 160, 0.35)';
                 } else {
                     card.style.borderColor = '';
                     card.style.boxShadow = '';
@@ -342,39 +456,10 @@ function filterTimeline() {
             wrapper.style.display = 'none';
         }
     });
-    
-    const timelineLine = document.querySelector('.timeline-line');
-    if (timelineLine) {
-        if (visibleCount === 0) {
-            timelineLine.style.display = 'none';
-        } else {
-            timelineLine.style.display = 'block';
-            
-            // Si hay filtros activos, ajustar la línea horizontal
-            if (query !== '' && window.innerWidth > 768) {
-                // Encontrar el primer y último elemento visible para ajustar los extremos de la línea
-                const visibleElements = Array.from(cardWrappers).filter(el => el.style.display !== 'none');
-                if (visibleElements.length > 0) {
-                    const firstEl = visibleElements[0];
-                    const lastEl = visibleElements[visibleElements.length - 1];
-                    
-                    const leftOffset = firstEl.offsetLeft + 190;
-                    const rightOffset = timelineItemsContainer.offsetWidth - (lastEl.offsetLeft + 190);
-                    
-                    timelineLine.style.left = `${leftOffset}px`;
-                    timelineLine.style.right = `${rightOffset}px`;
-                }
-            } else {
-                // Restaurar valores por defecto
-                timelineLine.style.left = '';
-                timelineLine.style.right = '';
-            }
-        }
-    }
 }
 
 // ==========================================
-// UTILIDADES COMPLEMENTARIAS
+// UTILIDADES
 // ==========================================
 
 function formatSpanishDate(dateString) {

@@ -18,44 +18,45 @@
 </head>
 <body>
 
+    <!-- 3D Universe Canvas Background -->
+    <canvas id="universeCanvas"></canvas>
+
     <!-- Ambient background glows -->
     <div class="bg-glow bg-glow-1"></div>
     <div class="bg-glow bg-glow-2"></div>
     <div class="bg-glow bg-glow-3"></div>
 
-    <header class="app-header">
-        <div class="header-container">
-            <div class="brand">
-                <div class="brand-logo">
-                    <i class="fa-solid fa-timeline"></i>
-                </div>
-                <div class="brand-info">
-                    <h1>FEM COMUNICACIONES</h1>
-                    <p class="subtitle">Línea de Tiempo de Actividades</p>
-                </div>
+    <!-- Minimal HUD Badge / Brand & Search Floating Controls -->
+    <div class="hud-container">
+        <div class="hud-brand">
+            <div class="hud-logo">
+                <i class="fa-solid fa-timeline"></i>
             </div>
-            
-            <div class="header-controls">
-                <!-- Search bar -->
-                <div class="search-box">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" id="searchInput" placeholder="Buscar actividad o fecha...">
-                </div>
+            <div class="hud-title">
+                <h1>FEM COMUNICACIONES</h1>
+                <p>Línea de Tiempo de Actividades</p>
             </div>
         </div>
-    </header>
+        
+        <div class="hud-search">
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="searchInput" placeholder="Buscar actividad o fecha...">
+            </div>
+        </div>
+    </div>
 
     <main class="app-main">
         <div class="timeline-container">
             <!-- Central timeline path line -->
             <div class="timeline-line"></div>
             
-            <!-- Dynamic Saturdays will render here -->
+            <!-- Dynamic Saturdays will render here (alternating above and below central line) -->
             <div id="timelineItems" class="timeline-items">
                 <!-- Loading State placeholder -->
                 <div class="loading-state">
                     <i class="fa-solid fa-circle-notch fa-spin"></i>
-                    <p>Cargando línea de tiempo...</p>
+                    <p>Cargando línea de tiempo del universo...</p>
                 </div>
             </div>
         </div>
@@ -75,6 +76,8 @@
     <!-- Toast Notification for Alerts -->
     <div id="toast" class="toast"></div>
 
+    <!-- Three.js Library for 3D Universe -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <!-- Frontend JS Application Logic -->
     <script src="app.js"></script>
 </body>
