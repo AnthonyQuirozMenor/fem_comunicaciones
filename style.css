@@ -110,7 +110,7 @@ html, body {
 }
 
 /* ==========================================
-   BOTTOM-LEFT BRAND PILL BADGE & TOP-RIGHT SEARCH
+   BOTTOM-LEFT BRAND PILL BADGE
    ========================================== */
 
 .brand-pill-badge {
@@ -165,54 +165,6 @@ html, body {
     font-weight: 400;
     margin-top: 2px;
     letter-spacing: 0.2px;
-}
-
-.hud-search-fixed {
-    position: fixed;
-    top: 25px;
-    right: 30px;
-    z-index: 100;
-}
-
-.search-box {
-    position: relative;
-    background: var(--input-bg);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid var(--glass-border);
-    border-radius: 30px;
-    padding: 8px 16px 8px 38px;
-    width: 260px;
-    transition: var(--transition-smooth);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-}
-
-.search-box i {
-    position: absolute;
-    left: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--accent-pink);
-    font-size: 13px;
-}
-
-.search-box input {
-    background: transparent;
-    border: none;
-    color: var(--text-primary);
-    font-size: 13px;
-    width: 100%;
-    outline: none;
-}
-
-.search-box input::placeholder {
-    color: #6c6c8a;
-}
-
-.search-box:focus-within {
-    border-color: var(--accent-pink);
-    box-shadow: 0 0 20px var(--accent-pink-glow-strong);
-    width: 320px;
 }
 
 /* ==========================================
@@ -693,25 +645,16 @@ html, body {
         padding: 8px 16px 8px 10px;
     }
     
-    .hud-search-fixed {
-        top: 15px;
-        left: 15px;
-        right: 15px;
-    }
-    
-    .search-box { width: 100%; }
-    .search-box:focus-within { width: 100%; }
-    
     .timeline-container {
         overflow-y: auto;
         overflow-x: hidden;
         height: 100vh;
-        padding: 100px 20px 100px 20px;
+        padding: 40px 20px 100px 20px;
     }
     
     .timeline-line {
         left: 30px !important; right: auto !important;
-        top: 100px; bottom: 100px;
+        top: 40px; bottom: 100px;
         width: 4px !important; height: auto;
         transform: none;
     }
