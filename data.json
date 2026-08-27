@@ -7,7 +7,7 @@
       {
         "id": "sat_1_act_1",
         "name": "REUNIÓN DE LÍDERES",
-        "description": "Jornada de coordinación inicial y planificación estratégica con los líderes de comités.",
+        "description": "Vivimos una jornada especial de aprendizaje, integración y presentación de proyectos junto a nuestros líderes de Facultades en Misión. Fue inspirador ver a tantos jóvenes dispuestos a poner sus talentos y profesiones al servicio de Dios y de la comunidad. 🙏🏼🌎Nuestro agradecimiento a cada estudiante, docente, coordinador y capellán que participó con entusiasmo y compromiso. Que cada proyecto lleve esperanza, transforme vidas y deje una huella de amor",
         "photos": [
           "fotos/22_agos/reunion de lideres/a1.jpg",
           "fotos/22_agos/reunion de lideres/a2.jpg",
@@ -24,7 +24,7 @@
       {
         "id": "sat_2_act_1",
         "name": "PRIMER ENCUENTRO COMO FEM",
-        "description": "Taller de integración, dinámicas de equipo y alineamiento de la comunidad FEM COMUNICACIONES.",
+        "description": " FEM COMUNICACIONES.",
         "photos": [
           "fotos/29_agos/primer_encuentro_como_fem/a1.jpg",
           "fotos/29_agos/primer_encuentro_como_fem/a2.jpg",
@@ -38,10 +38,9 @@
     "date": "2026-09-05",
     "formattedDate": "Sábado, 5 de septiembre de 2026",
     "activities": [
-      { "id": "sat_3_act_1", "name": "ECOTRANSFORMADORES (PRIMERA SALIDA)", "description": "Actividad de campo de la brigada de Ecotransformadores.", "photos": ["fotos/5_sep/primera_salida/ecotransformadores/a1.jpg", "fotos/5_sep/primera_salida/ecotransformadores/a2.jpg", "fotos/5_sep/primera_salida/ecotransformadores/a3.jpg"] },
-      { "id": "sat_3_act_2", "name": "MANUALIDADES (PRIMERA SALIDA)", "description": "Taller y exposición de manualidades comunitarias.", "photos": ["fotos/5_sep/primera_salida/manualidades/a1.jpg", "fotos/5_sep/primera_salida/manualidades/a2.jpg", "fotos/5_sep/primera_salida/manualidades/a3.jpg"] },
-      { "id": "sat_3_act_3", "name": "SEMBRANDO ESPERANZA (PRIMERA SALIDA)", "description": "Proyecto de arborización y sensibilización social.", "photos": ["fotos/5_sep/primera_salida/sembrando_esperanza/a1.jpg", "fotos/5_sep/primera_salida/sembrando_esperanza/a2.jpg", "fotos/5_sep/primera_salida/sembrando_esperanza/a3.jpg"] },
-      { "id": "sat_3_act_4", "name": "Evaluación de Salida", "description": "Registro y balance general de la primera jornada de salidas.", "photos": ["fotos/5_sep/primera_salida/ecotransformadores/a1.jpg", "fotos/5_sep/primera_salida/manualidades/a1.jpg", "fotos/5_sep/primera_salida/sembrando_esperanza/a1.jpg"] }
+      { "id": "sat_3_act_1", "name": "ECOTRANSFORMADORES", "description": "Holi.", "photos": ["fotos/5_sep/primera_salida/ecotransformadores/a1.jpg", "fotos/5_sep/primera_salida/ecotransformadores/a2.jpg", "fotos/5_sep/primera_salida/ecotransformadores/a3.jpg"] },
+      { "id": "sat_3_act_2", "name": "MANUALIDADES", "description": "Taller y exposición de manualidades comunitarias.", "photos": ["fotos/5_sep/primera_salida/manualidades/a1.jpg", "fotos/5_sep/primera_salida/manualidades/a2.jpg", "fotos/5_sep/primera_salida/manualidades/a3.jpg"] },
+      { "id": "sat_3_act_3", "name": "SEMBRANDO ESPERANZA", "description": "Proyecto de arborización y sensibilización social.", "photos": ["fotos/5_sep/primera_salida/sembrando_esperanza/a1.jpg", "fotos/5_sep/primera_salida/sembrando_esperanza/a2.jpg", "fotos/5_sep/primera_salida/sembrando_esperanza/a3.jpg"] }
     ]
   },
   {
@@ -49,10 +48,7 @@
     "date": "2026-09-12",
     "formattedDate": "Sábado, 12 de septiembre de 2026",
     "activities": [
-      { "id": "sat_4_act_1", "name": "INICIO SEMANA REVIVE", "description": "Apertura oficial de la Semana Revive y distribución de equipos.", "photos": ["fotos/12_sep/inicio_semana_revive/a1.jpg", "fotos/12_sep/inicio_semana_revive/a2.jpg", "fotos/12_sep/inicio_semana_revive/a3.jpg"] },
-      { "id": "sat_4_act_2", "name": "Manejo de Vocerías", "description": "Simulación de entrevistas periodísticas y fortalecimiento de mensajes clave.", "photos": ["fotos/12_sep/inicio_semana_revive/a1.jpg", "fotos/12_sep/inicio_semana_revive/a2.jpg", "fotos/12_sep/inicio_semana_revive/a3.jpg"] },
-      { "id": "sat_4_act_3", "name": "Campañas de Campo", "description": "Organización del plan de visitas de campo para registro fotográfico presencial.", "photos": ["fotos/12_sep/inicio_semana_revive/a1.jpg", "fotos/12_sep/inicio_semana_revive/a2.jpg", "fotos/12_sep/inicio_semana_revive/a3.jpg"] },
-      { "id": "sat_4_act_4", "name": "Monitoreo Operativo", "description": "Compromisos para el desarrollo logístico de las salidas programadas.", "photos": ["fotos/12_sep/inicio_semana_revive/a1.jpg", "fotos/12_sep/inicio_semana_revive/a2.jpg", "fotos/12_sep/inicio_semana_revive/a3.jpg"] }
+      { "id": "sat_4_act_1", "name": "INICIO SEMANA REVIVE", "description": "Apertura oficial de la Semana Revive y distribución de equipos.", "photos": ["fotos/12_sep/inicio_semana_revive/a1.jpg", "fotos/12_sep/inicio_semana_revive/a2.jpg", "fotos/12_sep/inicio_semana_revive/a3.jpg"] }
     ]
   },
   {
@@ -60,10 +56,7 @@
     "date": "2026-09-19",
     "formattedDate": "Sábado, 19 de septiembre de 2026",
     "activities": [
-      { "id": "sat_5_act_1", "name": "CIERRE SEMANA REVIVE", "description": "Jornada de clausura y síntesis de la Semana Revive.", "photos": ["fotos/19_sep/cierre_semana_revive/a1.jpg", "fotos/19_sep/cierre_semana_revive/a2.jpg", "fotos/19_sep/cierre_semana_revive/a3.jpg"] },
-      { "id": "sat_5_act_2", "name": "Taller de Relaciones Públicas", "description": "Cómo redactar notas de prensa institucionales y contactar a medios locales.", "photos": ["fotos/19_sep/cierre_semana_revive/a1.jpg", "fotos/19_sep/cierre_semana_revive/a2.jpg", "fotos/19_sep/cierre_semana_revive/a3.jpg"] },
-      { "id": "sat_5_act_3", "name": "Mapeo de Actores", "description": "Identificación de líderes comunitarios clave para el escalamiento del proyecto.", "photos": ["fotos/19_sep/cierre_semana_revive/a1.jpg", "fotos/19_sep/cierre_semana_revive/a2.jpg", "fotos/19_sep/cierre_semana_revive/a3.jpg"] },
-      { "id": "sat_5_act_4", "name": "Reporte Semanal", "description": "Documentación de impresiones recibidas de los primeros impactos públicos.", "photos": ["fotos/19_sep/cierre_semana_revive/a1.jpg", "fotos/19_sep/cierre_semana_revive/a2.jpg", "fotos/19_sep/cierre_semana_revive/a3.jpg"] }
+      { "id": "sat_5_act_1", "name": "CIERRE SEMANA REVIVE", "description": "Jornada de clausura y síntesis de la Semana Revive.", "photos": ["fotos/19_sep/cierre_semana_revive/a1.jpg", "fotos/19_sep/cierre_semana_revive/a2.jpg", "fotos/19_sep/cierre_semana_revive/a3.jpg"] }
     ]
   },
   {
@@ -71,10 +64,9 @@
     "date": "2026-09-26",
     "formattedDate": "Sábado, 26 de septiembre de 2026",
     "activities": [
-      { "id": "sat_6_act_1", "name": "CHECKPOINT (SEGUNDA SALIDA)", "description": "Punto de control operativo en la Segunda Salida.", "photos": ["fotos/26_sep/segunda_salida/checkpoint/a1.jpg", "fotos/26_sep/segunda_salida/checkpoint/a2.jpg", "fotos/26_sep/segunda_salida/checkpoint/a3.jpg"] },
-      { "id": "sat_6_act_2", "name": "ESCUELA DE LOS PROFETAS (SEGUNDA SALIDA)", "description": "Taller de capacitación en la Escuela de los Profetas.", "photos": ["fotos/26_sep/segunda_salida/escuela_de_los_profetas/a1.jpg", "fotos/26_sep/segunda_salida/escuela_de_los_profetas/a2.jpg", "fotos/26_sep/segunda_salida/escuela_de_los_profetas/a3.jpg"] },
-      { "id": "sat_6_act_3", "name": "CONQUISTADORES (SEGUNDA SALIDA)", "description": "Actividades de campo con el grupo Conquistadores.", "photos": ["fotos/26_sep/segunda_salida/conquistadores/a1.jpg", "fotos/26_sep/segunda_salida/conquistadores/a2.jpg", "fotos/26_sep/segunda_salida/conquistadores/a3.jpg"] },
-      { "id": "sat_6_act_4", "name": "Balance de Segunda Salida", "description": "Recopilación de avances de los 3 grupos en la segunda jornada de campo.", "photos": ["fotos/26_sep/segunda_salida/checkpoint/a1.jpg", "fotos/26_sep/segunda_salida/escuela_de_los_profetas/a1.jpg", "fotos/26_sep/segunda_salida/conquistadores/a1.jpg"] }
+      { "id": "sat_6_act_1", "name": "CHECKPOINT", "description": "Punto de control operativo en la Segunda Salida.", "photos": ["fotos/26_sep/segunda_salida/checkpoint/a1.jpg", "fotos/26_sep/segunda_salida/checkpoint/a2.jpg", "fotos/26_sep/segunda_salida/checkpoint/a3.jpg"] },
+      { "id": "sat_6_act_2", "name": "ESCUELA DE LOS PROFETAS", "description": "Taller de capacitación en la Escuela de los Profetas.", "photos": ["fotos/26_sep/segunda_salida/escuela_de_los_profetas/a1.jpg", "fotos/26_sep/segunda_salida/escuela_de_los_profetas/a2.jpg", "fotos/26_sep/segunda_salida/escuela_de_los_profetas/a3.jpg"] },
+      { "id": "sat_6_act_3", "name": "CONQUISTADORES", "description": "Actividades de campo con el grupo Conquistadores.", "photos": ["fotos/26_sep/segunda_salida/conquistadores/a1.jpg", "fotos/26_sep/segunda_salida/conquistadores/a2.jpg", "fotos/26_sep/segunda_salida/conquistadores/a3.jpg"] }
     ]
   },
   {
@@ -82,10 +74,7 @@
     "date": "2026-10-03",
     "formattedDate": "Sábado, 3 de octubre de 2026",
     "activities": [
-      { "id": "sat_7_act_1", "name": "VOTACIONES REGIONALES", "description": "Jornada y proceso de votaciones regionales.", "photos": ["fotos/3_oct/votaciones_regionales/a1.jpg", "fotos/3_oct/votaciones_regionales/a2.jpg", "fotos/3_oct/votaciones_regionales/a3.jpg"] },
-      { "id": "sat_7_act_2", "name": "Taller de Herramientas Digitales", "description": "Creación guiada de plantillas visuales reutilizables para contenido digital.", "photos": ["fotos/3_oct/votaciones_regionales/a1.jpg", "fotos/3_oct/votaciones_regionales/a2.jpg", "fotos/3_oct/votaciones_regionales/a3.jpg"] },
-      { "id": "sat_7_act_3", "name": "Sesión Fotográfica Práctica", "description": "Consejos para capturar retratos e historias humanas con buena iluminación.", "photos": ["fotos/3_oct/votaciones_regionales/a1.jpg", "fotos/3_oct/votaciones_regionales/a2.jpg", "fotos/3_oct/votaciones_regionales/a3.jpg"] },
-      { "id": "sat_7_act_4", "name": "Galería Grupal", "description": "Presentación y corrección constructiva de los diseños y fotos creados en el día.", "photos": ["fotos/3_oct/votaciones_regionales/a1.jpg", "fotos/3_oct/votaciones_regionales/a2.jpg", "fotos/3_oct/votaciones_regionales/a3.jpg"] }
+      { "id": "sat_7_act_1", "name": "I NOT, SORRY", "description": "Jornada y proceso de votaciones regionales.", "photos": ["fotos/3_oct/votaciones_regionales/a1.jpg", "fotos/3_oct/votaciones_regionales/a2.jpg", "fotos/3_oct/votaciones_regionales/a3.jpg"] }
     ]
   },
   {
@@ -93,10 +82,9 @@
     "date": "2026-10-10",
     "formattedDate": "Sábado, 10 de octubre de 2026",
     "activities": [
-      { "id": "sat_8_act_1", "name": "GUERREROS DE ESPERANZA (TERCERA SALIDA)", "description": "Actividad de campo del grupo Guerreros de Esperanza.", "photos": ["fotos/10_oct/tercera_salida/guerreros_de_esperanza/a1.jpg", "fotos/10_oct/tercera_salida/guerreros_de_esperanza/a2.jpg", "fotos/10_oct/tercera_salida/guerreros_de_esperanza/a3.jpg"] },
-      { "id": "sat_8_act_2", "name": "SALVADOS PARA SERVIR (TERCERA SALIDA)", "description": "Acción social de la brigada Salvados para Servir.", "photos": ["fotos/10_oct/tercera_salida/salvados_para_servir/a1.jpg", "fotos/10_oct/tercera_salida/salvados_para_servir/a2.jpg", "fotos/10_oct/tercera_salida/salvados_para_servir/a3.jpg"] },
-      { "id": "sat_8_act_3", "name": "CREARQ (TERCERA SALIDA)", "description": "Intervención del equipo CREARQ.", "photos": ["fotos/10_oct/tercera_salida/crearq/a1.jpg", "fotos/10_oct/tercera_salida/crearq/a2.jpg", "fotos/10_oct/tercera_salida/crearq/a3.jpg"] },
-      { "id": "sat_8_act_4", "name": "Balance Tercera Salida", "description": "Evaluación general de la tercera salida de campo.", "photos": ["fotos/10_oct/tercera_salida/guerreros_de_esperanza/a1.jpg", "fotos/10_oct/tercera_salida/salvados_para_servir/a1.jpg", "fotos/10_oct/tercera_salida/crearq/a1.jpg"] }
+      { "id": "sat_8_act_1", "name": "GUERREROS DE ESPERANZA", "description": "Actividad de campo del grupo Guerreros de Esperanza.", "photos": ["fotos/10_oct/tercera_salida/guerreros_de_esperanza/a1.jpg", "fotos/10_oct/tercera_salida/guerreros_de_esperanza/a2.jpg", "fotos/10_oct/tercera_salida/guerreros_de_esperanza/a3.jpg"] },
+      { "id": "sat_8_act_2", "name": "SALVADOS PARA SERVIR", "description": "Acción social de la brigada Salvados para Servir.", "photos": ["fotos/10_oct/tercera_salida/salvados_para_servir/a1.jpg", "fotos/10_oct/tercera_salida/salvados_para_servir/a2.jpg", "fotos/10_oct/tercera_salida/salvados_para_servir/a3.jpg"] },
+      { "id": "sat_8_act_3", "name": "CREARQ", "description": "Intervención del equipo CREARQ.", "photos": ["fotos/10_oct/tercera_salida/crearq/a1.jpg", "fotos/10_oct/tercera_salida/crearq/a2.jpg", "fotos/10_oct/tercera_salida/crearq/a3.jpg"] }
     ]
   },
   {
@@ -104,10 +92,10 @@
     "date": "2026-10-17",
     "formattedDate": "Sábado, 17 de octubre de 2026",
     "activities": [
-      { "id": "sat_9_act_1", "name": "ABRIENDO CAMINOS (CUARTA SALIDA)", "description": "Jornada del proyecto Abriendo Caminos.", "photos": ["fotos/17_oct/cuarta_salida/abriendo_caminos/a1.jpg", "fotos/17_oct/cuarta_salida/abriendo_caminos/a2.jpg", "fotos/17_oct/cuarta_salida/abriendo_caminos/a3.jpg"] },
-      { "id": "sat_9_act_2", "name": "SÁBADO DE AVENTURA (CUARTA SALIDA)", "description": "Actividad especial Sábado de Aventura.", "photos": ["fotos/17_oct/cuarta_salida/sabado_de_aventura/a1.jpg", "fotos/17_oct/cuarta_salida/sabado_de_aventura/a2.jpg", "fotos/17_oct/cuarta_salida/sabado_de_aventura/a3.jpg"] },
-      { "id": "sat_9_act_3", "name": "SÁBADOS DE JUSTICIA (CUARTA SALIDA)", "description": "Taller de sensibilización y acción comunitaria Sábados de Justicia.", "photos": ["fotos/17_oct/cuarta_salida/sabados_de_justicia/a1.jpg", "fotos/17_oct/cuarta_salida/sabados_de_justicia/a2.jpg", "fotos/17_oct/cuarta_salida/sabados_de_justicia/a3.jpg"] },
-      { "id": "sat_9_act_4", "name": "TRABAJO EDUCATIVO (CUARTA SALIDA)", "description": "Desarrollo del programa de Trabajo Educativo.", "photos": ["fotos/17_oct/cuarta_salida/trabajo_educativo/a1.jpg", "fotos/17_oct/cuarta_salida/trabajo_educativo/a2.jpg", "fotos/17_oct/cuarta_salida/trabajo_educativo/a3.jpg"] }
+      { "id": "sat_9_act_1", "name": "ABRIENDO CAMINOS", "description": "Jornada del proyecto Abriendo Caminos.", "photos": ["fotos/17_oct/cuarta_salida/abriendo_caminos/a1.jpg", "fotos/17_oct/cuarta_salida/abriendo_caminos/a2.jpg", "fotos/17_oct/cuarta_salida/abriendo_caminos/a3.jpg"] },
+      { "id": "sat_9_act_2", "name": "SÁBADO DE AVENTURA", "description": "Actividad especial Sábado de Aventura.", "photos": ["fotos/17_oct/cuarta_salida/sabado_de_aventura/a1.jpg", "fotos/17_oct/cuarta_salida/sabado_de_aventura/a2.jpg", "fotos/17_oct/cuarta_salida/sabado_de_aventura/a3.jpg"] },
+      { "id": "sat_9_act_3", "name": "SÁBADOS DE JUSTICIA", "description": "Taller de sensibilización y acción comunitaria Sábados de Justicia.", "photos": ["fotos/17_oct/cuarta_salida/sabados_de_justicia/a1.jpg", "fotos/17_oct/cuarta_salida/sabados_de_justicia/a2.jpg", "fotos/17_oct/cuarta_salida/sabados_de_justicia/a3.jpg"] },
+      { "id": "sat_9_act_4", "name": "TRABAJO EDUCATIVO", "description": "Desarrollo del programa de Trabajo Educativo.", "photos": ["fotos/17_oct/cuarta_salida/trabajo_educativo/a1.jpg", "fotos/17_oct/cuarta_salida/trabajo_educativo/a2.jpg", "fotos/17_oct/cuarta_salida/trabajo_educativo/a3.jpg"] }
     ]
   },
   {
@@ -115,10 +103,9 @@
     "date": "2026-10-24",
     "formattedDate": "Sábado, 24 de octubre de 2026",
     "activities": [
-      { "id": "sat_10_act_1", "name": "SONRISAS (QUINTA SALIDA)", "description": "Intervención comunitaria del equipo Sonrisas.", "photos": ["fotos/24_oct/quinta_salida/sonrisas/a1.jpg", "fotos/24_oct/quinta_salida/sonrisas/a2.jpg", "fotos/24_oct/quinta_salida/sonrisas/a3.jpg"] },
-      { "id": "sat_10_act_2", "name": "MIMOS (QUINTA SALIDA)", "description": "Presentación escénica del equipo Mimos.", "photos": ["fotos/24_oct/quinta_salida/mimos/a1.jpg", "fotos/24_oct/quinta_salida/mimos/a2.jpg", "fotos/24_oct/quinta_salida/mimos/a3.jpg"] },
-      { "id": "sat_10_act_3", "name": "CRECIENDO EN GRACIA (QUINTA SALIDA)", "description": "Taller formativo Creciendo en Gracia.", "photos": ["fotos/24_oct/quinta_salida/creciendo_en_gracia/a1.jpg", "fotos/24_oct/quinta_salida/creciendo_en_gracia/a2.jpg", "fotos/24_oct/quinta_salida/creciendo_en_gracia/a3.jpg"] },
-      { "id": "sat_10_act_4", "name": "Balance Quinta Salida", "description": "Consolidación de informes y registros fotográficos.", "photos": ["fotos/24_oct/quinta_salida/sonrisas/a1.jpg", "fotos/24_oct/quinta_salida/mimos/a1.jpg", "fotos/24_oct/quinta_salida/creciendo_en_gracia/a1.jpg"] }
+      { "id": "sat_10_act_1", "name": "SONRISAS", "description": "Intervención comunitaria del equipo Sonrisas.", "photos": ["fotos/24_oct/quinta_salida/sonrisas/a1.jpg", "fotos/24_oct/quinta_salida/sonrisas/a2.jpg", "fotos/24_oct/quinta_salida/sonrisas/a3.jpg"] },
+      { "id": "sat_10_act_2", "name": "MIMOS", "description": "Presentación escénica del equipo Mimos.", "photos": ["fotos/24_oct/quinta_salida/mimos/a1.jpg", "fotos/24_oct/quinta_salida/mimos/a2.jpg", "fotos/24_oct/quinta_salida/mimos/a3.jpg"] },
+      { "id": "sat_10_act_3", "name": "CRECIENDO EN GRACIA", "description": "Taller formativo Creciendo en Gracia.", "photos": ["fotos/24_oct/quinta_salida/creciendo_en_gracia/a1.jpg", "fotos/24_oct/quinta_salida/creciendo_en_gracia/a2.jpg", "fotos/24_oct/quinta_salida/creciendo_en_gracia/a3.jpg"] }
     ]
   },
   {
@@ -126,10 +113,9 @@
     "date": "2026-10-31",
     "formattedDate": "Sábado, 31 de octubre de 2026",
     "activities": [
-      { "id": "sat_11_act_1", "name": "KERYGMA (SEXTA SALIDA)", "description": "Jornada de comunicación del equipo Kerygma.", "photos": ["fotos/31_oct/sexta_salida/kerygma/a1.jpg", "fotos/31_oct/sexta_salida/kerygma/a2.jpg", "fotos/31_oct/sexta_salida/kerygma/a3.jpg"] },
-      { "id": "sat_11_act_2", "name": "LUCES DE ESPERANZA (SEXTA SALIDA)", "description": "Acción social de Luces de Esperanza.", "photos": ["fotos/31_oct/sexta_salida/luces_de_esperanza/a1.jpg", "fotos/31_oct/sexta_salida/luces_de_esperanza/a2.jpg", "fotos/31_oct/sexta_salida/luces_de_esperanza/a3.jpg"] },
-      { "id": "sat_11_act_3", "name": "LENGUA DE SEÑAS (SEXTA SALIDA)", "description": "Taller inclusivo de Lengua de Señas.", "photos": ["fotos/31_oct/sexta_salida/lengua_de_senas/a1.jpg", "fotos/31_oct/sexta_salida/lengua_de_senas/a2.jpg", "fotos/31_oct/sexta_salida/lengua_de_senas/a3.jpg"] },
-      { "id": "sat_11_act_4", "name": "Balance Sexta Salida", "description": "Resumen operativo de la jornada del 31 de octubre.", "photos": ["fotos/31_oct/sexta_salida/kerygma/a1.jpg", "fotos/31_oct/sexta_salida/luces_de_esperanza/a1.jpg", "fotos/31_oct/sexta_salida/lengua_de_senas/a1.jpg"] }
+      { "id": "sat_11_act_1", "name": "KERYGMA", "description": "Jornada de comunicación del equipo Kerygma.", "photos": ["fotos/31_oct/sexta_salida/kerygma/a1.jpg", "fotos/31_oct/sexta_salida/kerygma/a2.jpg", "fotos/31_oct/sexta_salida/kerygma/a3.jpg"] },
+      { "id": "sat_11_act_2", "name": "LUCES DE ESPERANZA", "description": "Acción social de Luces de Esperanza.", "photos": ["fotos/31_oct/sexta_salida/luces_de_esperanza/a1.jpg", "fotos/31_oct/sexta_salida/luces_de_esperanza/a2.jpg", "fotos/31_oct/sexta_salida/luces_de_esperanza/a3.jpg"] },
+      { "id": "sat_11_act_3", "name": "LENGUA DE SEÑAS", "description": "Taller inclusivo de Lengua de Señas.", "photos": ["fotos/31_oct/sexta_salida/lengua_de_senas/a1.jpg", "fotos/31_oct/sexta_salida/lengua_de_senas/a2.jpg", "fotos/31_oct/sexta_salida/lengua_de_senas/a3.jpg"] }
     ]
   },
   {
@@ -137,10 +123,7 @@
     "date": "2026-11-07",
     "formattedDate": "Sábado, 7 de noviembre de 2026",
     "activities": [
-      { "id": "sat_12_act_1", "name": "MATEMÁTICAS (SEPTIMA SALIDA)", "description": "Taller y reforzamiento educativo de Matemáticas.", "photos": ["fotos/7_nov/septima_salida/matematicas/a1.jpg", "fotos/7_nov/septima_salida/matematicas/a2.jpg", "fotos/7_nov/septima_salida/matematicas/a3.jpg"] },
-      { "id": "sat_12_act_2", "name": "Revisión de Material Gráfico", "description": "Inspección final de los folletos, banners y materiales que se imprimirán.", "photos": ["fotos/7_nov/septima_salida/matematicas/a1.jpg", "fotos/7_nov/septima_salida/matematicas/a2.jpg", "fotos/7_nov/septima_salida/matematicas/a3.jpg"] },
-      { "id": "sat_12_act_3", "name": "Ensayo General Voces", "description": "Segundo ensayo con cronometraje estricto de las ponencias e intervenciones.", "photos": ["fotos/7_nov/septima_salida/matematicas/a1.jpg", "fotos/7_nov/septima_salida/matematicas/a2.jpg", "fotos/7_nov/septima_salida/matematicas/a3.jpg"] },
-      { "id": "sat_12_act_4", "name": "Logística de Sitio", "description": "Coordinación final de sonido, iluminación y disposición física en la locación.", "photos": ["fotos/7_nov/septima_salida/matematicas/a1.jpg", "fotos/7_nov/septima_salida/matematicas/a2.jpg", "fotos/7_nov/septima_salida/matematicas/a3.jpg"] }
+      { "id": "sat_12_act_1", "name": "MATEMÁTICAS", "description": "Taller y reforzamiento educativo de Matemáticas.", "photos": ["fotos/7_nov/septima_salida/matematicas/a1.jpg", "fotos/7_nov/septima_salida/matematicas/a2.jpg", "fotos/7_nov/septima_salida/matematicas/a3.jpg"] }
     ]
   },
   {
@@ -148,10 +131,7 @@
     "date": "2026-11-14",
     "formattedDate": "Sábado, 14 de noviembre de 2026",
     "activities": [
-      { "id": "sat_13_act_1", "name": "COMUNICACIONES (UN SÁBADO PARA NUESTRO FEM)", "description": "Jornada especial dedicada al equipo de Comunicaciones de FEM.", "photos": ["fotos/14_nov/un_sabado_para_nuestro_fem/comunicaciones/a1.jpg", "fotos/14_nov/un_sabado_para_nuestro_fem/comunicaciones/a2.jpg", "fotos/14_nov/un_sabado_para_nuestro_fem/comunicaciones/a3.jpg"] },
-      { "id": "sat_13_act_2", "name": "Registro de Testimonios", "description": "Grabación de opiniones e impactos de los participantes al cierre del evento.", "photos": ["fotos/14_nov/un_sabado_para_nuestro_fem/comunicaciones/a1.jpg", "fotos/14_nov/un_sabado_para_nuestro_fem/comunicaciones/a2.jpg", "fotos/14_nov/un_sabado_para_nuestro_fem/comunicaciones/a3.jpg"] },
-      { "id": "sat_13_act_3", "name": "Desmontaje Logístico", "description": "Orden, inventario y devolución de los materiales del local del evento.", "photos": ["fotos/14_nov/un_sabado_para_nuestro_fem/comunicaciones/a1.jpg", "fotos/14_nov/un_sabado_para_nuestro_fem/comunicaciones/a2.jpg", "fotos/14_nov/un_sabado_para_nuestro_fem/comunicaciones/a3.jpg"] },
-      { "id": "sat_13_act_4", "name": "Celebración de Hitos", "description": "Breve compartir grupal para felicitar el esfuerzo de todos los comités.", "photos": ["fotos/14_nov/un_sabado_para_nuestro_fem/comunicaciones/a1.jpg", "fotos/14_nov/un_sabado_para_nuestro_fem/comunicaciones/a2.jpg", "fotos/14_nov/un_sabado_para_nuestro_fem/comunicaciones/a3.jpg"] }
+      { "id": "sat_13_act_1", "name": "COMUNICACIONES (UN SÁBADO PARA NUESTRO FEM)", "description": "Jornada especial dedicada al equipo de Comunicaciones de FEM.", "photos": ["fotos/14_nov/un_sabado_para_nuestro_fem/comunicaciones/a1.jpg", "fotos/14_nov/un_sabado_para_nuestro_fem/comunicaciones/a2.jpg", "fotos/14_nov/un_sabado_para_nuestro_fem/comunicaciones/a3.jpg"] }
     ]
   },
   {
@@ -159,10 +139,7 @@
     "date": "2026-11-21",
     "formattedDate": "Sábado, 21 de noviembre de 2026",
     "activities": [
-      { "id": "sat_14_act_1", "name": "CIERRE DE ACTIVIDADES ESPIRITUALES", "description": "Jornada final y reunión de clausura de las actividades espirituales 2026-II.", "photos": ["fotos/21_nov/cierre_de_actividades_espirituales/a1.jpg", "fotos/21_nov/cierre_de_actividades_espirituales/a2.jpg", "fotos/21_nov/cierre_de_actividades_espirituales/a3.jpg"] },
-      { "id": "sat_14_act_2", "name": "Redacción de Informe Final", "description": "Estructuración del reporte ejecutivo con datos cuantitativos de impacto social.", "photos": ["fotos/21_nov/cierre_de_actividades_espirituales/a1.jpg", "fotos/21_nov/cierre_de_actividades_espirituales/a2.jpg", "fotos/21_nov/cierre_de_actividades_espirituales/a3.jpg"] },
-      { "id": "sat_14_act_3", "name": "Compilación del Video Memoria", "description": "Edición grupal del videoclip que recopila los mejores momentos del foro.", "photos": ["fotos/21_nov/cierre_de_actividades_espirituales/a1.jpg", "fotos/21_nov/cierre_de_actividades_espirituales/a2.jpg", "fotos/21_nov/cierre_de_actividades_espirituales/a3.jpg"] },
-      { "id": "sat_14_act_4", "name": "Entrega de Borradores", "description": "Revisión conjunta y validación de las cifras presentadas en el borrador.", "photos": ["fotos/21_nov/cierre_de_actividades_espirituales/a1.jpg", "fotos/21_nov/cierre_de_actividades_espirituales/a2.jpg", "fotos/21_nov/cierre_de_actividades_espirituales/a3.jpg"] }
+      { "id": "sat_14_act_1", "name": "CIERRE DE ACTIVIDADES ESPIRITUALES", "description": "Jornada final y reunión de clausura de las actividades espirituales 2026-II.", "photos": ["fotos/21_nov/cierre_de_actividades_espirituales/a1.jpg", "fotos/21_nov/cierre_de_actividades_espirituales/a2.jpg", "fotos/21_nov/cierre_de_actividades_espirituales/a3.jpg"] }
     ]
   }
 ]
