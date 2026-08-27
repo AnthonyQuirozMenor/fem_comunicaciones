@@ -350,15 +350,22 @@ function updateTimelineLine() {
     line.style.right = 'auto';
 }
 
+function normalizePhotoPath(path) {
+    if (!path) return '';
+    // Quitar la barra diagonal inicial para que sea una ruta relativa válida
+    return path.replace(/^\//, '');
+}
+
 function renderActivity(activity, saturdayId, actIndex) {
     const photosHtml = [];
     
     if (activity.photos && activity.photos.length > 0) {
         activity.photos.forEach((photoPath, slotIdx) => {
             if (photoPath) {
+                const normPath = normalizePhotoPath(photoPath);
                 photosHtml.push(`
                     <div class="photo-slot photo-slot-filled" data-slot="${slotIdx}">
-                        <img src="${photoPath}" alt="Imagen ${slotIdx + 1}">
+                        <img src="${normPath}" alt="Imagen ${slotIdx + 1}">
                         <div class="photo-overlay">
                             <button class="btn-photo-action btn-photo-view" onclick="openLightbox('${activity.id}', ${slotIdx})" title="Ampliar imagen">
                                 <i class="fa-solid fa-expand"></i>
@@ -430,7 +437,7 @@ function updateLightboxContent(activityName) {
     const photoPath = currentLightboxPhotos[currentLightboxIndex];
     if (!photoPath) return;
     
-    lightboxImg.src = photoPath;
+    lightboxImg.src = normalizePhotoPath(photoPath);
     lightboxCaption.innerText = `${activityName} - Foto ${currentLightboxIndex + 1} de ${currentLightboxPhotos.length}`;
     
     if (currentLightboxPhotos.length <= 1) {
