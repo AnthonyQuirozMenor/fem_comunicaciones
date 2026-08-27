@@ -352,9 +352,26 @@ function updateTimelineLine() {
 
 function normalizePhotoPath(path) {
     if (!path) return '';
-    // Quitar la barra diagonal inicial para que sea una ruta relativa válida
-    return path.replace(/^\//, '');
+    let clean = path.replace(/^\//, '');
+    return clean;
 }
+
+window.handleImageError = function(imgElement, originalPath) {
+    if (!imgElement || imgElement.getAttribute('data-tried-fallback')) return;
+    imgElement.setAttribute('data-tried-fallback', 'true');
+    
+    let clean = originalPath.replace(/^\//, '');
+    if (clean.includes('_')) {
+        // Intentar variante con espacios
+        imgElement.src = encodeURI(clean.replace(/_/g, ' '));
+    } else if (clean.includes(' ')) {
+        // Intentar variante con guiones bajos
+        imgElement.src = encodeURI(clean.replace(/ /g, '_'));
+    } else {
+        // Intentar variante con ./ al inicio
+        imgElement.src = './' + encodeURI(clean);
+    }
+};
 
 function renderActivity(activity, saturdayId, actIndex) {
     const photosHtml = [];
@@ -363,9 +380,11 @@ function renderActivity(activity, saturdayId, actIndex) {
         activity.photos.forEach((photoPath, slotIdx) => {
             if (photoPath) {
                 const normPath = normalizePhotoPath(photoPath);
+                const encodedUrl = encodeURI(normPath);
+                const safeOrig = escapeHtml(photoPath);
                 photosHtml.push(`
                     <div class="photo-slot photo-slot-filled" data-slot="${slotIdx}">
-                        <img src="${normPath}" alt="Imagen ${slotIdx + 1}">
+                        <img src="${encodedUrl}" onerror="handleImageError(this, '${safeOrig}')" alt="Imagen ${slotIdx + 1}">
                         <div class="photo-overlay">
                             <button class="btn-photo-action btn-photo-view" onclick="openLightbox('${activity.id}', ${slotIdx})" title="Ampliar imagen">
                                 <i class="fa-solid fa-expand"></i>
@@ -437,7 +456,18 @@ function updateLightboxContent(activityName) {
     const photoPath = currentLightboxPhotos[currentLightboxIndex];
     if (!photoPath) return;
     
-    lightboxImg.src = normalizePhotoPath(photoPath);
+    const normPath = normalizePhotoPath(photoPath);
+    lightboxImg.src = encodeURI(normPath);
+    lightboxImg.onerror = function() {
+        if (!this.getAttribute('data-tried-fallback')) {
+            this.setAttribute('data-tried-fallback', 'true');
+            if (normPath.includes('_')) {
+                this.src = encodeURI(normPath.replace(/_/g, ' '));
+            } else if (normPath.includes(' ')) {
+                this.src = encodeURI(normPath.replace(/ /g, '_'));
+            }
+        }
+    };
     lightboxCaption.innerText = `${activityName} - Foto ${currentLightboxIndex + 1} de ${currentLightboxPhotos.length}`;
     
     if (currentLightboxPhotos.length <= 1) {
