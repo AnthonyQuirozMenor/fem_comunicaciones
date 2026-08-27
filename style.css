@@ -1,26 +1,29 @@
 /* ==========================================
-   DESIGN SYSTEM - FEM COMUNICACIONES
-   Color Palette: #F652A0 & Deep Cosmic Black (#020205)
+   DESIGN SYSTEM - FEM COMUNICACIONES (UPeU BRANDING ENHANCED LIGHTING)
+   Color Palette: Vibrant UPeU Navy (#0C1D3A / #152D54), Royal Blue (#1D4ED8) & Imperial Gold (#E6B52B / #FFD700)
    ========================================== */
 
 :root {
-    --bg-color: #020205;
+    --bg-color: #0c1d3a;
     --text-primary: #ffffff;
-    --text-secondary: #a3a3c2;
+    --text-secondary: #cbd5e1;
     
-    /* Accents (Hot Pink, Magenta & Deep Violet Glows) */
-    --accent-pink: #F652A0;
-    --accent-pink-glow: rgba(246, 82, 160, 0.25);
-    --accent-pink-glow-strong: rgba(246, 82, 160, 0.55);
-    --accent-purple: #7b2cbf;
+    /* Accents - Institutional UPeU Gold & Royal Navy */
+    --accent-gold: #E6B52B;
+    --accent-gold-bright: #FFD700;
+    --accent-gold-glow: rgba(230, 181, 43, 0.45);
+    --accent-gold-glow-strong: rgba(230, 181, 43, 0.75);
+    --accent-blue: #1d4ed8;
+    --accent-blue-bright: #3b82f6;
+    --accent-navy-deep: #0f274c;
     
-    /* Glassmorphism background matching cosmic nebula theme */
-    --glass-bg: rgba(10, 8, 18, 0.78);
-    --glass-border: rgba(246, 82, 160, 0.22);
-    --glass-border-hover: rgba(246, 82, 160, 0.6);
+    /* Glassmorphism matching UPeU Illuminated Navy theme */
+    --glass-bg: rgba(15, 35, 68, 0.85);
+    --glass-border: rgba(230, 181, 43, 0.38);
+    --glass-border-hover: rgba(230, 181, 43, 0.85);
     
-    --card-bg-inner: rgba(18, 14, 30, 0.65);
-    --input-bg: rgba(16, 12, 25, 0.88);
+    --card-bg-inner: rgba(20, 45, 85, 0.75);
+    --input-bg: rgba(15, 35, 68, 0.92);
     
     --transition-smooth: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -38,7 +41,7 @@ html, body {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    background-color: var(--bg-color);
+    background: radial-gradient(circle at 50% 30%, #173361 0%, #0d2142 50%, #071328 100%);
     color: var(--text-primary);
     position: relative;
 }
@@ -54,27 +57,28 @@ html, body {
     pointer-events: none;
 }
 
-/* Ambient Background Glows */
+/* Ambient Background Glows - Illuminated Nebulae */
 .bg-glow {
     position: fixed;
-    width: 650px;
-    height: 650px;
+    width: 750px;
+    height: 750px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(246, 82, 160, 0.09) 0%, rgba(0, 0, 0, 0) 70%);
     pointer-events: none;
     z-index: -1;
-    filter: blur(95px);
+    filter: blur(80px);
 }
 
 .bg-glow-1 {
-    top: -200px;
-    left: -200px;
+    top: -150px;
+    left: -150px;
+    background: radial-gradient(circle, rgba(230, 181, 43, 0.24) 0%, rgba(29, 78, 216, 0.22) 50%, rgba(0, 0, 0, 0) 70%);
     animation: floatGlow 25s ease-in-out infinite alternate;
 }
 
 .bg-glow-2 {
-    bottom: -200px;
-    right: -200px;
+    bottom: -150px;
+    right: -150px;
+    background: radial-gradient(circle, rgba(37, 99, 235, 0.32) 0%, rgba(230, 181, 43, 0.2) 55%, rgba(0, 0, 0, 0) 75%);
     animation: floatGlow 30s ease-in-out infinite alternate-reverse;
 }
 
@@ -82,9 +86,9 @@ html, body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 950px;
-    height: 950px;
-    background: radial-gradient(circle, rgba(123, 44, 191, 0.09) 0%, rgba(0, 0, 0, 0) 75%);
+    width: 1100px;
+    height: 1100px;
+    background: radial-gradient(circle, rgba(30, 64, 175, 0.28) 0%, rgba(230, 181, 43, 0.15) 50%, rgba(0, 0, 0, 0) 75%);
 }
 
 @keyframes floatGlow {
@@ -98,19 +102,19 @@ html, body {
     height: 6px;
 }
 ::-webkit-scrollbar-track {
-    background: rgba(8, 6, 14, 0.5);
+    background: rgba(7, 19, 40, 0.5);
     border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb {
-    background: rgba(246, 82, 160, 0.3);
+    background: rgba(230, 181, 43, 0.45);
     border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--accent-pink);
+    background: var(--accent-gold);
 }
 
 /* ==========================================
-   BOTTOM-LEFT BRAND PILL BADGE
+   BOTTOM-LEFT BRAND PILL BADGE (UPeU STYLE)
    ========================================== */
 
 .brand-pill-badge {
@@ -121,19 +125,19 @@ html, body {
     display: flex;
     align-items: center;
     gap: 15px;
-    background: rgba(14, 10, 22, 0.85);
+    background: rgba(15, 35, 68, 0.92);
     backdrop-filter: blur(22px);
     -webkit-backdrop-filter: blur(22px);
-    border: 1.5px solid rgba(246, 82, 160, 0.35);
+    border: 1.5px solid rgba(230, 181, 43, 0.45);
     padding: 10px 24px 10px 12px;
     border-radius: 50px;
-    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.7), 0 0 25px rgba(246, 82, 160, 0.25), inset 0 0 15px rgba(246, 82, 160, 0.1);
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.6), 0 0 25px rgba(230, 181, 43, 0.3), inset 0 0 15px rgba(230, 181, 43, 0.15);
     transition: var(--transition-smooth);
 }
 
 .brand-pill-badge:hover {
-    border-color: var(--accent-pink);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8), 0 0 35px rgba(246, 82, 160, 0.4), inset 0 0 20px rgba(246, 82, 160, 0.2);
+    border-color: var(--accent-gold);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7), 0 0 35px rgba(230, 181, 43, 0.5), inset 0 0 20px rgba(230, 181, 43, 0.25);
     transform: translateY(-2px);
 }
 
@@ -141,12 +145,12 @@ html, body {
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    border: 2px solid #F652A0;
+    border: 2px solid var(--accent-gold);
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(0, 0, 0, 0.65);
-    box-shadow: 0 0 15px rgba(246, 82, 160, 0.5);
+    background: rgba(13, 30, 58, 0.9);
+    box-shadow: 0 0 15px rgba(230, 181, 43, 0.55);
     flex-shrink: 0;
 }
 
@@ -154,17 +158,17 @@ html, body {
     font-size: 15.5px;
     font-weight: 800;
     letter-spacing: 0.6px;
-    color: #F652A0;
+    color: var(--accent-gold);
     margin: 0;
     line-height: 1.2;
 }
 
 .brand-pill-info p {
     font-size: 11px;
-    color: rgba(255, 255, 255, 0.75);
-    font-weight: 400;
+    color: rgba(255, 255, 255, 0.88);
+    font-weight: 500;
     margin-top: 2px;
-    letter-spacing: 0.2px;
+    letter-spacing: 0.3px;
 }
 
 /* ==========================================
@@ -189,16 +193,16 @@ html, body {
     align-items: center;
 }
 
-/* Central horizontal glowing line (stretching precisely to last node) */
+/* Central horizontal glowing line (UPeU Gold Gradient) */
 .timeline-line {
     position: absolute;
     top: 50%;
     height: 5px;
-    background: linear-gradient(90deg, #F652A0 0%, #ff75c3 50%, #F652A0 100%);
+    background: linear-gradient(90deg, #D4AF37 0%, #FFD700 50%, #E6B52B 100%);
     transform: translateY(-50%);
     border-radius: 3px;
     z-index: 5;
-    box-shadow: 0 0 15px rgba(246, 82, 160, 0.9), 0 0 30px rgba(246, 82, 160, 0.5);
+    box-shadow: 0 0 18px rgba(230, 181, 43, 0.95), 0 0 35px rgba(230, 181, 43, 0.6);
     pointer-events: none;
     transition: width 0.3s ease, left 0.3s ease;
 }
@@ -214,8 +218,8 @@ html, body {
     height: 0;
     border-top: 8px solid transparent;
     border-bottom: 8px solid transparent;
-    border-left: 18px solid var(--accent-pink);
-    filter: drop-shadow(0 0 10px var(--accent-pink));
+    border-left: 18px solid var(--accent-gold);
+    filter: drop-shadow(0 0 12px var(--accent-gold));
 }
 
 .timeline-items {
@@ -238,7 +242,7 @@ html, body {
 
 .loading-state i {
     font-size: 44px;
-    color: var(--accent-pink);
+    color: var(--accent-gold);
     margin-bottom: 15px;
 }
 
@@ -263,20 +267,26 @@ html, body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 22px;
-    height: 22px;
-    background-color: #020205;
-    border: 4px solid var(--accent-pink);
+    width: 24px;
+    height: 24px;
+    background-color: #0c1d3a;
+    border: 4px solid var(--accent-gold);
     border-radius: 50%;
     z-index: 15;
     transition: var(--transition-smooth);
-    box-shadow: 0 0 15px rgba(246, 82, 160, 0.9), 0 0 25px rgba(246, 82, 160, 0.4);
+    box-shadow: 0 0 18px rgba(230, 181, 43, 0.95), 0 0 28px rgba(230, 181, 43, 0.5);
+    animation: goldPulse 3s ease-in-out infinite alternate;
+}
+
+@keyframes goldPulse {
+    0% { box-shadow: 0 0 14px rgba(230, 181, 43, 0.8), 0 0 22px rgba(230, 181, 43, 0.4); }
+    100% { box-shadow: 0 0 26px rgba(255, 215, 0, 1), 0 0 40px rgba(230, 181, 43, 0.7); }
 }
 
 .timeline-card-wrapper:hover .timeline-node {
     border-color: #ffffff;
-    box-shadow: 0 0 25px rgba(246, 82, 160, 1), 0 0 12px #ffffff;
-    transform: translate(-50%, -50%) scale(1.3);
+    box-shadow: 0 0 32px rgba(255, 215, 0, 1), 0 0 16px #ffffff;
+    transform: translate(-50%, -50%) scale(1.35);
 }
 
 /* Vertical Connector Line */
@@ -284,10 +294,10 @@ html, body {
     position: absolute;
     left: 50%;
     width: 2px;
-    background: linear-gradient(to bottom, var(--accent-pink), rgba(246, 82, 160, 0.2));
+    background: linear-gradient(to bottom, var(--accent-gold), rgba(230, 181, 43, 0.3));
     transform: translateX(-50%);
     z-index: 8;
-    box-shadow: 0 0 8px rgba(246, 82, 160, 0.6);
+    box-shadow: 0 0 10px rgba(230, 181, 43, 0.7);
 }
 
 /* POSICIONAMIENTO ARRIBA DE LA LÍNEA (CARD-ABOVE) */
@@ -299,7 +309,7 @@ html, body {
 .timeline-card-wrapper.card-above .timeline-connector {
     top: calc(50vh - 40px);
     height: 40px;
-    background: linear-gradient(to top, var(--accent-pink), rgba(246, 82, 160, 0.2));
+    background: linear-gradient(to top, var(--accent-gold), rgba(230, 181, 43, 0.3));
 }
 
 .timeline-card-wrapper.card-above:hover .timeline-card {
@@ -315,7 +325,7 @@ html, body {
 .timeline-card-wrapper.card-below .timeline-connector {
     top: 50vh;
     height: 40px;
-    background: linear-gradient(to bottom, var(--accent-pink), rgba(246, 82, 160, 0.2));
+    background: linear-gradient(to bottom, var(--accent-gold), rgba(230, 181, 43, 0.3));
 }
 
 .timeline-card-wrapper.card-below:hover .timeline-card {
@@ -323,20 +333,20 @@ html, body {
 }
 
 /* ==========================================
-   GLASSMORPHIC SATURDAY CARD
+   GLASSMORPHIC SATURDAY CARD (UPeU STYLE)
    ========================================= */
 
 .timeline-card {
     background: var(--glass-bg);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border: 1px solid var(--glass-border);
     border-radius: 20px;
     padding: 20px;
     width: 100%;
     max-height: 370px;
     overflow-y: auto;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 15px 38px rgba(3, 12, 28, 0.65), 0 0 20px rgba(230, 181, 43, 0.12);
     transition: var(--transition-smooth);
     position: relative;
     z-index: 10;
@@ -351,7 +361,7 @@ html, body {
     bottom: 0;
     border-radius: 20px;
     padding: 1px;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(246, 82, 160, 0.3) 100%);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.22), rgba(230, 181, 43, 0.45) 100%);
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
@@ -360,7 +370,7 @@ html, body {
 
 .timeline-card:hover {
     border-color: var(--glass-border-hover);
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.9), 0 0 25px rgba(246, 82, 160, 0.25);
+    box-shadow: 0 20px 48px rgba(3, 12, 28, 0.85), 0 0 32px rgba(230, 181, 43, 0.35);
 }
 
 /* Card Header */
@@ -368,7 +378,7 @@ html, body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid rgba(246, 82, 160, 0.15);
+    border-bottom: 1px solid rgba(230, 181, 43, 0.25);
     padding-bottom: 12px;
     margin-bottom: 15px;
 }
@@ -381,7 +391,7 @@ html, body {
 
 .card-date i {
     font-size: 18px;
-    color: var(--accent-pink);
+    color: var(--accent-gold);
 }
 
 .card-date h2 {
@@ -403,7 +413,7 @@ html, body {
 
 .activity-card {
     background: var(--card-bg-inner);
-    border: 1px solid rgba(246, 82, 160, 0.08);
+    border: 1px solid rgba(230, 181, 43, 0.18);
     border-radius: 14px;
     padding: 14px;
     transition: var(--transition-smooth);
@@ -413,8 +423,8 @@ html, body {
 }
 
 .activity-card:hover {
-    border-color: rgba(246, 82, 160, 0.3);
-    background: rgba(246, 82, 160, 0.04);
+    border-color: rgba(230, 181, 43, 0.5);
+    background: rgba(230, 181, 43, 0.08);
 }
 
 .activity-header {
@@ -425,9 +435,9 @@ html, body {
 }
 
 .activity-badge {
-    background: rgba(246, 82, 160, 0.12);
-    border: 1px solid rgba(246, 82, 160, 0.25);
-    color: var(--accent-pink);
+    background: rgba(230, 181, 43, 0.2);
+    border: 1px solid rgba(230, 181, 43, 0.4);
+    color: var(--accent-gold-bright);
     font-size: 9.5px;
     font-weight: 700;
     text-transform: uppercase;
@@ -477,13 +487,13 @@ html, body {
     border-radius: 8px;
     position: relative;
     overflow: hidden;
-    background: rgba(246, 82, 160, 0.03);
-    border: 1px dashed rgba(246, 82, 160, 0.18);
+    background: rgba(230, 181, 43, 0.06);
+    border: 1px dashed rgba(230, 181, 43, 0.3);
     transition: var(--transition-smooth);
 }
 
 .photo-slot-filled {
-    border: 1px solid rgba(246, 82, 160, 0.3);
+    border: 1px solid rgba(230, 181, 43, 0.45);
     cursor: pointer;
 }
 
@@ -497,7 +507,7 @@ html, body {
 .photo-overlay {
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(12, 29, 58, 0.85);
     opacity: 0;
     display: flex;
     align-items: center;
@@ -518,13 +528,18 @@ html, body {
     justify-content: center;
     font-size: 12px;
     cursor: pointer;
-    background: var(--accent-pink);
-    color: #000000;
-    box-shadow: 0 0 10px rgba(246, 82, 160, 0.5);
+    background: var(--accent-gold);
+    color: #0c1d3a;
+    box-shadow: 0 0 10px rgba(230, 181, 43, 0.7);
+}
+
+.btn-photo-action:hover {
+    background: var(--accent-gold-bright);
+    transform: scale(1.1);
 }
 
 /* ==========================================
-   IMAGE LIGHTBOX MODAL
+   IMAGE LIGHTBOX MODAL (UPeU THEME)
    ========================================= */
 
 .lightbox {
@@ -533,7 +548,7 @@ html, body {
     z-index: 200;
     left: 0; top: 0;
     width: 100vw; height: 100vh;
-    background-color: rgba(2, 2, 5, 0.96);
+    background-color: rgba(12, 29, 58, 0.95);
     backdrop-filter: blur(25px);
     -webkit-backdrop-filter: blur(25px);
     align-items: center;
@@ -559,8 +574,8 @@ html, body {
     max-width: 100%;
     max-height: 75vh;
     border-radius: 16px;
-    box-shadow: 0 25px 80px rgba(246, 82, 160, 0.2);
-    border: 1px solid rgba(246, 82, 160, 0.4);
+    box-shadow: 0 25px 80px rgba(230, 181, 43, 0.3);
+    border: 1.5px solid rgba(230, 181, 43, 0.5);
     object-fit: contain;
 }
 
@@ -573,15 +588,15 @@ html, body {
     width: 44px; height: 44px;
     display: flex; align-items: center; justify-content: center;
     border-radius: 50%;
-    background: rgba(246, 82, 160, 0.15);
-    border: 1px solid rgba(246, 82, 160, 0.3);
+    background: rgba(230, 181, 43, 0.2);
+    border: 1px solid rgba(230, 181, 43, 0.4);
     z-index: 210;
 }
 
 .lightbox-close:hover {
-    color: var(--accent-pink);
+    color: var(--accent-gold);
     transform: rotate(90deg);
-    border-color: var(--accent-pink);
+    border-color: var(--accent-gold);
 }
 
 .lightbox-caption {
@@ -594,8 +609,8 @@ html, body {
 .lightbox-prev, .lightbox-next {
     position: absolute;
     top: 50%; transform: translateY(-50%);
-    background: rgba(246, 82, 160, 0.15);
-    border: 1px solid rgba(246, 82, 160, 0.3);
+    background: rgba(230, 181, 43, 0.2);
+    border: 1px solid rgba(230, 181, 43, 0.4);
     color: white;
     width: 46px; height: 46px;
     border-radius: 50%;
@@ -608,8 +623,8 @@ html, body {
 .lightbox-next { right: 30px; }
 
 .lightbox-prev:hover, .lightbox-next:hover {
-    background: rgba(246, 82, 160, 0.3);
-    color: var(--accent-pink);
+    background: rgba(230, 181, 43, 0.4);
+    color: var(--accent-gold-bright);
 }
 
 /* ==========================================
@@ -619,7 +634,7 @@ html, body {
 .toast {
     position: fixed;
     bottom: 30px; right: 30px;
-    background: rgba(10, 8, 18, 0.95);
+    background: rgba(15, 35, 68, 0.96);
     backdrop-filter: blur(10px);
     border: 1px solid var(--glass-border);
     padding: 12px 20px;
@@ -633,7 +648,7 @@ html, body {
 }
 
 .toast.show { opacity: 1; transform: translateY(0); }
-.toast.success { border-left: 4px solid var(--accent-pink); }
+.toast.success { border-left: 4px solid var(--accent-gold); }
 .toast.error { border-left: 4px solid #ef4444; }
 
 /* Mobile adaptation */

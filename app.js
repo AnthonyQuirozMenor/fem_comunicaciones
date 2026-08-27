@@ -1,6 +1,6 @@
 /**
- * APLICACIÓN DE LÍNEA DE TIEMPO - FEM COMUNICACIONES
- * Versión Universo 3D Espacial (Lógica de Cliente)
+ * APLICACIÓN DE LÍNEA DE TIEMPO - FEM COMUNICACIONES (UPeU BRANDING ENHANCED LIGHTING)
+ * Versión Universo 3D Espacial Iluminado (Tonos Azul Marino UPeU y Dorado Imperial)
  */
 
 // Estado de la aplicación
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ==========================================
-// FONDO 3D INTERACTIVO CON MILES DE ESTRELLAS (THREE.JS)
+// FONDO 3D INTERACTIVO CON MILES DE ESTRELLAS ILUMINADAS (THREE.JS - UPeU STYLE)
 // ==========================================
 
 function init3DUniverse() {
@@ -42,21 +42,21 @@ function init3DUniverse() {
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-    // Textura de punto estelar brillante
+    // Textura de punto estelar brillante con mayor luminiscencia
     function createStarTexture() {
         const pCanvas = document.createElement('canvas');
-        pCanvas.width = 32;
-        pCanvas.height = 32;
+        pCanvas.width = 64;
+        pCanvas.height = 64;
         const ctx = pCanvas.getContext('2d');
         
-        const gradient = ctx.createRadialGradient(16, 16, 0, 16, 16, 16);
+        const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
         gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
-        gradient.addColorStop(0.25, 'rgba(246, 82, 160, 0.9)');
-        gradient.addColorStop(0.65, 'rgba(123, 44, 191, 0.4)');
+        gradient.addColorStop(0.2, 'rgba(255, 215, 0, 0.95)');  // Oro brillante UPeU
+        gradient.addColorStop(0.5, 'rgba(59, 130, 246, 0.6)');  // Azul resplandeciente
         gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
         
         ctx.fillStyle = gradient;
-        ctx.fillRect(0, 0, 32, 32);
+        ctx.fillRect(0, 0, 64, 64);
         
         return new THREE.CanvasTexture(pCanvas);
     }
@@ -64,18 +64,18 @@ function init3DUniverse() {
     const starTexture = createStarTexture();
 
     // ------------------------------------------
-    // CAPA 1: Polvo estelar de fondo (6,000 estrellas pequeñas)
+    // CAPA 1: Polvo estelar brillante de fondo (6,500 estrellas)
     // ------------------------------------------
-    const bgStarCount = 6000;
+    const bgStarCount = 6500;
     const bgGeometry = new THREE.BufferGeometry();
     const bgPositions = new Float32Array(bgStarCount * 3);
     const bgColors = new Float32Array(bgStarCount * 3);
 
     const bgPalette = [
         new THREE.Color('#ffffff'),
-        new THREE.Color('#e2e8f0'),
-        new THREE.Color('#f472b6'),
-        new THREE.Color('#c084fc')
+        new THREE.Color('#cbd5e1'),
+        new THREE.Color('#ffd700'), // Dorado claro
+        new THREE.Color('#60a5fa')  // Azul brillante
     ];
 
     for (let i = 0; i < bgStarCount; i++) {
@@ -93,10 +93,10 @@ function init3DUniverse() {
     bgGeometry.setAttribute('color', new THREE.BufferAttribute(bgColors, 3));
 
     const bgMaterial = new THREE.PointsMaterial({
-        size: 3,
+        size: 4,
         vertexColors: true,
         transparent: true,
-        opacity: 0.8,
+        opacity: 0.95,
         depthWrite: false
     });
 
@@ -104,20 +104,20 @@ function init3DUniverse() {
     scene.add(bgStarField);
 
     // ------------------------------------------
-    // CAPA 2: Estrellas brillantes y destellos (2,000 estrellas)
+    // CAPA 2: Estrellas radiantes y destellos (2,500 estrellas UPeU Gold & Sapphire)
     // ------------------------------------------
-    const fgStarCount = 2000;
+    const fgStarCount = 2500;
     const fgGeometry = new THREE.BufferGeometry();
     const fgPositions = new Float32Array(fgStarCount * 3);
     const fgColors = new Float32Array(fgStarCount * 3);
     const fgSizes = new Float32Array(fgStarCount);
 
     const fgPalette = [
-        new THREE.Color('#F652A0'), // Hot Pink FEM
+        new THREE.Color('#E6B52B'), // Dorado Imperial UPeU
         new THREE.Color('#ffffff'), // Blanco brillante
-        new THREE.Color('#7b2cbf'), // Violeta profundo
-        new THREE.Color('#00f5d4'), // Cyan cósmico
-        new THREE.Color('#ff75c3')  // Rosa neón
+        new THREE.Color('#2563eb'), // Azul Real Intenso UPeU
+        new THREE.Color('#38bdf8'), // Safiro cian radiante
+        new THREE.Color('#FFD700')  // Oro radiante
     ];
 
     for (let i = 0; i < fgStarCount; i++) {
@@ -130,14 +130,14 @@ function init3DUniverse() {
         fgColors[i * 3 + 1] = color.g;
         fgColors[i * 3 + 2] = color.b;
 
-        fgSizes[i] = Math.random() * 10 + 4;
+        fgSizes[i] = Math.random() * 12 + 5;
     }
 
     fgGeometry.setAttribute('position', new THREE.BufferAttribute(fgPositions, 3));
     fgGeometry.setAttribute('color', new THREE.BufferAttribute(fgColors, 3));
 
     const fgMaterial = new THREE.PointsMaterial({
-        size: 8,
+        size: 10,
         vertexColors: true,
         map: starTexture,
         transparent: true,
@@ -148,7 +148,7 @@ function init3DUniverse() {
     const fgStarField = new THREE.Points(fgGeometry, fgMaterial);
     scene.add(fgStarField);
 
-    // Movimiento con el ratón
+    // Movimiento interactivo suave con el ratón
     let mouseX = 0;
     let mouseY = 0;
     let targetX = 0;
@@ -163,11 +163,11 @@ function init3DUniverse() {
     function animate() {
         requestAnimationFrame(animate);
 
-        bgStarField.rotation.y += 0.0003;
-        bgStarField.rotation.x += 0.00015;
+        bgStarField.rotation.y += 0.00035;
+        bgStarField.rotation.x += 0.00018;
 
-        fgStarField.rotation.y += 0.0007;
-        fgStarField.rotation.x += 0.00035;
+        fgStarField.rotation.y += 0.0008;
+        fgStarField.rotation.x += 0.0004;
 
         targetX += (mouseX - targetX) * 0.04;
         targetY += (mouseY - targetY) * 0.04;
@@ -211,7 +211,7 @@ function setupEventListeners() {
         if (e.key === 'ArrowRight') nextLightboxImage();
     });
 
-    // Scroll de rueda de ratón horizontal
+    // Scroll de rueda de ratón horizontal fluido
     const container = document.querySelector('.timeline-container');
     if (container) {
         container.addEventListener('wheel', (e) => {
@@ -219,7 +219,7 @@ function setupEventListeners() {
                 container.scrollLeft += e.deltaY * 1.5;
                 e.preventDefault();
             }
-        });
+        }, { passive: false });
     }
 
     window.addEventListener('resize', updateTimelineLine);
@@ -362,13 +362,10 @@ window.handleImageError = function(imgElement, originalPath) {
     
     let clean = originalPath.replace(/^\//, '');
     if (clean.includes('_')) {
-        // Intentar variante con espacios
         imgElement.src = encodeURI(clean.replace(/_/g, ' '));
     } else if (clean.includes(' ')) {
-        // Intentar variante con guiones bajos
         imgElement.src = encodeURI(clean.replace(/ /g, '_'));
     } else {
-        // Intentar variante con ./ al inicio
         imgElement.src = './' + encodeURI(clean);
     }
 };
@@ -525,11 +522,8 @@ function getActivityNameByPhoto(photoPath) {
     return 'Actividad';
 }
 
-// ==========================================
-// BÚSQUEDA Y FILTRADO
-// ==========================================
-
 function filterTimeline() {
+    if (!searchInput) return;
     const query = searchInput.value.toLowerCase().trim();
     const cardWrappers = document.querySelectorAll('.timeline-card-wrapper');
     
@@ -554,8 +548,8 @@ function filterTimeline() {
                 const act = saturday.activities.find(a => a.id === actId);
                 
                 if (query !== '' && (act.name.toLowerCase().includes(query) || act.description.toLowerCase().includes(query))) {
-                    card.style.borderColor = 'var(--accent-pink)';
-                    card.style.boxShadow = '0 0 15px rgba(246, 82, 160, 0.35)';
+                    card.style.borderColor = 'var(--accent-gold)';
+                    card.style.boxShadow = '0 0 15px rgba(230, 181, 43, 0.35)';
                 } else {
                     card.style.borderColor = '';
                     card.style.boxShadow = '';
