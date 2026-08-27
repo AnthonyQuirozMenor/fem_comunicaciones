@@ -34,4 +34,8 @@ La aplicación abarca el periodo del **22 de agosto de 2026** al **21 de noviemb
 - `style.css` - Estilos del tema espacial, glassmorphism y línea dinámica.
 - `app.js` - Lógica de cliente, motor Three.js 3D de 8,000 estrellas y cálculo dinámico de la línea de tiempo.
 - `data.json` - Datos del 22 de agosto al 21 de noviembre de 2026.
-- `fotos/` - Carpeta donde se guardan tus fotos de evidencia.
+- `fotos/` - Carpeta organizadora de evidencias fotográficas, estructurada en subcarpetas por fecha:
+  - `fotos/22_agos/`, `fotos/29_agos/`
+  - `fotos/5_sep/`, `fotos/12_sep/`, `fotos/19_sep/`, `fotos/26_sep/`
+  - `fotos/3_oct/`, `fotos/10_oct/`, `fotos/17_oct/`, `fotos/24_oct/`, `fotos/31_oct/`
+  - `fotos/7_nov/`, `fotos/14_nov/`, `fotos/21_nov/`

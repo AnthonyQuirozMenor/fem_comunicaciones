@@ -231,21 +231,24 @@ function setupEventListeners() {
 
 async function loadTimelineData() {
     try {
-        const response = await fetch('/api/data');
-        if (!response.ok) throw new Error('Error al conectar con la base de datos');
-        
-        const data = await response.json();
-        
-        if (data && data.length > 0) {
-            timelineData = data;
-        } else {
-            generateInitialSaturdays();
+        let response = await fetch('/api/data').catch(() => null);
+        if (!response || !response.ok) {
+            response = await fetch('data.json').catch(() => null);
         }
         
+        if (response && response.ok) {
+            const data = await response.json();
+            if (data && data.length > 0) {
+                timelineData = data;
+                renderTimeline();
+                return;
+            }
+        }
+        
+        generateInitialSaturdays();
         renderTimeline();
     } catch (error) {
         console.error(error);
-        showToast('Cargando plantilla estelar de respaldo.', 'error');
         generateInitialSaturdays();
         renderTimeline();
     }

@@ -8,10 +8,18 @@ Add-Type -AssemblyName System.Web -ErrorAction SilentlyContinue
 $workspace = if ($PSScriptRoot) { $PSScriptRoot } else { "c:\Users\The-b\Downloads\Linea de tiempo" }
 $fotosDir = Join-Path $workspace "fotos"
 
-# Crear carpeta de fotos si no existe
+# Crear carpeta de fotos y subcarpetas por fecha si no existen
 if (-not (Test-Path $fotosDir)) {
     New-Item -ItemType Directory -Path $fotosDir | Out-Null
     Write-Host "Creada carpeta de fotos en: $fotosDir"
+}
+
+$dateFolders = @("22_agos", "29_agos", "5_sep", "12_sep", "19_sep", "26_sep", "3_oct", "10_oct", "17_oct", "24_oct", "31_oct", "7_nov", "14_nov", "21_nov")
+foreach ($folder in $dateFolders) {
+    $subPath = Join-Path $fotosDir $folder
+    if (-not (Test-Path $subPath)) {
+        New-Item -ItemType Directory -Path $subPath | Out-Null
+    }
 }
 
 # Inicializar HttpListener
@@ -137,13 +145,27 @@ while ($listener.IsListening) {
                     $rawFilename = "imagen.png"
                 }
                 
+                $dateFolder = $request.Headers["X-Date-Folder"]
+                $targetDir = $fotosDir
+                $folderPrefix = ""
+                
+                if (-not [string]::IsNullOrEmpty($dateFolder)) {
+                    $dateFolderClean = [System.IO.Path]::GetFileName($dateFolder)
+                    $subPath = Join-Path $fotosDir $dateFolderClean
+                    if (-not (Test-Path $subPath)) {
+                        New-Item -ItemType Directory -Path $subPath | Out-Null
+                    }
+                    $targetDir = $subPath
+                    $folderPrefix = $dateFolderClean + "/"
+                }
+                
                 $originalName = [System.IO.Path]::GetFileName($rawFilename)
                 $originalName = $originalName -replace '[^a-zA-Z0-9_\-\.]', '_'
                 
                 $uniquePrefix = [Guid]::NewGuid().ToString().Substring(0, 8)
                 $finalFilename = $uniquePrefix + "_" + $originalName
                 
-                $savePath = Join-Path $fotosDir $finalFilename
+                $savePath = Join-Path $targetDir $finalFilename
                 
                 $inputStream = $request.InputStream
                 $fileStream = [System.IO.File]::Create($savePath)
@@ -156,7 +178,7 @@ while ($listener.IsListening) {
                 $response.ContentType = "application/json; charset=utf-8"
                 
                 $encodedFilename = [System.Uri]::EscapeDataString($finalFilename)
-                $jsonResponse = '{"status":"success", "filePath": "/fotos/' + $encodedFilename + '"}'
+                $jsonResponse = '{"status":"success", "filePath": "/fotos/' + $folderPrefix + $encodedFilename + '"}'
                 $bytes = [System.Text.Encoding]::UTF8.GetBytes($jsonResponse)
                 $response.OutputStream.Write($bytes, 0, $bytes.Length)
                 $response.OutputStream.Close()
