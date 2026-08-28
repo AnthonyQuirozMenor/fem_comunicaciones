@@ -211,14 +211,28 @@ function setupEventListeners() {
         if (e.key === 'ArrowRight') nextLightboxImage();
     });
 
-    // Scroll de rueda de ratón horizontal fluido
+    // Scroll inteligente con la rueda del ratón:
+    // Si el cursor está dentro de una tarjeta (.timeline-card) con scroll interno, permite el desplazamiento vertical.
+    // En caso contrario (o al llegar al tope), desplaza la línea de tiempo horizontalmente.
     const container = document.querySelector('.timeline-container');
     if (container) {
         container.addEventListener('wheel', (e) => {
-            if (window.innerWidth > 768 && e.deltaY !== 0) {
-                container.scrollLeft += e.deltaY * 1.5;
-                e.preventDefault();
+            if (window.innerWidth <= 768 || e.deltaY === 0) return;
+
+            const card = e.target.closest('.timeline-card');
+            if (card) {
+                const canScrollDown = e.deltaY > 0 && Math.ceil(card.scrollTop + card.clientHeight) < card.scrollHeight;
+                const canScrollUp = e.deltaY < 0 && card.scrollTop > 0;
+
+                if (canScrollDown || canScrollUp) {
+                    // Permitir el scroll vertical nativo dentro de la tarjeta
+                    return;
+                }
             }
+
+            // Scroll horizontal de la línea de tiempo
+            container.scrollLeft += e.deltaY * 1.5;
+            e.preventDefault();
         }, { passive: false });
     }
 
