@@ -373,6 +373,14 @@ html, body {
     box-shadow: 0 20px 48px rgba(3, 12, 28, 0.85), 0 0 32px rgba(230, 181, 43, 0.35);
 }
 
+/* Tarjeta activa / seleccionada mediante clic */
+.timeline-card.card-selected {
+    border-color: var(--accent-gold);
+    box-shadow: 0 0 35px rgba(230, 181, 43, 0.7), 0 18px 45px rgba(3, 12, 28, 0.9);
+    outline: 2px solid rgba(255, 215, 0, 0.5);
+    outline-offset: 1px;
+}
+
 /* Card Header */
 .card-header {
     display: flex;

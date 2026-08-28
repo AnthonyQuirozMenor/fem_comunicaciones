@@ -7,6 +7,7 @@
 let timelineData = [];
 let currentLightboxIndex = 0;
 let currentLightboxPhotos = [];
+let activeCard = null;
 
 // Elementos del DOM
 const timelineItemsContainer = document.getElementById('timelineItems');
@@ -211,26 +212,44 @@ function setupEventListeners() {
         if (e.key === 'ArrowRight') nextLightboxImage();
     });
 
+    // Selección de tarjeta al hacer clic
+    document.addEventListener('click', (e) => {
+        const clickedCard = e.target.closest('.timeline-card');
+        
+        if (clickedCard) {
+            if (e.target.closest('.btn-photo-action')) return;
+
+            document.querySelectorAll('.timeline-card').forEach(c => c.classList.remove('card-selected'));
+            clickedCard.classList.add('card-selected');
+            activeCard = clickedCard;
+        } else if (!e.target.closest('.lightbox')) {
+            document.querySelectorAll('.timeline-card').forEach(c => c.classList.remove('card-selected'));
+            activeCard = null;
+        }
+    });
+
     // Scroll inteligente con la rueda del ratón:
-    // Si el cursor está dentro de una tarjeta (.timeline-card) con scroll interno, permite el desplazamiento vertical.
-    // En caso contrario (o al llegar al tope), desplaza la línea de tiempo horizontalmente.
+    // Al hacer clic en una tarjeta o estar sobre ella, la rueda desplaza verticalmente su contenido.
     const container = document.querySelector('.timeline-container');
     if (container) {
         container.addEventListener('wheel', (e) => {
             if (window.innerWidth <= 768 || e.deltaY === 0) return;
 
-            const card = e.target.closest('.timeline-card');
-            if (card) {
-                const canScrollDown = e.deltaY > 0 && Math.ceil(card.scrollTop + card.clientHeight) < card.scrollHeight;
-                const canScrollUp = e.deltaY < 0 && card.scrollTop > 0;
+            // Determinar tarjeta objetivo (la seleccionada por clic o sobre la que está el mouse)
+            const targetCard = activeCard || e.target.closest('.timeline-card');
+
+            if (targetCard) {
+                const canScrollDown = e.deltaY > 0 && Math.ceil(targetCard.scrollTop + targetCard.clientHeight) < targetCard.scrollHeight;
+                const canScrollUp = e.deltaY < 0 && targetCard.scrollTop > 0;
 
                 if (canScrollDown || canScrollUp) {
-                    // Permitir el scroll vertical nativo dentro de la tarjeta
+                    targetCard.scrollTop += e.deltaY * 0.85;
+                    e.preventDefault();
                     return;
                 }
             }
 
-            // Scroll horizontal de la línea de tiempo
+            // Si no hay scroll vertical pendiente en tarjeta, desplaza la línea horizontalmente
             container.scrollLeft += e.deltaY * 1.5;
             e.preventDefault();
         }, { passive: false });
