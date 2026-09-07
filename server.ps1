@@ -50,6 +50,8 @@ function Get-ContentType ($filename) {
         ".gif"  { return "image/gif" }
         ".webp" { return "image/webp" }
         ".svg"  { return "image/svg+xml" }
+        ".mp4"  { return "video/mp4" }
+        ".webm" { return "video/webm" }
         default { return "application/octet-stream" }
     }
 }

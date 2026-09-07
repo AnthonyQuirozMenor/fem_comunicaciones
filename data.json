@@ -26,7 +26,7 @@
         "name": "PRIMER ENCUENTRO COMO FEM",
         "description": " FEM COMUNICACIONES.",
         "photos": [
-          "fotos/29_agos/primer encuentro como fem/a1.jpg",
+          "fotos/29_agos/primer encuentro como fem/a1.jpeg",
           "fotos/29_agos/primer encuentro como fem/a2.jpg",
           "fotos/29_agos/primer encuentro como fem/a3.jpg"
         ]
@@ -38,9 +38,45 @@
     "date": "2026-09-05",
     "formattedDate": "Sábado, 5 de septiembre de 2026",
     "activities": [
-      { "id": "sat_3_act_1", "name": "ECOTRANSFORMADORES", "description": "Holi.", "photos": ["fotos/5_sep/primera salida/ecotransformadores/a1.jpg", "fotos/5_sep/primera salida/ecotransformadores/a2.jpg", "fotos/5_sep/primera salida/ecotransformadores/a3.jpg"] },
-      { "id": "sat_3_act_2", "name": "MANUALIDADES", "description": "Taller y exposición de manualidades comunitarias.", "photos": ["fotos/5_sep/primera salida/manualidades/a1.jpg", "fotos/5_sep/primera salida/manualidades/a2.jpg", "fotos/5_sep/primera salida/manualidades/a3.jpg"] },
-      { "id": "sat_3_act_3", "name": "SEMBRANDO ESPERANZA", "description": "Proyecto de arborización y sensibilización social.", "photos": ["fotos/5_sep/primera salida/sembrando esperanza/a1.jpg", "fotos/5_sep/primera salida/sembrando esperanza/a2.jpg", "fotos/5_sep/primera salida/sembrando esperanza/a3.jpg"] }
+      {
+        "id": "sat_3_act_1",
+        "name": "GUERREROS DE ESPERANZA",
+        "description": "Actividad de campo del grupo Guerreros de Esperanza.",
+        "photos": [
+          "fotos/5_sep/primera salida/gerreros de esperanza/a1.jpg",
+          "fotos/5_sep/primera salida/gerreros de esperanza/a2.jpg",
+          "fotos/5_sep/primera salida/gerreros de esperanza/a3.jpg"
+        ]
+      },
+      {
+        "id": "sat_3_act_2",
+        "name": "MANUALIDADES",
+        "description": "Taller y exposición de manualidades comunitarias.",
+        "photos": [
+          "fotos/5_sep/primera salida/manualidades/a1.jpg",
+          "fotos/5_sep/primera salida/manualidades/a2.jpg",
+          "fotos/5_sep/primera salida/manualidades/a3.jpg"
+        ]
+      },
+      {
+        "id": "sat_3_act_3",
+        "name": "SEMBRANDO ESPERANZA",
+        "description": "Primera salida misionera: Jornada de arborización, acción social, cuidado ambiental y testimonio cristiano con la comunidad.",
+        "photos": [
+          "fotos/5_sep/primera salida/sembrando esperanza/a1.jpeg",
+          "fotos/5_sep/primera salida/sembrando esperanza/a2.jpeg",
+          "fotos/5_sep/primera salida/sembrando esperanza/a3.jpeg",
+          "fotos/5_sep/primera salida/sembrando esperanza/a4.jpeg",
+          "fotos/5_sep/primera salida/sembrando esperanza/a5.jpeg",
+          "fotos/5_sep/primera salida/sembrando esperanza/a6.jpeg",
+          "fotos/5_sep/primera salida/sembrando esperanza/a7.jpeg",
+          "fotos/5_sep/primera salida/sembrando esperanza/a8.jpeg",
+          "fotos/5_sep/primera salida/sembrando esperanza/a9.jpeg"
+        ],
+        "videos": [
+          "fotos/5_sep/primera salida/sembrando esperanza/v1.mp4"
+        ]
+      }
     ]
   },
   {
@@ -82,7 +118,7 @@
     "date": "2026-10-10",
     "formattedDate": "Sábado, 10 de octubre de 2026",
     "activities": [
-      { "id": "sat_8_act_1", "name": "GUERREROS DE ESPERANZA", "description": "Actividad de campo del grupo Guerreros de Esperanza.", "photos": ["fotos/10_oct/tercera salida/guerreros de esperanza/a1.jpg", "fotos/10_oct/tercera salida/guerreros de esperanza/a2.jpg", "fotos/10_oct/tercera salida/guerreros de esperanza/a3.jpg"] },
+      { "id": "sat_8_act_1", "name": "ECOTRANSFORMADORES", "description": "Proyecto de acción ambiental, reciclaje y transformación comunitaria.", "photos": ["fotos/10_oct/tercera salida/ecotransformadores/a1.jpg", "fotos/10_oct/tercera salida/ecotransformadores/a2.jpg", "fotos/10_oct/tercera salida/ecotransformadores/a3.jpg"] },
       { "id": "sat_8_act_2", "name": "SALVADOS PARA SERVIR", "description": "Acción social de la brigada Salvados para Servir.", "photos": ["fotos/10_oct/tercera salida/salvados para servir/a1.jpg", "fotos/10_oct/tercera salida/salvados para servir/a2.jpg", "fotos/10_oct/tercera salida/salvados para servir/a3.jpg"] },
       { "id": "sat_8_act_3", "name": "CREARQ", "description": "Intervención del equipo CREARQ.", "photos": ["fotos/10_oct/tercera salida/crearq/a1.jpg", "fotos/10_oct/tercera salida/crearq/a2.jpg", "fotos/10_oct/tercera salida/crearq/a3.jpg"] }
     ]

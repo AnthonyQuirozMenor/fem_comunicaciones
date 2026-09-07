@@ -7,6 +7,7 @@
 let timelineData = [];
 let currentLightboxIndex = 0;
 let currentLightboxPhotos = [];
+let currentLightboxMedia = [];
 let activeCard = null;
 
 // Elementos del DOM
@@ -14,6 +15,7 @@ const timelineItemsContainer = document.getElementById('timelineItems');
 const searchInput = document.getElementById('searchInput');
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightboxImg');
+const lightboxVideo = document.getElementById('lightboxVideo');
 const lightboxCaption = document.getElementById('lightboxCaption');
 const lightboxClose = document.querySelector('.lightbox-close');
 const lightboxPrev = document.querySelector('.lightbox-prev');
@@ -403,33 +405,114 @@ window.handleImageError = function(imgElement, originalPath) {
     }
 };
 
-function renderActivity(activity, saturdayId, actIndex) {
-    const photosHtml = [];
+function isVideoFile(path) {
+    if (!path) return false;
+    const clean = path.toLowerCase().split('?')[0];
+    return clean.endsWith('.mp4') || clean.endsWith('.webm') || clean.endsWith('.mov') || clean.endsWith('.ogg');
+}
+
+function getActivityMediaList(activity) {
+    const media = [];
     
-    if (activity.photos && activity.photos.length > 0) {
-        activity.photos.forEach((photoPath, slotIdx) => {
-            if (photoPath) {
-                const normPath = normalizePhotoPath(photoPath);
-                const encodedUrl = encodeURI(normPath);
-                const safeOrig = escapeHtml(photoPath);
-                photosHtml.push(`
-                    <div class="photo-slot photo-slot-filled" data-slot="${slotIdx}">
-                        <img src="${encodedUrl}" onerror="handleImageError(this, '${safeOrig}')" alt="Imagen ${slotIdx + 1}">
-                        <div class="photo-overlay">
-                            <button class="btn-photo-action btn-photo-view" onclick="openLightbox('${activity.id}', ${slotIdx})" title="Ampliar imagen">
-                                <i class="fa-solid fa-expand"></i>
-                            </button>
-                        </div>
-                    </div>
-                `);
+    // Recorrer videos registrados explícitamente
+    if (activity.videos && Array.isArray(activity.videos)) {
+        activity.videos.forEach(v => {
+            if (v) media.push({ type: 'video', path: v });
+        });
+    }
+    
+    // Recorrer fotos (o videos colocados dentro de fotos)
+    if (activity.photos && Array.isArray(activity.photos)) {
+        activity.photos.forEach(p => {
+            if (!p) return;
+            if (isVideoFile(p)) {
+                if (!media.some(m => m.path === p)) {
+                    media.push({ type: 'video', path: p });
+                }
+            } else {
+                media.push({ type: 'image', path: p });
             }
         });
     }
     
-    while (photosHtml.length < 3) {
-        photosHtml.push(`
-            <div class="photo-slot photo-slot-empty" title="Sin foto cargada"></div>
-        `);
+    return media;
+}
+
+function renderActivity(activity, saturdayId, actIndex) {
+    const allMedia = getActivityMediaList(activity);
+    const videoItems = allMedia.filter(m => m.type === 'video');
+    const photoItems = allMedia.filter(m => m.type === 'image');
+    
+    // Sección de Video
+    let videoHtml = '';
+    if (videoItems.length > 0) {
+        const firstVideo = videoItems[0];
+        const normVideoPath = normalizePhotoPath(firstVideo.path);
+        const encodedVideoUrl = encodeURI(normVideoPath);
+        videoHtml = `
+            <div class="activity-video-container">
+                <div class="media-section-header">
+                    <span class="media-header-title"><i class="fa-solid fa-circle-play video-header-icon"></i> Video de la Actividad</span>
+                    <span class="media-count-tag"><i class="fa-solid fa-film"></i> 1 Video HD</span>
+                </div>
+                <div class="video-preview-card" onclick="openLightboxMedia('${activity.id}', 0, 'video')" title="Clic para reproducir video">
+                    <video src="${encodedVideoUrl}#t=0.5" preload="metadata" muted playsinline></video>
+                    <div class="video-play-overlay">
+                        <div class="video-play-btn">
+                            <i class="fa-solid fa-play"></i>
+                        </div>
+                        <span class="video-play-tag">Ver Video en HD</span>
+                    </div>
+                    <div class="video-card-badge">
+                        <i class="fa-solid fa-sparkles"></i> Video Oficial
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+    
+    // Sección de Fotografías
+    const photosHtml = [];
+    if (photoItems.length > 0) {
+        photoItems.forEach((item, slotIdx) => {
+            const normPath = normalizePhotoPath(item.path);
+            const encodedUrl = encodeURI(normPath);
+            const safeOrig = escapeHtml(item.path);
+            photosHtml.push(`
+                <div class="photo-slot photo-slot-filled" data-slot="${slotIdx}">
+                    <img src="${encodedUrl}" onerror="handleImageError(this, '${safeOrig}')" alt="Foto ${slotIdx + 1}" loading="lazy">
+                    <div class="photo-overlay">
+                        <button class="btn-photo-action btn-photo-view" onclick="openLightboxMedia('${activity.id}', ${slotIdx}, 'image')" title="Ampliar imagen">
+                            <i class="fa-solid fa-expand"></i>
+                        </button>
+                    </div>
+                </div>
+            `);
+        });
+    }
+    
+    // Si no hay video y hay menos de 3 fotos, rellenar con slots vacíos
+    if (videoItems.length === 0 && photosHtml.length < 3) {
+        while (photosHtml.length < 3) {
+            photosHtml.push(`
+                <div class="photo-slot photo-slot-empty" title="Sin foto cargada"></div>
+            `);
+        }
+    }
+    
+    let photoSectionHtml = '';
+    if (photosHtml.length > 0) {
+        photoSectionHtml = `
+            <div class="activity-photos-container">
+                <div class="media-section-header">
+                    <span class="media-header-title"><i class="fa-solid fa-images photo-header-icon"></i> Registro Fotográfico</span>
+                    <span class="media-count-tag">${photoItems.length} Fotos</span>
+                </div>
+                <div class="photo-slots-grid ${photoItems.length > 3 ? 'photo-grid-expanded' : ''}">
+                    ${photosHtml.join('')}
+                </div>
+            </div>
+        `;
     }
     
     return `
@@ -443,36 +526,47 @@ function renderActivity(activity, saturdayId, actIndex) {
                 <p class="activity-description">${escapeHtml(activity.description)}</p>
             </div>
             
-            <div class="activity-photos-container">
-                <div class="photos-label">
-                    <span>Registro Fotográfico</span>
-                </div>
-                <div class="photo-slots-grid">
-                    ${photosHtml.join('')}
-                </div>
-            </div>
+            ${videoHtml}
+            ${photoSectionHtml}
         </div>
     `;
 }
 
 // ==========================================
-// VISUALIZADOR DE IMÁGENES (LIGHTBOX)
+// VISUALIZADOR MULTIMEDIA (LIGHTBOX FOTOS + VIDEO)
 // ==========================================
 
-function openLightbox(actId, slotIndex) {
+function openLightboxMedia(actId, itemIndex = 0, preferredType = 'image') {
     let activity = null;
     for (let s of timelineData) {
         activity = s.activities.find(a => a.id === actId);
         if (activity) break;
     }
     
-    if (!activity || !activity.photos || activity.photos.length === 0) return;
+    if (!activity) return;
     
-    currentLightboxPhotos = activity.photos.filter(p => p !== null && p !== undefined && p !== '');
-    const selectedPhotoPath = activity.photos[slotIndex];
-    currentLightboxIndex = currentLightboxPhotos.indexOf(selectedPhotoPath);
+    const allMedia = getActivityMediaList(activity);
+    if (allMedia.length === 0) return;
     
-    if (currentLightboxIndex === -1) currentLightboxIndex = 0;
+    currentLightboxMedia = allMedia;
+    currentLightboxPhotos = allMedia.filter(m => m.type === 'image').map(m => m.path);
+    
+    if (preferredType === 'video') {
+        const videoIdx = allMedia.findIndex(m => m.type === 'video');
+        currentLightboxIndex = videoIdx >= 0 ? videoIdx : 0;
+    } else {
+        const photoItems = allMedia.filter(m => m.type === 'image');
+        const targetPhoto = photoItems[itemIndex];
+        if (targetPhoto) {
+            currentLightboxIndex = allMedia.indexOf(targetPhoto);
+        } else {
+            currentLightboxIndex = 0;
+        }
+    }
+    
+    if (currentLightboxIndex < 0 || currentLightboxIndex >= allMedia.length) {
+        currentLightboxIndex = 0;
+    }
     
     updateLightboxContent(activity.name);
     
@@ -482,25 +576,62 @@ function openLightbox(actId, slotIndex) {
     document.body.style.overflow = 'hidden';
 }
 
+// Compatibilidad con invocaciones previas
+function openLightbox(actId, slotIndex) {
+    openLightboxMedia(actId, slotIndex, 'image');
+}
+
 function updateLightboxContent(activityName) {
-    const photoPath = currentLightboxPhotos[currentLightboxIndex];
-    if (!photoPath) return;
+    if (!currentLightboxMedia || currentLightboxMedia.length === 0) return;
     
-    const normPath = normalizePhotoPath(photoPath);
-    lightboxImg.src = encodeURI(normPath);
-    lightboxImg.onerror = function() {
-        if (!this.getAttribute('data-tried-fallback')) {
-            this.setAttribute('data-tried-fallback', 'true');
-            if (normPath.includes('_')) {
-                this.src = encodeURI(normPath.replace(/_/g, ' '));
-            } else if (normPath.includes(' ')) {
-                this.src = encodeURI(normPath.replace(/ /g, '_'));
-            }
+    const mediaItem = currentLightboxMedia[currentLightboxIndex];
+    if (!mediaItem) return;
+    
+    const normPath = normalizePhotoPath(mediaItem.path);
+    const encodedUrl = encodeURI(normPath);
+    
+    if (mediaItem.type === 'video') {
+        // Modo Video
+        if (lightboxImg) {
+            lightboxImg.style.display = 'none';
+            lightboxImg.src = '';
         }
-    };
-    lightboxCaption.innerText = `${activityName} - Foto ${currentLightboxIndex + 1} de ${currentLightboxPhotos.length}`;
+        if (lightboxVideo) {
+            lightboxVideo.style.display = 'block';
+            lightboxVideo.src = encodedUrl;
+            lightboxVideo.currentTime = 0;
+            lightboxVideo.play().catch(() => {});
+        }
+        
+        lightboxCaption.innerHTML = `<span class="caption-tag-video"><i class="fa-solid fa-film"></i> Video Oficial</span> ${escapeHtml(activityName)} (Elemento ${currentLightboxIndex + 1} de ${currentLightboxMedia.length})`;
+    } else {
+        // Modo Imagen
+        if (lightboxVideo) {
+            lightboxVideo.pause();
+            lightboxVideo.style.display = 'none';
+            lightboxVideo.src = '';
+        }
+        if (lightboxImg) {
+            lightboxImg.style.display = 'block';
+            lightboxImg.src = encodedUrl;
+            lightboxImg.onerror = function() {
+                if (!this.getAttribute('data-tried-fallback')) {
+                    this.setAttribute('data-tried-fallback', 'true');
+                    if (normPath.includes('_')) {
+                        this.src = encodeURI(normPath.replace(/_/g, ' '));
+                    } else if (normPath.includes(' ')) {
+                        this.src = encodeURI(normPath.replace(/ /g, '_'));
+                    }
+                }
+            };
+        }
+        
+        const photoIndexInPhotos = currentLightboxMedia.slice(0, currentLightboxIndex + 1).filter(m => m.type === 'image').length;
+        const totalPhotos = currentLightboxMedia.filter(m => m.type === 'image').length;
+        lightboxCaption.innerHTML = `<span class="caption-tag-photo"><i class="fa-solid fa-camera"></i> Foto ${photoIndexInPhotos} de ${totalPhotos}</span> ${escapeHtml(activityName)}`;
+    }
     
-    if (currentLightboxPhotos.length <= 1) {
+    if (currentLightboxMedia.length <= 1) {
         lightboxPrev.style.display = 'none';
         lightboxNext.style.display = 'none';
     } else {
@@ -511,37 +642,58 @@ function updateLightboxContent(activityName) {
 
 function closeLightbox() {
     lightbox.classList.remove('active');
+    if (lightboxVideo) {
+        lightboxVideo.pause();
+        lightboxVideo.src = '';
+    }
     setTimeout(() => {
         lightbox.style.display = 'none';
-        lightboxImg.src = '';
+        if (lightboxImg) lightboxImg.src = '';
         document.body.style.overflow = '';
     }, 300);
 }
 
 function prevLightboxImage(e) {
     if (e) e.stopPropagation();
-    if (currentLightboxPhotos.length <= 1) return;
+    if (!currentLightboxMedia || currentLightboxMedia.length <= 1) return;
+    
+    if (lightboxVideo) lightboxVideo.pause();
     
     currentLightboxIndex--;
     if (currentLightboxIndex < 0) {
-        currentLightboxIndex = currentLightboxPhotos.length - 1;
+        currentLightboxIndex = currentLightboxMedia.length - 1;
     }
     
-    const activityName = getActivityNameByPhoto(currentLightboxPhotos[currentLightboxIndex]);
+    const activityName = getActivityNameByMedia(currentLightboxMedia[currentLightboxIndex]);
     updateLightboxContent(activityName);
 }
 
 function nextLightboxImage(e) {
     if (e) e.stopPropagation();
-    if (currentLightboxPhotos.length <= 1) return;
+    if (!currentLightboxMedia || currentLightboxMedia.length <= 1) return;
+    
+    if (lightboxVideo) lightboxVideo.pause();
     
     currentLightboxIndex++;
-    if (currentLightboxIndex >= currentLightboxPhotos.length) {
+    if (currentLightboxIndex >= currentLightboxMedia.length) {
         currentLightboxIndex = 0;
     }
     
-    const activityName = getActivityNameByPhoto(currentLightboxPhotos[currentLightboxIndex]);
+    const activityName = getActivityNameByMedia(currentLightboxMedia[currentLightboxIndex]);
     updateLightboxContent(activityName);
+}
+
+function getActivityNameByMedia(mediaItem) {
+    if (!mediaItem) return 'Actividad';
+    for (let s of timelineData) {
+        for (let a of s.activities) {
+            const allMedia = getActivityMediaList(a);
+            if (allMedia.some(m => m.path === mediaItem.path)) {
+                return a.name;
+            }
+        }
+    }
+    return 'Actividad';
 }
 
 function getActivityNameByPhoto(photoPath) {
