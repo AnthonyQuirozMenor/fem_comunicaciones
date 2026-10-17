@@ -132,48 +132,29 @@
       {
         "id": "sat_6_act_1",
         "name": "CHECKPOINT",
-        "description": "Punto de control operativo en la Segunda Salida.",
+        "description": "El FEM de CHECKPOINT está conformado por estudiantes de Ingeniería de Sistemas que, sábado a sábado, enseñan a los niños del colegio 10 de Agosto y comparten el amor de Jesús a través de sus enseñanzas y actividades.",
         "photos": [
           "fotos/26_sep/segunda salida/checkpoint/a1.jpg",
           "fotos/26_sep/segunda salida/checkpoint/a2.jpg",
-          "fotos/26_sep/segunda salida/checkpoint/a3.jpg"
+          "fotos/26_sep/segunda salida/checkpoint/a3.jpeg",
+          "fotos/26_sep/segunda salida/checkpoint/a4.jpeg",
+          "fotos/26_sep/segunda salida/checkpoint/a5.jpeg",
+          "fotos/26_sep/segunda salida/checkpoint/a6.jpeg",
+          "fotos/26_sep/segunda salida/checkpoint/a7.jpeg",
+          "fotos/26_sep/segunda salida/checkpoint/a8.jpeg"
         ]
       },
       {
         "id": "sat_6_act_2",
-        "name": "ESCUELA DE LOS PROFETAS",
-        "description": "Taller de capacitación en la Escuela de los Profetas.",
+        "name": "MATEMÁTICAS",
+        "description": "El FEM de Matemáticas está conformado por jóvenes universitarios que realizan su misión en la localidad de Los Tulipanes, donde enseñan matemáticas a los niños y, a través de ellas, comparten el mensaje de Jesús, con el apoyo de los docentes de la UPeU.",
         "photos": [
-          "fotos/26_sep/segunda salida/escuela de los profetas/a1.jpg",
-          "fotos/26_sep/segunda salida/escuela de los profetas/a2.jpg",
-          "fotos/26_sep/segunda salida/escuela de los profetas/a3.jpg"
-        ]
-      },
-      {
-        "id": "sat_6_act_3",
-        "name": "CONQUISTADORES",
-        "description": "Actividades de campo con el grupo Conquistadores.",
-        "photos": [
-          "fotos/26_sep/segunda salida/conquistadores/a1.jpg",
-          "fotos/26_sep/segunda salida/conquistadores/a2.jpg",
-          "fotos/26_sep/segunda salida/conquistadores/a3.jpg"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "sat_7",
-    "date": "2026-10-03",
-    "formattedDate": "Sábado, 3 de octubre de 2026",
-    "activities": [
-      {
-        "id": "sat_7_act_1",
-        "name": "I NOT, SORRY",
-        "description": "Jornada y proceso de votaciones regionales.",
-        "photos": [
-          "fotos/3_oct/votaciones regionales/a1.jpg",
-          "fotos/3_oct/votaciones regionales/a2.jpg",
-          "fotos/3_oct/votaciones regionales/a3.jpg"
+          "fotos/26_sep/segunda salida/matematicas/a1.jpeg",
+          "fotos/26_sep/segunda salida/matematicas/a2.png",
+          "fotos/26_sep/segunda salida/matematicas/a3.jpeg",
+          "fotos/26_sep/segunda salida/matematicas/a4.jpeg",
+          "fotos/26_sep/segunda salida/matematicas/a5.jpeg",
+          "fotos/26_sep/segunda salida/matematicas/a6.jpeg"
         ]
       }
     ]
@@ -186,7 +167,7 @@
       {
         "id": "sat_8_act_1",
         "name": "ECOTRANSFORMADORES",
-        "description": "Proyecto de acción ambiental, reciclaje y transformación comunitaria.",
+        "description": "El FEM de ECOTRANSFORMADORES está conformado por jóvenes universitarios de la carrera de Ingeniería Ambiental de la UPeU, quienes, sábado a sábado, visitan el colegio 10 de Agosto para compartir sus conocimientos y enseñar a los niños mediante actividades educativas, dinámicas y valores cristianos. A través de cada enseñanza, buscan inspirar a los pequeños, fomentar su aprendizaje integral y, sobre todo, transmitir el amor de Jesús, contribuyendo a su formación académica, personal y espiritual.",
         "photos": [
           "fotos/10_oct/tercera salida/ecotransformadores/a1.jpg",
           "fotos/10_oct/tercera salida/ecotransformadores/a2.jpg",
@@ -196,21 +177,36 @@
       {
         "id": "sat_8_act_2",
         "name": "SALVADOS PARA SERVIR",
-        "description": "Acción social de la brigada Salvados para Servir.",
+        "description": "El FEM SALVADOS PARA SERVIR está conformado por jóvenes universitarios de la Escuela Profesional de Enfermería de la UPeU, quienes dedican su tiempo y esfuerzo a enseñar a niños menores de cuatro años mediante dinámicas, juegos educativos, colores y actividades recreativas que estimulan su aprendizaje, creatividad y desarrollo integral. A través de cada actividad, buscan brindar un ambiente de amor, alegría y confianza, contribuyendo al desarrollo de sus habilidades desde la primera infancia y compartiendo los valores cristianos. De esta manera, ponen en práctica su vocación de servicio y reflejan el amor de Jesús mediante acciones que dejan huellas positivas en la vida de los más pequeños.",
         "photos": [
-          "fotos/10_oct/tercera salida/salvados para servir/a1.jpg",
-          "fotos/10_oct/tercera salida/salvados para servir/a2.jpg",
-          "fotos/10_oct/tercera salida/salvados para servir/a3.jpg"
+          "fotos/10_oct/tercera salida/salvados para servir/a1.jpeg",
+          "fotos/10_oct/tercera salida/salvados para servir/a2.jpeg",
+          "fotos/10_oct/tercera salida/salvados para servir/a3.jpeg",
+          "fotos/10_oct/tercera salida/salvados para servir/a4.jpeg",
+          "fotos/10_oct/tercera salida/salvados para servir/a5.jpeg",
+          "fotos/10_oct/tercera salida/salvados para servir/a6.jpeg"
         ]
       },
       {
         "id": "sat_8_act_3",
-        "name": "CREARQ",
-        "description": "Intervención del equipo CREARQ.",
+        "name": "ABRIENDO CAMINOS",
+        "description": "El FEM ABRIENDO CAMINOS está conformado por jóvenes universitarios de la Escuela Profesional de Enfermería de la UPeU, quienes realizan su labor misionera en el sector La Planicie, donde comparten enseñanzas y desarrollan actividades educativas y recreativas dirigidas a los niños. A través de dinámicas, juegos y momentos de aprendizaje, buscan fomentar valores, fortalecer el desarrollo integral de los pequeños y crear un ambiente de confianza, alegría y compañerismo. Asimismo, mediante su servicio y dedicación, transmiten el amor de Jesús, dejando una huella positiva en cada niño y contribuyendo a su formación espiritual y personal.",
         "photos": [
-          "fotos/10_oct/tercera salida/crearq/a1.jpg",
-          "fotos/10_oct/tercera salida/crearq/a2.jpg",
-          "fotos/10_oct/tercera salida/crearq/a3.jpg"
+          "fotos/10_oct/tercera salida/abriendo caminos/a1.jpeg",
+          "fotos/10_oct/tercera salida/abriendo caminos/a2.jpeg",
+          "fotos/10_oct/tercera salida/abriendo caminos/a3.jpeg",
+          "fotos/10_oct/tercera salida/abriendo caminos/a4.jpeg",
+          "fotos/10_oct/tercera salida/abriendo caminos/a5.jpeg",
+          "fotos/10_oct/tercera salida/abriendo caminos/a6.jpeg",
+          "fotos/10_oct/tercera salida/abriendo caminos/a7.jpeg",
+          "fotos/10_oct/tercera salida/abriendo caminos/a8.jpeg",
+          "fotos/10_oct/tercera salida/abriendo caminos/a9.jpeg",
+          "fotos/10_oct/tercera salida/abriendo caminos/a10.jpeg",
+          "fotos/10_oct/tercera salida/abriendo caminos/a11.jpeg",
+          "fotos/10_oct/tercera salida/abriendo caminos/a12.jpeg",
+          "fotos/10_oct/tercera salida/abriendo caminos/a13.jpeg",
+          "fotos/10_oct/tercera salida/abriendo caminos/a14.jpeg",
+          "fotos/10_oct/tercera salida/abriendo caminos/a15.jpeg"
         ]
       }
     ]
@@ -222,7 +218,7 @@
     "activities": [
       {
         "id": "sat_9_act_1",
-        "name": "ABRIENDO CAMINOS",
+        "name": "CREARQ",
         "description": "Jornada del proyecto Abriendo Caminos.",
         "photos": [
           "fotos/17_oct/cuarta salida/abriendo caminos/a1.jpg",
@@ -343,7 +339,7 @@
     "activities": [
       {
         "id": "sat_12_act_1",
-        "name": "MATEMÁTICAS",
+        "name": "Holi",
         "description": "Taller y reforzamiento educativo de Matemáticas.",
         "photos": [
           "fotos/7_nov/septima salida/matematicas/a1.jpg",
